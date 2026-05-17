@@ -1,1010 +1,1644 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>বুঝলে Easy — Free Learning Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --red:#E24B4A;--red-dark:#A32D2D;--red-light:#FCEBEB;
-  --green:#1D9E75;--green-dark:#0F6E56;--green-light:#E1F5EE;
-  --dark:#101010;--dark2:#1a1a1a;
-  --gray:#F4F4F4;--gray2:#E8E8E8;--border:#E0E0E0;
-  --text:#111;--text2:#555;--text3:#888;
-  --radius:10px;--radius-lg:14px;
-}
-body{font-family:'Inter',sans-serif;background:#F6F6F6;color:var(--text);font-size:14px;line-height:1.6;}
-.bangla{font-family:'Hind Siliguri',sans-serif;}
+  :root {
+    --primary: #4ade3a;
+    --primary-glow: rgba(74,222,58,0.35);
+    --orange: #ff5e1a;
+    --orange-glow: rgba(255,94,26,0.35);
+    --gold: #f5a623;
+    --green-dark: #22c55e;
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --bg4: #1f1f1f;
+    --white: #f0f0f0;
+    --text: #e8e8e8;
+    --text-muted: #888;
+    --card-bg: #161616;
+    --border: #2a2a2a;
+    --border-bright: #3a3a3a;
+    --nav-h: 64px;
+    --radius: 14px;
+    --shadow-green: 0 0 20px rgba(74,222,58,0.2);
+    --shadow-orange: 0 0 20px rgba(255,94,26,0.2);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.5);
+    --wa: #25D366;
+    --fb: #0084FF;
+    --grad-logo: linear-gradient(135deg, #4ade3a 0%, #f5a623 50%, #ff5e1a 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #4ade3a44; }
 
-/* NAV */
-nav{background:var(--dark);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100;}
-.nav-logo{display:flex;align-items:center;gap:10px;}
-.logo-text{font-family:'Hind Siliguri',sans-serif;font-size:18px;font-weight:600;color:white;}
-.logo-badge{background:var(--red);color:white;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;}
-.nav-links{display:flex;gap:4px;}
-.nav-btn{background:none;border:none;color:rgba(255,255,255,0.6);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;transition:all 0.15s;}
-.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.1);color:white;}
-.nav-btn.active{color:var(--red);}
+  /* ══════════════ LOGO PILL ══════════════ */
+  .nav-logo-pill, .drawer-logo-pill, .admin-logo-pill {
+    display: inline-flex; align-items: baseline; gap: 3px;
+    background: #0a0a0a;
+    border-radius: 10px;
+    padding: 5px 12px;
+    border: 1.5px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    box-shadow: 0 0 14px rgba(74,222,58,0.25), 0 0 28px rgba(255,94,26,0.12);
+  }
+  .nav-logo-pill::before, .drawer-logo-pill::before, .admin-logo-pill::before {
+    content: ''; position: absolute; inset: -1.5px; border-radius: 11px;
+    background: linear-gradient(135deg, #4ade3a 0%, #f5a623 50%, #ff5e1a 100%);
+    z-index: -1;
+  }
+  .nav-logo-bujhle {
+    font-family: 'Baloo Da 2', cursive; font-size: 1rem; font-weight: 800;
+    color: var(--primary); text-shadow: 0 0 10px rgba(74,222,58,0.7); letter-spacing: -0.3px;
+  }
+  .nav-logo-easy {
+    font-family: 'Baloo Da 2', cursive; font-size: 0.88rem; font-weight: 700;
+    color: #d0d0d0; letter-spacing: 0.5px;
+  }
+  .drawer-logo-pill { padding: 6px 14px; }
+  .drawer-logo-pill .nav-logo-bujhle { font-size: 1.1rem; }
+  .admin-logo-pill { padding: 8px 18px; display: flex; }
+  .admin-logo-pill .nav-logo-bujhle { font-size: 1.25rem; }
+  .admin-logo-pill .nav-logo-easy { font-size: 1.1rem; }
+  .nav-logo { text-decoration: none; }
+  .nav-logo:hover .nav-logo-pill { box-shadow: 0 0 22px rgba(74,222,58,0.45), 0 0 40px rgba(255,94,26,0.2); }
 
-/* PAGES */
-.page{display:none;}
-.page.active{display:block;}
+  /* ══════════════ NAVBAR ══════════════ */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--nav-h); background: rgba(10,10,10,0.95);
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 16px; backdrop-filter: blur(16px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+  }
+  .nav-left { display: flex; align-items: center; }
+  .menu-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 8px; border-radius: 10px;
+    display: flex; flex-direction: column; gap: 5px; transition: background .2s;
+  }
+  .menu-btn:hover { background: var(--bg3); }
+  .menu-btn span {
+    display: block; width: 24px; height: 2px;
+    background: var(--primary); border-radius: 2px;
+    transition: all .3s; box-shadow: 0 0 6px var(--primary-glow);
+  }
+  .nav-logo { display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-right { display: flex; justify-content: flex-end; gap: 8px; align-items: center; }
+  .lessons-btn {
+    background: transparent; border: 1.5px solid var(--primary); color: var(--primary);
+    padding: 8px 16px; border-radius: 20px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 0 12px var(--primary-glow), inset 0 0 12px rgba(74,222,58,0.05);
+    transition: all .2s; white-space: nowrap;
+  }
+  .lessons-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 24px var(--primary-glow); }
+  .private-btn {
+    background: linear-gradient(135deg,rgba(245,166,35,0.15),rgba(255,94,26,0.1));
+    border: 1.5px solid var(--gold); color: var(--gold);
+    padding: 8px 14px; border-radius: 20px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all .2s; white-space: nowrap;
+  }
+  .private-btn:hover { background: var(--gold); color: #000; }
 
-/* HERO */
-.hero{background:var(--dark);padding:48px 24px 40px;text-align:center;}
-.hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#F09595;margin-bottom:18px;}
-.hero h1{font-family:'Hind Siliguri',sans-serif;font-size:32px;font-weight:600;color:white;line-height:1.25;margin-bottom:12px;}
-.hero h1 span{color:var(--red);}
-.hero p{color:rgba(255,255,255,0.6);font-size:14px;max-width:480px;margin:0 auto 28px;line-height:1.7;}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;}
-.btn-primary{background:var(--red);color:white;}
-.btn-primary:hover{background:var(--red-dark);}
-.btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,0.25);}
-.btn-outline:hover{border-color:rgba(255,255,255,0.5);}
-.btn-green{background:var(--green);color:white;}
-.btn-green:hover{background:var(--green-dark);}
-.btn-dark{background:var(--dark2);color:white;border:1px solid #333;}
+  /* ══════════════ SIDE MENU DRAWER ══════════════ */
+  .drawer-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+  }
+  .drawer-overlay.open { display: block; }
+  .drawer {
+    position: fixed; top: 0; left: -300px; bottom: 0;
+    width: 280px; background: var(--bg2); z-index: 1200;
+    transition: left .3s ease;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.8), 1px 0 0 var(--border);
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { left: 0; }
+  .drawer-header {
+    padding: 20px 20px 16px; border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .drawer-logo-sub { font-size: 0.65rem; color: var(--orange); letter-spacing: 1.5px; margin-top: 2px; }
+  .drawer-close {
+    background: var(--bg4); border: 1px solid var(--border);
+    font-size: 1rem; cursor: pointer; color: var(--text-muted);
+    padding: 6px 9px; border-radius: 8px; transition: all .2s;
+  }
+  .drawer-close:hover { background: #2a0a0a; color: var(--orange); border-color: var(--orange); }
+  .drawer nav { padding: 10px 0; flex: 1; overflow-y: auto; }
+  .drawer nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 20px; text-decoration: none;
+    color: var(--text-muted); font-size: 0.95rem; font-weight: 500;
+    transition: all .15s; border-left: 3px solid transparent;
+  }
+  .drawer nav a:hover { background: var(--bg3); border-left-color: var(--primary); color: var(--primary); }
+  .drawer nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+  .drawer nav .nav-divider { height: 1px; background: var(--border); margin: 6px 20px; }
+  .drawer-footer {
+    padding: 14px 20px; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--text-muted); text-align: center;
+  }
+  .drawer-footer span { color: var(--primary); }
 
-/* STEPS BAR */
-.steps-bar{background:white;border-bottom:1px solid var(--border);padding:16px 24px;}
-.steps-inner{max-width:700px;margin:0 auto;display:flex;align-items:center;gap:0;}
-.step-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
-.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;}
-.step-num.done{background:var(--green);color:white;}
-.step-num.active{background:var(--red);color:white;}
-.step-num.todo{background:var(--gray);color:var(--text3);}
-.step-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.3;}
-.step-connector{flex:1;height:1px;background:var(--border);}
-.step-connector.done{background:var(--green);}
+  /* ══════════════ MAIN CONTENT ══════════════ */
+  .main { margin-top: var(--nav-h); }
+  .page-section { display: none; }
+  .page-section.active { display: block; }
 
-/* SECTION WRAPPER */
-.section{max-width:760px;margin:0 auto;padding:28px 20px;}
-.section-title{font-family:'Hind Siliguri',sans-serif;font-size:20px;font-weight:600;margin-bottom:6px;}
-.section-sub{color:var(--text2);font-size:13px;margin-bottom:20px;}
+  /* ══════════════ HERO ══════════════ */
+  .hero {
+    background: var(--bg2); color: var(--text); text-align: center;
+    padding: 60px 20px 50px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 50%, rgba(74,222,58,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,94,26,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: var(--grad-logo); box-shadow: 0 0 20px rgba(74,222,58,0.4);
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(74,222,58,0.1);
+    border: 1px solid rgba(74,222,58,0.4); padding: 5px 16px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; margin-bottom: 20px;
+    color: var(--primary); box-shadow: 0 0 12px rgba(74,222,58,0.15);
+  }
+  .hero h1 {
+    font-family: 'Baloo Da 2', cursive;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800; line-height: 1.3; margin-bottom: 14px; color: var(--white);
+  }
+  .hero p { font-size: 1rem; color: var(--text-muted); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: #000;
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 0.95rem;
+    padding: 12px 24px; border-radius: 25px; border: none;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 0 20px var(--primary-glow); transition: all .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px var(--primary-glow); filter: brightness(1.1); }
+  .btn-ghost {
+    background: transparent; color: var(--text); border: 1.5px solid var(--border-bright);
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: 0.95rem;
+    padding: 10px 22px; border-radius: 25px; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 12px var(--primary-glow); }
 
-/* SOCIAL PILLS */
-.social-row{display:flex;gap:10px;flex-wrap:wrap;}
-.social-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;color:white;cursor:pointer;transition:opacity 0.15s;}
-.social-pill:hover{opacity:0.85;}
-.sp-yt{background:#FF0000;}
-.sp-wa{background:#25D366;}
-.sp-fb{background:#1877F2;}
-.sp-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+  /* ══════════════ SECTIONS ══════════════ */
+  .section { padding: 40px 16px; max-width: 860px; margin: 0 auto; }
+  .section-title { font-family: 'Baloo Da 2', cursive; font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+  .section-sub { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 24px; }
 
-/* JOURNEY STEPS */
-.journey-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
-.jc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex-shrink:0;}
-.jc-title{font-weight:600;font-size:14px;margin-bottom:4px;}
-.jc-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;}
-.hashtag{color:var(--red);font-weight:600;}
-.notice-box{background:var(--gray);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;}
+  /* ══════════════ STEPS / HOW IT WORKS ══════════════ */
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 24px;
+  }
+  .step-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px 18px; position: relative; overflow: hidden; transition: all .25s;
+  }
+  .step-card:hover { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
+  .step-card.done { border-color: rgba(74,222,58,0.4); background: rgba(74,222,58,0.04); }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--primary); color: #000;
+    font-family: 'Baloo Da 2', cursive; font-size: 1rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 14px var(--primary-glow); margin-bottom: 12px;
+  }
+  .step-card.done .step-num { background: var(--primary); }
+  .step-card-done .step-num { background: var(--primary); font-size: 1.2rem; }
+  .step-title { font-family: 'Baloo Da 2', cursive; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .step-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .step-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .step-btn {
+    padding: 7px 14px; border-radius: 16px; border: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.8rem; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all .2s;
+  }
+  .step-btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary-glow); }
+  .step-btn-primary:hover { filter: brightness(1.1); }
+  .step-btn-ghost { background: transparent; border: 1px solid var(--border-bright); color: var(--text-muted); }
+  .step-btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
 
-/* LESSONS */
-.lessons-wrap{max-width:760px;margin:0 auto;padding:20px;}
-.module-block{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px;overflow:hidden;}
-.module-header{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
-.module-header:hover{background:#fafafa;}
-.mod-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.mod-title{font-weight:600;font-size:14px;flex:1;}
-.mod-count{font-size:12px;color:var(--text3);}
-.mod-arrow{font-size:16px;color:var(--text3);transition:transform 0.2s;}
-.mod-arrow.open{transform:rotate(180deg);}
-.mod-lessons{border-top:1px solid var(--border);}
-.lesson-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background 0.1s;}
-.lesson-row:hover{background:#fafafa;}
-.lesson-row:last-child{border-bottom:none;}
-.lesson-thumb{width:72px;height:44px;border-radius:6px;background:#000;flex-shrink:0;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
-.lesson-thumb img{width:100%;height:100%;object-fit:cover;}
-.play-overlay{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;}
-.play-overlay svg{width:10px;height:10px;fill:var(--dark);margin-left:1px;}
-.lesson-info{flex:1;}
-.lesson-title{font-size:13px;font-weight:500;margin-bottom:3px;line-height:1.4;}
-.lesson-meta{font-size:11px;color:var(--text3);}
-.lesson-status{flex-shrink:0;}
-.status-badge{padding:3px 10px;border-radius:10px;font-size:11px;font-weight:500;}
-.sb-done{background:var(--green-light);color:var(--green-dark);}
-.sb-active{background:#FAEEDA;color:#633806;}
-.sb-locked{background:var(--gray);color:var(--text3);}
-.progress-bar{height:3px;background:var(--gray2);border-radius:2px;margin-top:4px;}
-.progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.5s;}
+  /* ══════════════ LESSONS / SECTIONS LIST ══════════════ */
+  .lessons-sections { display: flex; flex-direction: column; gap: 16px; }
+  .lesson-section-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    overflow: hidden; transition: border-color .2s;
+  }
+  .lesson-section-card:hover { border-color: var(--border-bright); }
+  .ls-header {
+    padding: 16px 20px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 14px;
+    background: linear-gradient(135deg, rgba(74,222,58,0.05), rgba(255,94,26,0.03));
+    transition: background .2s;
+  }
+  .ls-header:hover { background: linear-gradient(135deg, rgba(74,222,58,0.09), rgba(255,94,26,0.06)); }
+  .ls-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .ls-meta { flex: 1; }
+  .ls-title { font-family: 'Baloo Da 2', cursive; font-size: 1.05rem; font-weight: 800; color: var(--white); }
+  .ls-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+  .ls-toggle { color: var(--text-muted); font-size: 0.9rem; transition: transform .3s; flex-shrink: 0; }
+  .ls-header.open .ls-toggle { transform: rotate(180deg); color: var(--primary); }
+  .ls-body { display: none; border-top: 1px solid var(--border); }
+  .ls-body.open { display: block; }
+  .lesson-item {
+    display: flex; align-items: center; gap: 14px; padding: 14px 20px;
+    border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s;
+  }
+  .lesson-item:last-child { border-bottom: none; }
+  .lesson-item:hover { background: var(--bg3); }
+  .lesson-item.active { background: rgba(74,222,58,0.05); border-left: 3px solid var(--primary); }
+  .lesson-item.locked { opacity: 0.6; cursor: default; }
+  .lesson-item.locked:hover { background: transparent; }
+  .li-num {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 800;
+  }
+  .li-num.unlocked { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary-glow); }
+  .li-num.locked-icon { background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border); font-size: 0.9rem; }
+  .li-meta { flex: 1; min-width: 0; }
+  .li-title { font-size: 0.9rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+  .lesson-item.locked .li-title { color: var(--text-muted); }
+  .li-tags { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
+  .li-tag {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 8px;
+    background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border);
+  }
+  .li-status { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; flex-shrink: 0; }
+  .li-status.in-progress { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.3); }
+  .li-status.locked-lbl { background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border); }
 
-/* VIDEO PAGE */
-.video-page{max-width:760px;margin:0 auto;padding:20px;}
-.video-container{background:#000;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:16/9;position:relative;}
-.video-container iframe{width:100%;height:100%;border:none;}
-.vid-info{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-top:14px;}
-.vid-title{font-size:16px;font-weight:600;margin-bottom:8px;}
-.vid-tags-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-.vid-tag{padding:3px 10px;border-radius:10px;font-size:11px;background:var(--gray);color:var(--text2);}
-.completion-tracker{background:var(--gray);border-radius:8px;padding:12px 14px;margin-bottom:12px;}
-.ct-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:flex;justify-content:space-between;}
-.next-lesson-btn{display:flex;align-items:center;justify-content:space-between;background:var(--green);color:white;padding:12px 16px;border-radius:8px;cursor:pointer;font-weight:500;font-size:13px;border:none;width:100%;}
-.next-lesson-btn:disabled{background:var(--gray2);color:var(--text3);cursor:not-allowed;}
+  /* ══════════════ LESSON PLAYER PAGE ══════════════ */
+  .lesson-player-wrap {
+    background: var(--bg2); border-bottom: 1px solid var(--border); position: relative;
+  }
+  .lesson-player-inner { max-width: 860px; margin: 0 auto; padding: 24px 16px 0; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-muted); font-size: 0.88rem; cursor: pointer;
+    background: none; border: none; padding: 0; margin-bottom: 16px; transition: color .2s;
+  }
+  .back-btn:hover { color: var(--primary); }
+  .player-iframe-wrap { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #000; }
+  .player-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
+  .progress-bar-wrap { margin: 14px 0 0; }
+  .progress-bar-bg { height: 5px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--grad-logo); border-radius: 3px; transition: width .5s; box-shadow: 0 0 8px var(--primary-glow); }
+  .progress-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; display: flex; justify-content: space-between; }
+  .unlock-banner {
+    margin: 14px 0; padding: 12px 16px; border-radius: 10px;
+    background: rgba(255,94,26,0.1); border: 1px solid rgba(255,94,26,0.35);
+    color: var(--orange); font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .unlock-banner.unlocked { background: rgba(74,222,58,0.08); border-color: rgba(74,222,58,0.3); color: var(--primary); }
+  .lesson-detail-section { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+  .lesson-detail-title { font-family: 'Baloo Da 2', cursive; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+  .lesson-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .lesson-tag {
+    font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 12px;
+    background: rgba(74,222,58,0.1); color: var(--primary); border: 1px solid rgba(74,222,58,0.25);
+  }
+  .lesson-objectives { margin-top: 20px; }
+  .lesson-obj-title { font-size: 0.88rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .lesson-obj-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text); }
+  .lesson-obj-item:last-child { border-bottom: none; }
+  .lesson-obj-item .check { color: var(--primary); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .unlock-form-card {
+    background: linear-gradient(135deg, rgba(74,222,58,0.08), rgba(255,94,26,0.05));
+    border: 1px solid rgba(74,222,58,0.3); border-radius: var(--radius);
+    padding: 24px; text-align: center; margin-top: 24px;
+  }
+  .unlock-form-card .uf-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .unlock-form-card .uf-title { font-family: 'Baloo Da 2', cursive; font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+  .unlock-form-card .uf-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; }
 
-/* FORM GATE */
-.gate-page{max-width:520px;margin:0 auto;padding:32px 20px;}
-.gate-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;}
-.gate-icon{width:52px;height:52px;border-radius:12px;background:var(--red-light);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:26px;}
-.gate-card h2{font-family:'Hind Siliguri',sans-serif;font-size:20px;font-weight:600;margin-bottom:6px;}
-.gate-card p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6;}
-.form-label{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:5px;display:block;}
-.form-group{margin-bottom:14px;}
-.form-group input{width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.15s;}
-.form-group input:focus{border-color:var(--red);}
-.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:18px;}
-.int-opt{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;transition:all 0.15s;}
-.int-opt:hover{border-color:var(--red);}
-.int-opt.sel{border-color:var(--red);background:var(--red-light);color:var(--red-dark);}
-.int-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.submit-btn{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:background 0.15s;}
-.submit-btn:hover{background:var(--red-dark);}
-.form-note{text-align:center;font-size:11px;color:var(--text3);margin-top:10px;}
+  /* ══════════════ PLATFORM LINKS ══════════════ */
+  .platform-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* PRIVATE */
-.private-page{max-width:600px;margin:0 auto;padding:32px 20px;}
-.private-hero{background:var(--dark);border-radius:var(--radius-lg);padding:32px 24px;text-align:center;color:white;margin-bottom:16px;}
-.lock-icon{width:56px;height:56px;border-radius:14px;background:#E24B4A;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;}
-.private-hero h2{font-family:'Hind Siliguri',sans-serif;font-size:22px;font-weight:600;margin-bottom:8px;}
-.private-hero p{font-size:13px;opacity:0.6;line-height:1.7;margin-bottom:20px;}
-.exam-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
-.es-card{background:rgba(255,255,255,0.07);border-radius:8px;padding:14px 10px;text-align:center;}
-.es-num{font-size:22px;font-weight:700;color:var(--red);margin-bottom:4px;}
-.es-label{font-size:11px;color:rgba(255,255,255,0.6);line-height:1.4;}
-.pass-mark{display:inline-flex;align-items:center;gap:6px;background:rgba(29,158,117,0.2);border:1px solid rgba(29,158,117,0.4);border-radius:20px;padding:5px 14px;font-size:12px;color:#5DCAA5;margin-bottom:16px;}
-.private-perks{background:rgba(255,255,255,0.05);border-radius:8px;padding:14px;text-align:left;margin-bottom:16px;}
-.perk{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12px;color:rgba(255,255,255,0.7);}
-.perk-check{color:#5DCAA5;font-size:14px;margin-top:1px;}
+  /* ══════════════ PRIVATE TRACK PAGE ══════════════ */
+  .private-hero {
+    background: linear-gradient(135deg, #0d0d0d, #111);
+    border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    text-align: center; padding: 60px 20px 50px;
+  }
+  .private-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(245,166,35,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .private-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.4);
+    padding: 6px 18px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;
+    color: var(--gold); margin-bottom: 20px; box-shadow: 0 0 14px rgba(245,166,35,0.15);
+  }
+  .private-hero h1 { font-family: 'Baloo Da 2', cursive; font-size: clamp(1.5rem,5vw,2.2rem); font-weight: 800; color: var(--white); margin-bottom: 14px; line-height: 1.3; }
+  .private-hero p { font-size: 1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 28px; }
+  .pass-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(74,222,58,0.1); border: 1px solid rgba(74,222,58,0.3);
+    padding: 8px 20px; border-radius: 20px; color: var(--primary); font-size: 0.88rem; font-weight: 700; margin-bottom: 28px;
+  }
+  .private-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; margin-bottom: 28px; }
+  .private-step-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px; text-align: center; transition: border-color .2s;
+  }
+  .private-step-card:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(245,166,35,0.15); }
+  .ps-num {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #000; font-family: 'Baloo Da 2', cursive; font-size: 1rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+    box-shadow: 0 0 14px rgba(245,166,35,0.35);
+  }
+  .ps-title { font-family: 'Baloo Da 2', cursive; font-size: 0.92rem; font-weight: 700; color: var(--white); }
+  .private-benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+  .pb-item {
+    background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border);
+    padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px;
+    transition: border-color .2s;
+  }
+  .pb-item:hover { border-color: rgba(245,166,35,0.35); }
+  .pb-check { color: var(--primary); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .pb-text { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
 
-/* ADMIN */
-.admin-page{max-width:900px;margin:0 auto;padding:20px;}
-.admin-header{background:var(--dark);border-radius:var(--radius-lg);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.admin-header h2{color:white;font-size:16px;font-weight:600;}
-.admin-badge{background:rgba(226,75,74,0.2);color:#F09595;padding:3px 10px;border-radius:10px;font-size:11px;}
-.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
-.metric-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
-.metric-num{font-size:24px;font-weight:700;color:var(--text);margin-bottom:3px;}
-.metric-label{font-size:11px;color:var(--text3);}
-.metric-card.highlight .metric-num{color:var(--green);}
-.admin-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px;}
-.admin-tab{padding:9px 18px;font-size:13px;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all 0.15s;}
-.admin-tab.active{color:var(--red);border-bottom-color:var(--red);}
-.admin-table-wrap{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
-table{width:100%;border-collapse:collapse;}
-th{text-align:left;padding:10px 16px;font-size:11px;color:var(--text3);font-weight:500;border-bottom:1px solid var(--border);background:#fafafa;}
-td{padding:11px 16px;border-bottom:1px solid #f5f5f5;font-size:13px;}
-tr:last-child td{border-bottom:none;}
-.user-name{font-weight:500;font-size:13px;}
-.user-email{font-size:11px;color:var(--text3);}
-.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:500;}
-.pill-active{background:var(--green-light);color:var(--green-dark);}
-.pill-cert{background:#E6F1FB;color:#0C447C;}
-.pill-pending{background:#FAEEDA;color:#633806;}
-.pill-private{background:#EEEDFE;color:#3C3489;}
-.mini-bar{height:4px;background:var(--gray2);border-radius:2px;width:80px;margin-top:3px;}
-.mini-fill{height:100%;border-radius:2px;background:var(--green);}
-.action-btn{padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:white;color:var(--text);font-family:'Inter',sans-serif;}
-.export-bar{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--border);background:#fafafa;}
+  /* ══════════════ FLOATING BUTTONS ══════════════ */
+  .float-wrap {
+    position: fixed; bottom: 20px; left: 0; right: 0;
+    display: flex; justify-content: space-between;
+    padding: 0 16px; z-index: 900; pointer-events: none;
+  }
+  .float-btn {
+    pointer-events: all; display: flex; align-items: center; gap: 8px;
+    padding: 12px 18px; border-radius: 30px; border: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.88rem; font-weight: 700; color: white;
+    text-decoration: none; transition: all .2s;
+  }
+  .float-btn:hover { transform: translateY(-3px) scale(1.04); }
+  .float-wa { background: var(--wa); box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+  .float-wa:hover { box-shadow: 0 6px 28px rgba(37,211,102,0.7); }
+  .float-fb { background: var(--fb); box-shadow: 0 4px 20px rgba(0,132,255,0.5); }
+  .float-fb:hover { box-shadow: 0 6px 28px rgba(0,132,255,0.7); }
+  .float-btn svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+  .float-btn .btn-text { display: none; }
+  @media (min-width: 420px) { .float-btn .btn-text { display: inline; } }
 
-/* CERT MODAL */
-.cert-overlay{display:none;background:rgba(0,0,0,0.6);min-height:500px;align-items:center;justify-content:center;border-radius:var(--radius-lg);}
-.cert-overlay.show{display:flex;}
-.cert-card{background:white;border-radius:var(--radius-lg);padding:32px;max-width:420px;width:100%;text-align:center;position:relative;}
-.cert-top-bar{height:5px;background:linear-gradient(90deg,var(--red),#F09595,var(--red));border-radius:4px 4px 0 0;position:absolute;top:0;left:0;right:0;}
-.cert-seal{width:60px;height:60px;border-radius:50%;background:var(--green-light);border:3px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px;}
-.cert-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
-.cert-name{font-size:22px;font-weight:700;margin-bottom:4px;}
-.cert-course{font-size:13px;color:var(--text2);margin-bottom:16px;}
-.cert-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;padding:12px;background:var(--gray);border-radius:8px;}
-.cs-item .cs-num{font-size:18px;font-weight:700;color:var(--green);}
-.cs-item .cs-lbl{font-size:10px;color:var(--text3);}
-.cert-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  /* ══════════════ ADMIN PANEL ══════════════ */
+  .admin-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 0;
+  }
+  .admin-tab {
+    padding: 10px 16px; border-radius: 10px 10px 0 0;
+    border: 1px solid transparent; border-bottom: none;
+    background: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-muted);
+    transition: all .2s; position: relative; top: 1px;
+  }
+  .admin-tab.active { background: var(--bg3); border-color: var(--border); border-bottom-color: var(--bg3); color: var(--primary); }
+  .admin-tab-panel { display: none; }
+  .admin-tab-panel.active { display: block; }
 
-/* RESPONSIVE */
-@media(max-width:600px){
-  .metrics-grid{grid-template-columns:1fr 1fr;}
-  .exam-steps-grid{grid-template-columns:1fr;}
-  .interest-grid{grid-template-columns:1fr;}
-  .hero h1{font-size:24px;}
-  .nav-links{gap:0;}
-  .nav-btn{padding:6px 8px;font-size:12px;}
-}
+  .content-editor-card {
+    background: var(--card-bg); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 24px; margin-bottom: 20px;
+  }
+  .ce-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .ce-input {
+    width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem;
+    color: var(--text); background: var(--bg3);
+    transition: border-color .2s, box-shadow .2s; margin-bottom: 14px;
+  }
+  .ce-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 8px var(--primary-glow); }
+  textarea.ce-input { min-height: 80px; resize: vertical; }
+  .ce-save {
+    background: var(--primary); color: #000; border: none; padding: 10px 22px; border-radius: 10px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.92rem; font-weight: 800; cursor: pointer;
+    transition: all .2s; box-shadow: 0 0 14px var(--primary-glow);
+  }
+  .ce-save:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 0 22px var(--primary-glow); }
+  .ce-saved {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(74,222,58,0.15); color: var(--primary); border: 1px solid rgba(74,222,58,0.3);
+    padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; margin-left: 10px;
+    opacity: 0; transition: opacity .3s;
+  }
+  .ce-saved.show { opacity: 1; }
+
+  /* Admin table */
+  .admin-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .admin-table th { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); color: var(--text-muted); font-weight: 700; background: var(--bg3); }
+  .admin-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .admin-table tr:last-child td { border-bottom: none; }
+  .admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .tbl-action {
+    padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg4); color: var(--text-muted); font-size: 0.78rem;
+    font-weight: 600; cursor: pointer; transition: all .2s;
+  }
+  .tbl-action:hover { border-color: var(--primary); color: var(--primary); }
+  .tbl-action.danger:hover { border-color: #f87171; color: #f87171; }
+
+  /* Certificate */
+  .cert-card {
+    background: linear-gradient(135deg, rgba(74,222,58,0.06), rgba(245,166,35,0.04));
+    border: 2px solid rgba(74,222,58,0.4); border-radius: 20px;
+    padding: 40px 24px; text-align: center; position: relative; overflow: hidden;
+    max-width: 500px; margin: 0 auto;
+    box-shadow: 0 0 40px rgba(74,222,58,0.1);
+  }
+  .cert-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,222,58,0.06), transparent);
+    pointer-events: none;
+  }
+  .cert-trophy { font-size: 3.5rem; margin-bottom: 16px; display: block; }
+  .cert-label { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .cert-name { font-family: 'Baloo Da 2', cursive; font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 20px var(--primary-glow); }
+  .cert-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+  .cert-stats { display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; }
+  .cert-stat-num { font-family: 'Baloo Da 2', cursive; font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+  .cert-stat-label { font-size: 0.72rem; color: var(--text-muted); }
+  .cert-unlock { background: rgba(74,222,58,0.1); border: 1px solid rgba(74,222,58,0.3); border-radius: 10px; padding: 12px; margin-bottom: 20px; color: var(--primary); font-size: 0.88rem; font-weight: 600; }
+  .cert-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+  /* Skills Admin */
+  .skill-admin-card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden; }
+  .skill-admin-header {
+    padding: 16px 20px; background: linear-gradient(135deg, rgba(74,222,58,0.06), rgba(255,94,26,0.04));
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    user-select: none; border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  .skill-admin-header.open { border-bottom-color: var(--border); }
+  .skill-admin-header .sah-icon { font-size: 1.5rem; }
+  .skill-admin-header .sah-title { font-family: 'Baloo Da 2', cursive; font-size: 1rem; font-weight: 700; flex: 1; color: var(--white); }
+  .skill-admin-header .sah-toggle { color: var(--text-muted); font-size: 1rem; transition: transform .3s; }
+  .skill-admin-header.open .sah-toggle { transform: rotate(180deg); color: var(--primary); }
+  .skill-admin-body { padding: 20px; display: none; }
+  .skill-admin-body.open { display: block; }
+  .skill-admin-meta { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .skill-admin-meta .ce-input { margin-bottom: 0; flex: 1; min-width: 140px; }
+  .video-admin-list { margin-bottom: 16px; }
+  .video-admin-item { border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; background: var(--bg3); }
+  .video-admin-item .vai-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .video-admin-item .vai-row .ce-input { margin-bottom: 0; flex: 1; min-width: 140px; }
+  .vai-actions { display: flex; gap: 8px; }
+  .vai-del { background: rgba(255,60,60,0.1); color: #f87171; border: 1px solid rgba(255,60,60,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .vai-del:hover { background: #dc2626; color: white; border-color: #dc2626; }
+  .vai-move { background: var(--bg4); border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; transition: all .2s; }
+  .vai-move:hover { background: var(--border); color: var(--primary); border-color: var(--primary); }
+  .add-video-btn {
+    display: flex; align-items: center; gap: 8px; background: none;
+    border: 1.5px dashed rgba(74,222,58,0.4); color: var(--primary);
+    padding: 10px 18px; border-radius: 10px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; width: 100%;
+    justify-content: center; transition: all .2s;
+  }
+  .add-video-btn:hover { background: rgba(74,222,58,0.07); border-color: var(--primary); }
+  .add-skill-btn {
+    display: flex; align-items: center; gap: 8px; background: var(--primary); color: #000;
+    border: none; padding: 12px 22px; border-radius: 10px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: all .2s; margin-top: 8px;
+    box-shadow: 0 0 16px var(--primary-glow);
+  }
+  .add-skill-btn:hover { filter: brightness(1.1); box-shadow: 0 0 24px var(--primary-glow); }
+  .thumb-preview { width: 80px; height: 50px; object-fit: cover; border-radius: 6px; display: none; margin-top: 4px; border: 1px solid var(--border); }
+  .thumb-preview.show { display: block; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: var(--bg3); color: var(--primary); border: 1px solid rgba(74,222,58,0.4);
+    padding: 10px 22px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;
+    z-index: 9999; opacity: 0; transition: opacity .3s;
+    pointer-events: none; white-space: nowrap; box-shadow: 0 0 20px var(--primary-glow);
+  }
+  .toast.show { opacity: 1; }
+
+  /* Stats row */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 16px; text-align: center; transition: border-color .2s; }
+  .stat-card:hover { border-color: var(--primary); box-shadow: 0 0 16px var(--primary-glow); }
+  .stat-num { font-family: 'Baloo Da 2', cursive; font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+
+  /* Misc */
+  .divider { height: 1px; margin: 32px 0; border-radius: 2px; background: var(--grad-logo); box-shadow: 0 0 8px rgba(74,222,58,0.3); }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; background: rgba(74,222,58,0.12); color: var(--primary); border: 1px solid rgba(74,222,58,0.2); margin: 2px; }
+
+  @media (max-width: 500px) {
+    .hero { padding: 40px 16px 36px; }
+    .private-hero { padding: 40px 16px 36px; }
+  }
+
+  /* ══════════════ LESSON TABS ══════════════ */
+  .lesson-tabs {
+    display: flex; gap: 8px; padding: 20px 16px 0;
+    max-width: 860px; margin: 0 auto; overflow-x: auto; scrollbar-width: none;
+  }
+  .lesson-tabs::-webkit-scrollbar { display: none; }
+  .lesson-tab {
+    flex-shrink: 0; display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 24px; font-size: 0.88rem; font-weight: 700;
+    cursor: pointer; border: 1.5px solid var(--border-bright); color: var(--text-muted);
+    background: transparent; font-family: 'Hind Siliguri', sans-serif;
+    transition: all .2s; white-space: nowrap;
+  }
+  .lesson-tab:hover { border-color: var(--primary); color: var(--primary); }
+  .lesson-tab.active-ai { background: rgba(74,222,58,0.12); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 14px var(--primary-glow); }
+  .lesson-tab.active-quran { background: rgba(245,166,35,0.12); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(245,166,35,0.3); }
+  .lesson-tab.active-lang { background: rgba(56,140,221,0.12); border-color: #378ADD; color: #6db3f2; box-shadow: 0 0 14px rgba(56,140,221,0.25); }
+  .lesson-tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ══════════════ BOTTOM SECTION CARDS ══════════════ */
+  .section-switch-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .switch-card {
+    border-radius: var(--radius); border: 1.5px solid var(--border-bright);
+    padding: 18px 16px; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; gap: 12px; background: var(--card-bg);
+  }
+  .switch-card:hover { transform: translateY(-2px); }
+  .switch-card.quran-card:hover { border-color: var(--gold); box-shadow: 0 0 18px rgba(245,166,35,0.25); }
+  .switch-card.lang-card:hover { border-color: #378ADD; box-shadow: 0 0 18px rgba(56,140,221,0.2); }
+  .switch-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .switch-card-title { font-family: 'Baloo Da 2', cursive; font-size: 0.95rem; font-weight: 800; color: var(--white); }
+  .switch-card-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  .switch-card-arrow { margin-left: auto; font-size: 1rem; color: var(--text-muted); }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">
-    <span class="logo-text bangla">বুঝলে Easy</span>
-    <span class="logo-badge">FREE</span>
+<!-- ══════════════ NAVBAR ══════════════ -->
+<header class="navbar">
+  <div class="nav-left">
+    <button class="menu-btn" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <div class="nav-links">
-    <button class="nav-btn active" onclick="showPage('home')">Home</button>
-    <button class="nav-btn" onclick="showPage('lessons')">Lessons</button>
-    <button class="nav-btn" onclick="showPage('video')">▶ Watch</button>
-    <button class="nav-btn" onclick="showPage('private')">Private</button>
-    <button class="nav-btn" onclick="showPage('admin')">Admin</button>
+  <a href="#" class="nav-logo" onclick="showPage('home')" aria-label="Bujhle Easy Home">
+    <div class="nav-logo-pill">
+      <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">easy</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <button class="lessons-btn" onclick="showPage('lessons')">📚 Lessons</button>
+    <button class="private-btn" onclick="showPage('private')" title="Private Track">🔐</button>
   </div>
-</nav>
+</header>
 
-<!-- HOME PAGE -->
-<div class="page active" id="page-home">
-  <div class="hero">
-    <div class="hero-pill">✨ সম্পূর্ণ বিনামূল্যে · Free for everyone</div>
-    <h1 class="bangla">AI দিয়ে বদলে দাও<br>তোমার পড়াশোনা ও <span>ভবিষ্যৎ</span></h1>
-    <p class="bangla">Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.</p>
-    <div class="hero-btns">
-      <a href="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY" target="_blank" class="btn btn-primary">▶ Intro Video দেখো</a>
-      <button class="btn btn-outline" onclick="showPage('lessons')">📚 Lessons দেখো</button>
-    </div>
-  </div>
-
-  <!-- 4-step bar -->
-  <div class="steps-bar">
-    <div class="steps-inner">
-      <div class="step-item">
-        <div class="step-num done">1</div>
-        <div class="step-label">Intro video<br>দেখো</div>
+<!-- ══════════════ SIDE DRAWER ══════════════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="drawer-logo-pill">
+        <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">easy</span>
       </div>
-      <div class="step-connector"></div>
-      <div class="step-item">
-        <div class="step-num active">2</div>
-        <div class="step-label">Subscribe +<br>Comment করো</div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="step-item">
-        <div class="step-num todo">3</div>
-        <div class="step-label">Form fill<br>করো</div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="step-item">
-        <div class="step-num todo">✓</div>
-        <div class="step-label">সব Lesson<br>Free!</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-
-    <!-- Step 1: Intro Video -->
-    <div class="journey-card" style="border-left:4px solid var(--red);">
-      <div class="jc-num" style="background:var(--red-light);color:var(--red);">1</div>
-      <div style="flex:1;">
-        <div class="jc-title bangla">Intro Video দেখো — YouTube-এ</div>
-        <div class="jc-desc bangla">বুঝলে Easy কী, কেন free, এবং এটা তোমার জীবন কীভাবে বদলাবে — সেটা এই একটা video-তে বোঝানো হয়েছে।</div>
-        <a href="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 16px;">▶ Intro Video দেখো (YouTube)</a>
-      </div>
-    </div>
-
-    <!-- Step 2: Subscribe + Comment -->
-    <div class="journey-card" style="border-left:4px solid #FF0000;">
-      <div class="jc-num" style="background:#FFF0F0;color:#FF0000;">2</div>
-      <div style="flex:1;">
-        <div class="jc-title bangla">Subscribe করো + Comment করো + WhatsApp Join করো</div>
-        <div class="jc-desc bangla">
-          YouTube Subscribe করো। তারপর যেকোনো video-তে comment করো:<br>
-          <strong class="hashtag">#BujhleEasyBangla</strong> — বাংলায় শিখতে চাইলে<br>
-          <strong class="hashtag">#BujhleEasyEnglish</strong> — English-এ শিখতে চাইলে<br><br>
-          তারপর WhatsApp community-তে join করো।
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="btn" style="background:#FF0000;color:white;font-size:12px;padding:8px 14px;">▶ YouTube Subscribe</a>
-          <a href="https://wa.me/97455879325" target="_blank" class="btn" style="background:#25D366;color:white;font-size:12px;padding:8px 14px;">💬 WhatsApp Join</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 3: Benefit Video + Form -->
-    <div class="journey-card" style="border-left:4px solid #9B59B6;">
-      <div class="jc-num" style="background:#F3E8FF;color:#7D3C98;">3</div>
-      <div style="flex:1;">
-        <div class="jc-title bangla">Benefit Video দেখো, তারপর Form fill করো</div>
-        <div class="jc-desc bangla">এই video-তে দেখাবে তুমি কী কী শিখবে এবং কীভাবে উপকার পাবে। Video শেষে শুধু নাম, email এবং তোমার interests দিয়ে form fill করো।</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="https://www.youtube.com/shorts/FkBWh3drYKI" target="_blank" class="btn btn-outline" style="color:var(--text);border-color:var(--border);font-size:12px;padding:8px 14px;">▶ Benefit Video</a>
-          <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank" class="btn btn-primary" style="font-size:12px;padding:8px 14px;">📝 Form Fill করো</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 4: Unlock -->
-    <div class="journey-card" style="border-left:4px solid var(--green);">
-      <div class="jc-num" style="background:var(--green-light);color:var(--green);">✓</div>
-      <div style="flex:1;">
-        <div class="jc-title bangla">সব Lessons এখন Free — নিজের গতিতে শেখো!</div>
-        <div class="jc-desc bangla">Form fill করার পর সব lessons unlock হয়ে যাবে। কোনো password নেই, কোনো deadline নেই। যখন ইচ্ছা, যেটা ইচ্ছা শেখো।</div>
-        <button class="btn btn-green" style="font-size:12px;padding:8px 16px;" onclick="showPage('lessons')">📚 Lessons দেখো →</button>
-      </div>
-    </div>
-
-    <!-- Social Links -->
-    <div style="margin-top:8px;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:12px;">আমাদের সব platform-এ যুক্ত হও</div>
-      <div class="social-row">
-        <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="btn social-pill sp-yt">▶ YouTube</a>
-        <a href="https://wa.me/97455879325" target="_blank" class="btn social-pill sp-wa">💬 WhatsApp</a>
-        <span class="btn social-pill sp-fb">f Facebook</span>
-        <span class="btn social-pill sp-ig">📸 Instagram</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- LESSONS PAGE -->
-<div class="page" id="page-lessons">
-  <div class="lessons-wrap">
-    <div style="margin-bottom:20px;">
-      <div class="section-title bangla">সব Lessons</div>
-      <div class="section-sub bangla">Section বেছে নাও → যেকোনো Lesson-এ click করো → শুরু করো</div>
-    </div>
-
-    <!-- Section: AI for Students -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#FCEBEB;">🎓</div>
-        <div>
-          <div class="mod-title bangla">AI দিয়ে পড়াশোনা সহজ করো</div>
-          <div class="mod-count">Students · 6 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:block;">
-        <div class="lesson-row" onclick="openLesson('TThi7rCba_c','Study 10x Faster with AI','AI for Students',true)">
-          <div class="lesson-thumb">
-            <img src="https://img.youtube.com/vi/TThi7rCba_c/mqdefault.jpg" alt="Study 10x Faster">
-            <div class="play-overlay"><svg viewBox="0 0 10 10"><polygon points="3,2 8,5 3,8"/></svg></div>
-          </div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla">Lesson 1 — AI দিয়ে 10x দ্রুত পড়ো</div>
-            <div class="lesson-meta">ChatGPT · Beginner</div>
-            <div class="progress-bar"><div class="progress-fill" style="width:40%;"></div></div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-active">In Progress</span></div>
-        </div>
-        <div class="lesson-row" onclick="alert('Complete Lesson 1 to 80% first!')">
-          <div class="lesson-thumb" style="background:#555;">
-            <div style="font-size:20px;">🔒</div>
-          </div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Lesson 2 — Notes বানাও AI দিয়ে (Coming soon)</div>
-            <div class="lesson-meta">ChatGPT · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row" onclick="alert('Complete Lesson 1 to 80% first!')">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Lesson 3 — Exam Preparation AI দিয়ে</div>
-            <div class="lesson-meta">Claude · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section: Job Skills -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#E6F1FB;">💼</div>
-        <div>
-          <div class="mod-title bangla">Job Skills — CV, LinkedIn, Office</div>
-          <div class="mod-count">Freshers & Office · 7 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:none;">
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">CV বানাও AI দিয়ে — ৫ মিনিটে</div>
-            <div class="lesson-meta">ChatGPT · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">LinkedIn Profile Optimize করো</div>
-            <div class="lesson-meta">Claude · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">AI দিয়ে Presentation বানাও</div>
-            <div class="lesson-meta">Copilot · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Google Sheets ও Excel — AI Tricks</div>
-            <div class="lesson-meta">Gemini · Copilot · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Image Generation — AI দিয়ে</div>
-            <div class="lesson-meta">Grok · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Video Generation — AI দিয়ে</div>
-            <div class="lesson-meta">AI Tools · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section: Personal Branding -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#EAF3DE;">📱</div>
-        <div>
-          <div class="mod-title bangla">Personal Branding — নিজেকে Present করো</div>
-          <div class="mod-count">Social Media · 5 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:none;">
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">YouTube Channel শুরু করো</div>
-            <div class="lesson-meta">YouTube · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Facebook Page ও Instagram Setup</div>
-            <div class="lesson-meta">Social Media · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Content Strategy — AI দিয়ে Plan করো</div>
-            <div class="lesson-meta">ChatGPT · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section: Website & E-commerce -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#EEEDFE;">🌐</div>
-        <div>
-          <div class="mod-title bangla">Website, Hosting ও E-commerce</div>
-          <div class="mod-count">No-code · 5 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:none;">
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">AI দিয়ে Website বানাও — Coding ছাড়া</div>
-            <div class="lesson-meta">No-code Tools · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Free Website Hosting করো</div>
-            <div class="lesson-meta">GitHub Pages · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">E-commerce শুরু করো — AI দিয়ে</div>
-            <div class="lesson-meta">Shopify · Tools · Intermediate</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section: Quran & Islamic -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#FAEEDA;">🌙</div>
-        <div>
-          <div class="mod-title bangla">Quran ও Islamic Learning — Kids-friendly</div>
-          <div class="mod-count">Quran · Islamic · 8 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:none;">
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Juzz 30 — সহজে শেখো AI দিয়ে</div>
-            <div class="lesson-meta">Quran · Kids · All levels</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Quran Reading — Tajweed শেখো</div>
-            <div class="lesson-meta">Quran · Kids · All levels</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Prophet Stories — AI-assisted Learning</div>
-            <div class="lesson-meta">Islamic · Kids · Bangla</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Daily Duas — মুখস্থ করো সহজে</div>
-            <div class="lesson-meta">Islamic · Kids · All levels</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section: Language Learning -->
-    <div class="module-block">
-      <div class="module-header" onclick="toggleMod(this)">
-        <div class="mod-icon" style="background:#FBEAF0;">🗣️</div>
-        <div>
-          <div class="mod-title bangla">Language Learning with AI</div>
-          <div class="mod-count">English · Arabic · 4 lessons</div>
-        </div>
-        <div class="mod-arrow">▾</div>
-      </div>
-      <div class="mod-lessons" style="display:none;">
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">English Speaking Practice — AI দিয়ে</div>
-            <div class="lesson-meta">ChatGPT · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-        <div class="lesson-row">
-          <div class="lesson-thumb" style="background:#555;"><div style="font-size:20px;">🔒</div></div>
-          <div class="lesson-info">
-            <div class="lesson-title bangla" style="color:#aaa;">Arabic Conversation — AI দিয়ে শেখো</div>
-            <div class="lesson-meta">AI Tools · Beginner</div>
-          </div>
-          <div class="lesson-status"><span class="status-badge sb-locked">🔒 Locked</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div style="background:var(--dark);border-radius:var(--radius-lg);padding:18px 20px;display:flex;align-items:center;gap:14px;margin-top:6px;">
-      <div style="font-size:28px;">🔐</div>
-      <div style="flex:1;">
-        <div style="font-weight:600;color:white;font-size:14px;margin-bottom:3px;">Passive Income — Private Track</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);">80% score পেলে exam-এ — তারপর 1-on-1 private tutorial unlock হবে।</div>
-      </div>
-      <button class="btn" style="background:rgba(226,75,74,0.2);color:#F09595;border:1px solid rgba(226,75,74,0.3);font-size:12px;" onclick="showPage('private')">Learn more →</button>
-    </div>
-  </div>
-</div>
-
-<!-- VIDEO PAGE -->
-<div class="page" id="page-video">
-  <div class="video-page">
-    <div class="video-container">
-      <iframe id="ytEmbed"
-        src="https://www.youtube.com/embed/TThi7rCba_c?enablejsapi=1&rel=0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="vid-info">
-      <div class="vid-title bangla" id="vidTitle">Lesson 1 — AI দিয়ে 10x দ্রুত পড়ো</div>
-      <div class="vid-tags-row" id="vidTags">
-        <span class="vid-tag">ChatGPT</span>
-        <span class="vid-tag">Students</span>
-        <span class="vid-tag">Bangla</span>
-        <span class="vid-tag">Beginner</span>
-      </div>
-
-      <div class="completion-tracker">
-        <div class="ct-label">
-          <span>Watch Progress</span>
-          <span id="watchPct">40% watched — need 80% to unlock next</span>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" id="watchBar" style="width:40%;"></div></div>
-      </div>
-
-      <button class="next-lesson-btn" id="nextBtn" disabled onclick="alert('Next lesson will be unlocked here! (Lesson 2 coming soon)')">
-        <span>🔒 Watch 80% to unlock next lesson</span>
-        <span>→</span>
-      </button>
-
-      <div style="margin-top:14px;padding:12px;background:#f9f9f9;border-radius:8px;">
-        <div style="font-size:12px;font-weight:500;margin-bottom:8px;">এই Lesson-এ কী শিখবে:</div>
-        <div style="font-size:12px;color:var(--text2);line-height:2;" class="bangla">
-          ✅ AI কীভাবে পড়াশোনা সহজ করে<br>
-          ✅ ChatGPT দিয়ে notes তৈরি করা<br>
-          ✅ Complex বিষয় সহজ ভাষায় বোঝানো<br>
-          ✅ Exam preparation strategy<br>
-          ✅ পরের lesson: Notes বানাও AI দিয়ে
-        </div>
-      </div>
-    </div>
-
-    <!-- Form Gate (shown after 80%) -->
-    <div id="formGate" style="display:none;">
-      <div style="text-align:center;padding:20px 0 10px;">
-        <div style="font-size:28px;margin-bottom:8px;">🎉</div>
-        <div style="font-size:15px;font-weight:600;" class="bangla">দারুণ! পরের Lesson unlock করতে Form fill করো</div>
-        <div style="font-size:13px;color:var(--text2);margin-top:4px;" class="bangla">শুধু একবার। তারপর সব lessons free।</div>
-      </div>
-      <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank" class="btn btn-primary" style="display:flex;justify-content:center;margin:12px 0;">📝 Google Form Fill করো</a>
-    </div>
-
-    <div style="text-align:center;margin-top:12px;">
-      <button class="btn btn-outline" style="color:var(--text);border-color:var(--border);" onclick="showPage('lessons')">← সব Lessons-এ ফিরে যাও</button>
-    </div>
-  </div>
-</div>
-
-<!-- PRIVATE PAGE -->
-<div class="page" id="page-private">
-  <div class="private-page">
-    <div class="private-hero">
-      <div class="lock-icon">🔐</div>
-      <h2>Passive Income — Private 1-on-1 Tutorial</h2>
-      <p class="bangla">এটা সবার জন্য না। যারা free course শেষ করে exam-এ ৮০% বা তার বেশি পাবে — শুধু তারাই এই exclusive training পাবে। এখানে শেখানো হবে কীভাবে real passive income তৈরি করা যায়।</p>
-
-      <div class="pass-mark">✅ Pass mark: 80% বা তার বেশি</div>
-
-      <div class="exam-steps-grid">
-        <div class="es-card">
-          <div class="es-num">1</div>
-          <div class="es-label bangla">সব Free lessons শেষ করো</div>
-        </div>
-        <div class="es-card">
-          <div class="es-num">2</div>
-          <div class="es-label bangla">Online Exam দাও (80% target)</div>
-        </div>
-        <div class="es-card">
-          <div class="es-num">3</div>
-          <div class="es-label bangla">Selected হলে Private access পাবে</div>
-        </div>
-      </div>
-
-      <div class="private-perks">
-        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:10px;letter-spacing:0.5px;">Private track-এ কী পাবে</div>
-        <div class="perk"><span class="perk-check">✓</span><span class="bangla">YouTube channel grow করার exact strategy — step by step</span></div>
-        <div class="perk"><span class="perk-check">✓</span><span class="bangla">AI দিয়ে content তৈরি করে income করার proven method</span></div>
-        <div class="perk"><span class="perk-check">✓</span><span class="bangla">Bujhle Easy-এর সাথে direct collaboration সুযোগ</span></div>
-        <div class="perk"><span class="perk-check">✓</span><span class="bangla">1-on-1 Private video tutorial — limited seats only</span></div>
-        <div class="perk"><span class="perk-check">✓</span><span class="bangla">WhatsApp Private group-এ access</span></div>
-      </div>
-
-      <button class="btn btn-primary" onclick="showPage('lessons')">📚 Free Lessons শুরু করো →</button>
-    </div>
-
-    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;text-align:center;">
-      <div style="font-size:14px;font-weight:600;margin-bottom:6px;" class="bangla">এখনই শুরু করো</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:14px;" class="bangla">Free lessons শেষ করলেই exam দেওয়ার সুযোগ পাবে। কোনো fee নেই।</div>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="btn btn-primary">▶ YouTube-এ যাও</a>
-        <a href="https://wa.me/97455879325" target="_blank" class="btn btn-green">💬 WhatsApp Join</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN PAGE -->
-<div class="page" id="page-admin">
-  <div class="admin-page">
-    <div class="admin-header">
       <div>
-        <h2>🛠 Admin Panel — বুঝলে Easy</h2>
-        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;">Real-time student activity & progress</div>
-      </div>
-      <div class="admin-badge">Admin Only</div>
-    </div>
-
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-num">148</div>
-        <div class="metric-label">Total Students</div>
-      </div>
-      <div class="metric-card highlight">
-        <div class="metric-num">94</div>
-        <div class="metric-label">Active this week</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">23</div>
-        <div class="metric-label">Certificates issued</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">7</div>
-        <div class="metric-label">Private access (80%+)</div>
+        <div class="drawer-logo-sub">CHILL & LEARN</div>
       </div>
     </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <nav>
+    <a href="#" onclick="showPage('home');closeDrawer()"><span class="icon">🏠</span> Home</a>
+    <a href="#" onclick="showPage('lessons');closeDrawer()"><span class="icon">📚</span> Lessons</a>
+    <a href="#" onclick="showPage('lessons');closeDrawer()"><span class="icon">▶</span> Watch Videos</a>
+    <div class="nav-divider"></div>
+    <a href="https://www.youtube.com/@BujhleEasy" target="_blank"><span class="icon">📺</span> YouTube Channel</a>
+    <a href="https://wa.me/97455879325" target="_blank"><span class="icon">💬</span> WhatsApp Join</a>
+    <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank"><span class="icon">📝</span> Register Free</a>
+    <div class="nav-divider"></div>
+    <a href="#" onclick="showPage('private');closeDrawer()" style="color:var(--gold)"><span class="icon">🔐</span> Private Track</a>
+    <a href="#" onclick="showPage('admin');closeDrawer()"><span class="icon">🛠</span> Admin Panel</a>
+  </nav>
+  <div class="drawer-footer"><span>✨ সম্পূর্ণ বিনামূল্যে</span> · Free for everyone</div>
+</div>
 
-    <div class="admin-tabs">
-      <div class="admin-tab active" onclick="switchAdminTab(this,'tab-students')">Students</div>
-      <div class="admin-tab" onclick="switchAdminTab(this,'tab-certs')">Certificates</div>
-      <div class="admin-tab" onclick="switchAdminTab(this,'tab-private')">Private Exam</div>
-    </div>
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main">
 
-    <!-- Students Tab -->
-    <div id="tab-students" class="admin-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Progress</th>
-            <th>Watch Time</th>
-            <th>Status</th>
-            <th>Exam Score</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="user-name">Rahim Uddin</div>
-              <div class="user-email">rahim@gmail.com</div>
-            </td>
-            <td>
-              <div style="font-size:12px;margin-bottom:3px;">3 / 31 lessons</div>
-              <div class="mini-bar"><div class="mini-fill" style="width:10%;background:#E24B4A;"></div></div>
-            </td>
-            <td>47 min</td>
-            <td><span class="pill pill-active">Active</span></td>
-            <td style="color:var(--text3);">—</td>
-            <td><button class="action-btn" onclick="showCert(false)">View</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-name">Fatema Khatun</div>
-              <div class="user-email">fatema@gmail.com</div>
-            </td>
-            <td>
-              <div style="font-size:12px;margin-bottom:3px;">31 / 31 lessons</div>
-              <div class="mini-bar"><div class="mini-fill" style="width:100%;"></div></div>
-            </td>
-            <td>6h 14m</td>
-            <td><span class="pill pill-cert">Certified</span></td>
-            <td style="color:var(--green);font-weight:600;">92%</td>
-            <td><button class="action-btn" onclick="showCert(true)">View Cert</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-name">Karim Hossain</div>
-              <div class="user-email">karim@yahoo.com</div>
-            </td>
-            <td>
-              <div style="font-size:12px;margin-bottom:3px;">15 / 31 lessons</div>
-              <div class="mini-bar"><div class="mini-fill" style="width:48%;background:#EF9F27;"></div></div>
-            </td>
-            <td>2h 33m</td>
-            <td><span class="pill pill-active">Active</span></td>
-            <td style="color:var(--text3);">—</td>
-            <td><button class="action-btn">View</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-name">Nasrin Akter</div>
-              <div class="user-email">nasrin@gmail.com</div>
-            </td>
-            <td>
-              <div style="font-size:12px;margin-bottom:3px;">31 / 31 lessons</div>
-              <div class="mini-bar"><div class="mini-fill" style="width:100%;"></div></div>
-            </td>
-            <td>5h 48m</td>
-            <td><span class="pill pill-cert">Certified</span></td>
-            <td style="color:var(--red);font-weight:600;">64% ✗</td>
-            <td><button class="action-btn" onclick="showCert(true)">View Cert</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="user-name">Shakil Ahmed</div>
-              <div class="user-email">shakil@hotmail.com</div>
-            </td>
-            <td>
-              <div style="font-size:12px;margin-bottom:3px;">31 / 31 lessons</div>
-              <div class="mini-bar"><div class="mini-fill" style="width:100%;"></div></div>
-            </td>
-            <td>7h 02m</td>
-            <td><span class="pill pill-private">Private Access</span></td>
-            <td style="color:var(--green);font-weight:600;">88% ✓</td>
-            <td><button class="action-btn">View</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="export-bar">
-        <button class="action-btn">📤 Export CSV</button>
-        <button class="action-btn" style="background:var(--dark);color:white;border-color:var(--dark);">+ Add Student</button>
+  <!-- ══════════ HOME PAGE ══════════ -->
+  <div id="page-home" class="page-section active">
+    <div class="hero">
+      <div class="hero-badge">✨ সম্পূর্ণ বিনামূল্যে · 100% Free</div>
+      <h1 id="hero-title">AI দিয়ে বদলে দাও<br>তোমার পড়াশোনা ও ভবিষ্যৎ</h1>
+      <p id="hero-subtitle">Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.</p>
+      <div class="hero-btns">
+        <a href="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY" target="_blank" class="btn-primary">▶ Intro Video দেখো</a>
+        <button class="btn-ghost" onclick="showPage('lessons')">📚 Lessons দেখো</button>
       </div>
     </div>
 
-    <!-- Certs Tab -->
-    <div id="tab-certs" class="admin-table-wrap" style="display:none;">
-      <table>
-        <thead>
-          <tr><th>Student</th><th>Completed</th><th>Watch Time</th><th>Certificate</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="user-name">Fatema Khatun</div><div class="user-email">fatema@gmail.com</div></td>
-            <td>31/31 (100%)</td>
-            <td>6h 14m</td>
-            <td><span class="pill pill-cert">Issued Jan 12</span></td>
-            <td><button class="action-btn" onclick="showCert(true)">View Cert</button></td>
-          </tr>
-          <tr>
-            <td><div class="user-name">Nasrin Akter</div><div class="user-email">nasrin@gmail.com</div></td>
-            <td>31/31 (100%)</td>
-            <td>5h 48m</td>
-            <td><span class="pill pill-cert">Issued Jan 14</span></td>
-            <td><button class="action-btn" onclick="showCert(true)">View Cert</button></td>
-          </tr>
-          <tr>
-            <td><div class="user-name">Shakil Ahmed</div><div class="user-email">shakil@hotmail.com</div></td>
-            <td>31/31 (100%)</td>
-            <td>7h 02m</td>
-            <td><span class="pill pill-cert">Issued Jan 10</span></td>
-            <td><button class="action-btn" onclick="showCert(true)">View Cert</button></td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- How To Start Steps -->
+    <div class="section">
+      <div class="section-title">কীভাবে শুরু করবে?</div>
+      <div class="section-sub">মাত্র ৩টি ধাপ — তারপর সব lessons free!</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Intro Video দেখো — YouTube-এ</div>
+          <div class="step-desc">বুঝলে Easy কী, কেন free, এবং এটা তোমার জীবন কীভাবে বদলাবে — সেটা এই একটা video-তে বোঝানো হয়েছে।</div>
+          <div class="step-btns">
+            <a href="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY" target="_blank" class="step-btn step-btn-primary">▶ Intro Video দেখো (YouTube)</a>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Subscribe + Comment + WhatsApp Join</div>
+          <div class="step-desc">YouTube Subscribe করো। তারপর যেকোনো video-তে comment করো:<br><strong style="color:var(--primary)">#BujhleEasyBangla</strong> — বাংলায় শিখতে চাইলে<br><strong style="color:var(--orange)">#BujhleEasyEnglish</strong> — English-এ শিখতে চাইলে<br><br>তারপর WhatsApp community-তে join করো।</div>
+          <div class="step-btns">
+            <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="step-btn step-btn-primary">▶ YouTube Subscribe</a>
+            <a href="https://wa.me/97455879325" target="_blank" class="step-btn step-btn-ghost">💬 WhatsApp Join</a>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">Benefit Video দেখো, তারপর Form fill করো</div>
+          <div class="step-desc">এই video-তে দেখাবে তুমি কী কী শিখবে এবং কীভাবে উপকার পাবে। Video শেষে শুধু নাম, email এবং তোমার interests দিয়ে form fill করো।</div>
+          <div class="step-btns">
+            <a href="https://www.youtube.com/shorts/FkBWh3drYKI" target="_blank" class="step-btn step-btn-primary">▶ Benefit Video</a>
+            <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank" class="step-btn step-btn-ghost">📝 Form Fill করো</a>
+          </div>
+        </div>
+        <div class="step-card done" style="border-color:rgba(74,222,58,0.4);background:rgba(74,222,58,0.04);">
+          <div class="step-num" style="background:var(--primary);font-size:1.3rem;">✓</div>
+          <div class="step-title">সব Lessons এখন Free — নিজের গতিতে শেখো!</div>
+          <div class="step-desc">Form fill করার পর সব lessons unlock হয়ে যাবে। কোনো password নেই, কোনো deadline নেই। যখন ইচ্ছা, যেটা ইচ্ছা শেখো।</div>
+          <div class="step-btns">
+            <button class="step-btn step-btn-primary" onclick="showPage('lessons')">📚 Lessons দেখো →</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Private Exam Tab -->
-    <div id="tab-private" class="admin-table-wrap" style="display:none;">
-      <table>
-        <thead>
-          <tr><th>Student</th><th>Exam Score</th><th>Pass (80%+)</th><th>Private Access</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="user-name">Fatema Khatun</div></td>
-            <td style="font-weight:600;color:var(--green);">92%</td>
-            <td><span class="pill pill-cert">✓ Passed</span></td>
-            <td><span class="pill pill-private">Granted</span></td>
-            <td><button class="action-btn">Revoke</button></td>
-          </tr>
-          <tr>
-            <td><div class="user-name">Shakil Ahmed</div></td>
-            <td style="font-weight:600;color:var(--green);">88%</td>
-            <td><span class="pill pill-cert">✓ Passed</span></td>
-            <td><span class="pill pill-private">Granted</span></td>
-            <td><button class="action-btn">Revoke</button></td>
-          </tr>
-          <tr>
-            <td><div class="user-name">Nasrin Akter</div></td>
-            <td style="font-weight:600;color:var(--red);">64%</td>
-            <td><span class="pill" style="background:#FCEBEB;color:#A32D2D;">✗ Failed</span></td>
-            <td><span class="pill" style="background:var(--gray);color:var(--text3);">Not granted</span></td>
-            <td><button class="action-btn">Override</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="export-bar">
-        <button class="action-btn">📤 Export Exam Results</button>
+    <!-- Platform Links -->
+    <div class="section" style="padding-top:0;">
+      <div class="section-title">আমাদের সব platform-এ যুক্ত হও</div>
+      <div class="section-sub">YouTube · WhatsApp · Facebook · Instagram</div>
+      <div class="platform-links">
+        <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#ff0000,#cc0000);color:white;box-shadow:0 0 16px rgba(255,0,0,0.3);">▶ YouTube</a>
+        <a href="https://wa.me/97455879325" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#25D366,#128C7E);color:white;box-shadow:0 0 16px rgba(37,211,102,0.3);">💬 WhatsApp</a>
+        <a href="#" class="btn-primary" style="background:linear-gradient(135deg,#1877f2,#0a5cd6);color:white;box-shadow:0 0 16px rgba(24,119,242,0.3);">f Facebook</a>
+        <a href="#" class="btn-primary" style="background:linear-gradient(135deg,#e1306c,#f77737);color:white;box-shadow:0 0 16px rgba(225,48,108,0.3);">📸 Instagram</a>
       </div>
     </div>
   </div>
-</div>
 
-<!-- CERTIFICATE MODAL OVERLAY -->
-<div id="certOverlay" style="display:none;background:rgba(0,0,0,0.6);padding:30px 20px;">
-  <div style="background:white;border-radius:var(--radius-lg);padding:32px;max-width:420px;margin:0 auto;text-align:center;position:relative;border-top:5px solid var(--green);">
-    <div style="width:64px;height:64px;border-radius:50%;background:var(--green-light);border:3px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:32px;">🏆</div>
-    <div style="font-size:10px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;margin-bottom:6px;">Certificate of Completion</div>
-    <div id="certStudentName" style="font-size:22px;font-weight:700;margin-bottom:4px;">Fatema Khatun</div>
-    <div style="font-size:13px;color:var(--text2);margin-bottom:16px;" class="bangla">সফলভাবে সম্পন্ন করেছে<br><strong>বুঝলে Easy — AI Learning Program</strong></div>
-    <div style="display:flex;justify-content:center;gap:24px;background:var(--gray);border-radius:8px;padding:12px;margin-bottom:16px;">
-      <div><div style="font-size:18px;font-weight:700;color:var(--green);">31</div><div style="font-size:10px;color:var(--text3);">Lessons</div></div>
-      <div><div style="font-size:18px;font-weight:700;color:var(--green);">6h 14m</div><div style="font-size:10px;color:var(--text3);">Watch Time</div></div>
-      <div><div style="font-size:18px;font-weight:700;color:var(--green);">100%</div><div style="font-size:10px;color:var(--text3);">Completed</div></div>
+  <!-- ══════════ LESSONS PAGE ══════════ -->
+  <div id="page-lessons" class="page-section">
+    <div class="hero" style="padding:40px 20px 36px;">
+      <div class="hero-badge" id="lessons-badge">📚 AI Skills</div>
+      <h1 style="font-size:1.8rem;" id="lessons-title">AI Skills — সম্পূর্ণ Roadmap</h1>
+      <p id="lessons-desc">৬টি Free Track + ১টি Advanced Locked Track · AI Foundations থেকে শুরু করো!</p>
     </div>
-    <div id="privateNote" style="background:#EEEDFE;border-radius:8px;padding:10px;margin-bottom:14px;font-size:12px;color:#3C3489;display:none;">🎉 Private Passive Income Track — Unlocked!</div>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn" style="background:var(--green);color:white;font-size:12px;padding:8px 14px;">⬇ Download PDF</button>
-      <button class="btn btn-dark" style="font-size:12px;padding:8px 14px;">f Share on Facebook</button>
-      <button class="btn btn-outline" style="color:var(--text);border-color:var(--border);font-size:12px;padding:8px 14px;" onclick="hideCert()">✕ Close</button>
+
+    <!-- TAB BAR -->
+    <div class="lesson-tabs">
+      <button class="lesson-tab active-ai" id="tab-ai" onclick="switchLessonTab('ai')">
+        <span class="lesson-tab-dot" style="background:#4ade3a;box-shadow:0 0 6px var(--primary-glow);"></span>
+        🤖 AI Skills
+      </button>
+      <button class="lesson-tab" id="tab-quran" onclick="switchLessonTab('quran')">
+        <span class="lesson-tab-dot" style="background:var(--gold);"></span>
+        🌙 Quran &amp; Islamic Learning
+      </button>
+      <button class="lesson-tab" id="tab-lang" onclick="switchLessonTab('lang')">
+        <span class="lesson-tab-dot" style="background:#378ADD;"></span>
+        🗣️ Language Learning
+      </button>
+    </div>
+
+    <div class="section">
+      <div class="lessons-sections" id="lessons-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- BOTTOM SWITCH CARDS (only visible on AI tab) -->
+      <div class="section-switch-cards" id="bottom-switch-cards">
+        <div class="switch-card quran-card" onclick="switchLessonTab('quran')">
+          <span class="switch-card-icon">🌙</span>
+          <div>
+            <div class="switch-card-title">Quran &amp; Islamic Learning</div>
+            <div class="switch-card-sub">Juzz 30 · Arabic Reading · Prophet Stories</div>
+          </div>
+          <span class="switch-card-arrow">→</span>
+        </div>
+        <div class="switch-card lang-card" onclick="switchLessonTab('lang')">
+          <span class="switch-card-icon">🗣️</span>
+          <div>
+            <div class="switch-card-title">Language Learning with AI</div>
+            <div class="switch-card-sub">যেকোনো ভাষা · ৩ মাসে · Voice Practice</div>
+          </div>
+          <span class="switch-card-arrow">→</span>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- ══════════ LESSON PLAYER PAGE ══════════ -->
+  <div id="page-player" class="page-section">
+    <div class="lesson-player-wrap">
+      <div class="lesson-player-inner">
+        <button class="back-btn" onclick="showPage('lessons')">← সব Lessons-এ ফিরে যাও</button>
+        <div class="player-iframe-wrap">
+          <iframe id="player-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:40%"></div></div>
+          <div class="progress-label">
+            <span id="progress-text">Watch Progress: 40% watched — need 80% to unlock next</span>
+            <span id="progress-lock" style="color:var(--orange);">🔒 Watch 80% to unlock next lesson →</span>
+          </div>
+        </div>
+        <div id="unlock-banner" class="unlock-banner">🔒 Watch 80% to unlock next lesson →</div>
+      </div>
+    </div>
+    <div class="lesson-detail-section">
+      <div class="lesson-detail-title" id="player-title">Lesson Title</div>
+      <div class="lesson-tags" id="player-tags"></div>
+      <div class="lesson-objectives">
+        <div class="lesson-obj-title">এই Lesson-এ কী শিখবে:</div>
+        <div id="player-objectives"></div>
+      </div>
+      <div class="unlock-form-card" id="unlock-form-card">
+        <div class="uf-icon">🎉</div>
+        <div class="uf-title">দারুণ! পরের Lesson unlock করতে Form fill করো</div>
+        <div class="uf-desc">শুধু একবার। তারপর সব lessons free।</div>
+        <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank" class="btn-primary">📝 Google Form Fill করো</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PRIVATE TRACK PAGE ══════════ -->
+  <div id="page-private" class="page-section">
+    <div class="private-hero">
+      <div class="private-badge">🔐 Exclusive · Private Track</div>
+      <h1>Passive Income — Private 1-on-1 Tutorial</h1>
+      <p>এটা সবার জন্য না। যারা free course শেষ করে exam-এ ৮০% বা তার বেশি পাবে — শুধু তারাই এই exclusive training পাবে।</p>
+      <div class="pass-badge">✅ Pass mark: 80% বা তার বেশি</div>
+      <div class="hero-btns">
+        <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#ff0000,#cc0000);color:white;box-shadow:0 0 16px rgba(255,0,0,0.3);">▶ YouTube-এ যাও</a>
+        <a href="https://wa.me/97455879325" target="_blank" class="btn-ghost">💬 WhatsApp Join</a>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">কীভাবে Private Access পাবে</div>
+      <div class="section-sub">মাত্র ৩টি ধাপে — কোনো fee নেই</div>
+      <div class="private-steps">
+        <div class="private-step-card">
+          <div class="ps-num">1</div>
+          <div class="ps-title">সব Free lessons শেষ করো</div>
+        </div>
+        <div class="private-step-card">
+          <div class="ps-num">2</div>
+          <div class="ps-title">Online Exam দাও (80% target)</div>
+        </div>
+        <div class="private-step-card">
+          <div class="ps-num">3</div>
+          <div class="ps-title">Selected হলে Private access পাবে</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title" style="margin-bottom:16px;">Private track-এ কী পাবে</div>
+      <div class="private-benefits-grid">
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">YouTube channel grow করার exact strategy — step by step</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">AI দিয়ে content তৈরি করে income করার proven method</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">Bujhle Easy-এর সাথে direct collaboration সুযোগ</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">1-on-1 Private video tutorial — limited seats only</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">WhatsApp Private group-এ access</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="text-align:center;padding:10px 0 20px;">
+        <div class="section-title" style="margin-bottom:10px;">এখনই শুরু করো</div>
+        <div class="section-sub" style="margin-bottom:20px;">Free lessons শেষ করলেই exam দেওয়ার সুযোগ পাবে। কোনো fee নেই।</div>
+        <button class="btn-primary" onclick="showPage('lessons')" style="margin-right:10px;">📚 Free Lessons শুরু করো →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ ADMIN PAGE ══════════ -->
+  <div id="page-admin" class="page-section">
+    <div style="background:linear-gradient(135deg,#0d0d0d,#111);color:white;padding:32px 20px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(74,222,58,0.08),transparent);pointer-events:none;"></div>
+      <div class="admin-logo-pill" style="margin:0 auto 12px;">
+        <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">easy</span>
+      </div>
+      <div style="font-family:'Baloo Da 2',cursive;font-size:1.5rem;font-weight:800;color:var(--primary);">🛠 Admin Panel</div>
+      <div style="color:var(--text-muted);font-size:0.9rem;margin-top:4px;">বুঝলে Easy — Real-time student activity & progress · <span style="color:var(--orange);font-size:0.8rem;">Admin Only</span></div>
+    </div>
+    <div class="section">
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">148</div><div class="stat-label">Total Students</div></div>
+        <div class="stat-card"><div class="stat-num">94</div><div class="stat-label">Active this week</div></div>
+        <div class="stat-card"><div class="stat-num">23</div><div class="stat-label">Certificates issued</div></div>
+        <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Private access (80%+)</div></div>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('students',this)">👥 Students</button>
+        <button class="admin-tab" onclick="switchAdminTab('certs',this)">🏆 Certificates</button>
+        <button class="admin-tab" onclick="switchAdminTab('exam',this)">🔐 Private Exam</button>
+        <button class="admin-tab" onclick="switchAdminTab('content',this)">📝 Page Content</button>
+        <button class="admin-tab" onclick="switchAdminTab('lessons-admin',this)">🎓 Lessons</button>
+        <button class="admin-tab" onclick="switchAdminTab('links',this)">🔗 Links</button>
+      </div>
+
+      <!-- TAB: STUDENTS -->
+      <div id="admin-tab-students" class="admin-tab-panel active">
+        <div class="content-editor-card" style="overflow-x:auto;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;color:var(--primary);">👥 Students</div>
+            <div style="display:flex;gap:8px;">
+              <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;" onclick="showToast('Exported!')">📤 Export CSV</button>
+              <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;background:var(--bg4);color:var(--primary);box-shadow:none;" onclick="showToast('Add student modal coming!')">+ Add Student</button>
+            </div>
+          </div>
+          <table class="admin-table">
+            <thead><tr>
+              <th>Student</th><th>Progress</th><th>Watch Time</th><th>Status</th><th>Exam Score</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>Rahim Uddin<br><small style="color:var(--text-muted)">rahim@gmail.com</small></td>
+                <td>3 / 31 lessons</td><td>47 min</td>
+                <td><span class="tag">Active</span></td><td>—</td>
+                <td><button class="tbl-action">View</button></td>
+              </tr>
+              <tr>
+                <td>Fatema Khatun<br><small style="color:var(--text-muted)">fatema@gmail.com</small></td>
+                <td>31 / 31 lessons</td><td>6h 14m</td>
+                <td><span class="tag" style="background:rgba(74,222,58,0.15);color:var(--primary);border-color:rgba(74,222,58,0.3);">Certified</span></td>
+                <td>92%</td><td><button class="tbl-action">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Karim Hossain<br><small style="color:var(--text-muted)">karim@yahoo.com</small></td>
+                <td>15 / 31 lessons</td><td>2h 33m</td>
+                <td><span class="tag">Active</span></td><td>—</td>
+                <td><button class="tbl-action">View</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter<br><small style="color:var(--text-muted)">nasrin@gmail.com</small></td>
+                <td>31 / 31 lessons</td><td>5h 48m</td>
+                <td><span class="tag" style="background:rgba(74,222,58,0.15);color:var(--primary);border-color:rgba(74,222,58,0.3);">Certified</span></td>
+                <td>64% ✗</td><td><button class="tbl-action">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed<br><small style="color:var(--text-muted)">shakil@hotmail.com</small></td>
+                <td>31 / 31 lessons</td><td>7h 02m</td>
+                <td><span class="tag" style="background:rgba(245,166,35,0.15);color:var(--gold);border-color:rgba(245,166,35,0.3);">Private Access</span></td>
+                <td>88% ✓</td><td><button class="tbl-action">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: CERTIFICATES -->
+      <div id="admin-tab-certs" class="admin-tab-panel">
+        <div class="content-editor-card" style="overflow-x:auto;margin-bottom:24px;">
+          <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:16px;">🏆 Certificates</div>
+          <table class="admin-table">
+            <thead><tr><th>Student</th><th>Completed</th><th>Watch Time</th><th>Certificate</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Fatema Khatun<br><small style="color:var(--text-muted)">fatema@gmail.com</small></td>
+                <td>31/31 (100%)</td><td>6h 14m</td><td>Issued Jan 12</td>
+                <td><button class="tbl-action" onclick="showCert('Fatema Khatun','31','6h 14m','Jan 12')">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter<br><small style="color:var(--text-muted)">nasrin@gmail.com</small></td>
+                <td>31/31 (100%)</td><td>5h 48m</td><td>Issued Jan 14</td>
+                <td><button class="tbl-action" onclick="showCert('Nasrin Akter','31','5h 48m','Jan 14')">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed<br><small style="color:var(--text-muted)">shakil@hotmail.com</small></td>
+                <td>31/31 (100%)</td><td>7h 02m</td><td>Issued Jan 10</td>
+                <td><button class="tbl-action" onclick="showCert('Shakil Ahmed','31','7h 02m','Jan 10')">View Cert</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Certificate Preview -->
+        <div id="cert-preview" style="display:none;">
+          <div class="cert-card">
+            <span class="cert-trophy">🏆</span>
+            <div class="cert-label">Certificate of Completion</div>
+            <div class="cert-name" id="cert-name">Fatema Khatun</div>
+            <div class="cert-desc">সফলভাবে সম্পন্ন করেছে<br><strong style="color:var(--white);">বুঝলে Easy — AI Learning Program</strong></div>
+            <div class="cert-stats">
+              <div><div class="cert-stat-num" id="cert-lessons">31</div><div class="cert-stat-label">Lessons</div></div>
+              <div><div class="cert-stat-num" id="cert-time">6h 14m</div><div class="cert-stat-label">Watch Time</div></div>
+              <div><div class="cert-stat-num">100%</div><div class="cert-stat-label">Completed</div></div>
+            </div>
+            <div class="cert-unlock">🎉 Private Passive Income Track — Unlocked!</div>
+            <div class="cert-actions">
+              <button class="btn-primary" onclick="showToast('PDF download coming!')">⬇ Download PDF</button>
+              <button class="btn-ghost" onclick="showToast('Shared to Facebook!')">f Share on Facebook</button>
+              <button class="btn-ghost" onclick="document.getElementById('cert-preview').style.display='none'">✕ Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PRIVATE EXAM -->
+      <div id="admin-tab-exam" class="admin-tab-panel">
+        <div class="content-editor-card" style="overflow-x:auto;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;color:var(--primary);">🔐 Private Exam Results</div>
+            <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;" onclick="showToast('Exported!')">📤 Export Exam Results</button>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Student</th><th>Exam Score</th><th>Pass (80%+)</th><th>Private Access</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Fatema Khatun</td><td>92%</td>
+                <td style="color:var(--primary);">✓ Passed</td>
+                <td><span class="tag">Granted</span></td>
+                <td><button class="tbl-action danger">Revoke</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed</td><td>88%</td>
+                <td style="color:var(--primary);">✓ Passed</td>
+                <td><span class="tag">Granted</span></td>
+                <td><button class="tbl-action danger">Revoke</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter</td><td>64%</td>
+                <td style="color:#f87171;">✗ Failed</td>
+                <td><span class="tag" style="background:rgba(255,60,60,0.1);color:#f87171;border-color:rgba(255,60,60,0.3);">Not granted</span></td>
+                <td><button class="tbl-action">Override</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: PAGE CONTENT -->
+      <div id="admin-tab-content" class="admin-tab-panel">
+        <div class="content-editor-card">
+          <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">🏠 Hero Section</div>
+          <div class="ce-label">Main Title (Hero)</div>
+          <input type="text" class="ce-input" id="edit-hero-title" value="AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ">
+          <div class="ce-label">Subtitle / Description</div>
+          <textarea class="ce-input" id="edit-hero-subtitle">Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.</textarea>
+          <div class="ce-label">Hero Badge Text</div>
+          <input type="text" class="ce-input" id="edit-hero-badge" value="✨ সম্পূর্ণ বিনামূল্যে · 100% Free">
+          <div class="ce-label">Intro Video URL (YouTube)</div>
+          <input type="text" class="ce-input" id="edit-intro-url" value="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY">
+          <button class="ce-save" onclick="saveContent()">💾 Save Changes</button>
+          <span class="ce-saved" id="content-saved">✓ Saved!</span>
+        </div>
+        <div class="content-editor-card">
+          <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">💬 Contact / Social Links</div>
+          <div class="ce-label">WhatsApp Number (with country code)</div>
+          <input type="text" class="ce-input" id="edit-wa" value="97455879325">
+          <div class="ce-label">Facebook Messenger Link</div>
+          <input type="text" class="ce-input" id="edit-fb" value="https://m.me/BujhleEasy">
+          <div class="ce-label">YouTube Channel URL</div>
+          <input type="text" class="ce-input" id="edit-yt" value="https://www.youtube.com/@BujhleEasy">
+          <div class="ce-label">Google Form (Registration) URL</div>
+          <input type="text" class="ce-input" id="edit-form" value="https://forms.gle/hzFmhfPfX4hP57Q29">
+          <button class="ce-save" onclick="saveLinks()">💾 Save Links</button>
+          <span class="ce-saved" id="links-saved">✓ Saved!</span>
+        </div>
+      </div>
+
+      <!-- TAB: LESSONS ADMIN -->
+      <div id="admin-tab-lessons-admin" class="admin-tab-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;">🎓 Lessons Manager</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">Section ও lesson যোগ করো, edit করো, order পরিবর্তন করো</div>
+          </div>
+          <button class="ce-save" onclick="saveAllLessons()">💾 Save All</button>
+        </div>
+        <div id="lessons-admin-list"><!-- Populated by JS --></div>
+        <button class="add-skill-btn" onclick="addSection()">+ নতুন Section যোগ করো</button>
+      </div>
+
+      <!-- TAB: LINKS -->
+      <div id="admin-tab-links" class="admin-tab-panel">
+        <div class="content-editor-card">
+          <div style="font-family:'Baloo Da 2',cursive;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">🔗 Navigation & Button Links</div>
+          <div class="ce-label">Navbar Brand Name</div>
+          <input type="text" class="ce-input" value="বুঝলে Easy">
+          <div class="ce-label">Lessons Button Text (Navbar)</div>
+          <input type="text" class="ce-input" value="📚 Lessons">
+          <div class="ce-label">WhatsApp Float Button Text</div>
+          <input type="text" class="ce-input" value="WhatsApp">
+          <div class="ce-label">Messenger Float Button Text</div>
+          <input type="text" class="ce-input" value="Messenger">
+          <button class="ce-save" onclick="showToast('Navigation settings saved!')">💾 Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-wrap">
+  <a href="https://wa.me/97455879325" target="_blank" class="float-btn float-wa">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="btn-text">WhatsApp</span>
+  </a>
+  <a href="https://m.me/BujhleEasy" target="_blank" class="float-btn float-fb">
+    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.652V24l4.088-2.242c1.092.3 2.246.464 3.443.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/></svg>
+    <span class="btn-text">Messenger</span>
+  </a>
 </div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  const m={home:0,lessons:1,video:2,private:3,admin:4};
-  if(m[id]!==undefined) document.querySelectorAll('.nav-btn')[m[id]].classList.add('active');
+// ══════════════ DATA ══════════════
+let siteData = {
+  heroTitle: "AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ",
+  heroSubtitle: "Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.",
+  heroBadge: "✨ সম্পূর্ণ বিনামূল্যে · 100% Free",
+  introUrl: "https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY",
+  waNumber: "97455879325",
+  fbLink: "https://m.me/BujhleEasy",
+  ytUrl: "https://www.youtube.com/@BujhleEasy",
+  formUrl: "https://forms.gle/hzFmhfPfX4hP57Q29",
+};
+
+let sections = [
+
+  // ── 1. AI FOUNDATIONS ──────────────────────────────────
+  {
+    id: "foundations",
+    icon: "🤖",
+    title: "AI Foundations — শুরু করো এখানে",
+    sub: "Beginner · 8 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "Lesson 1 — ChatGPT, Gemini, Claude, Perplexity — কোনটা কী?", tags: ["Overview","Beginner"], ytId: "TThi7rCba_c", locked: false, status: "in-progress",
+        objectives: ["৮টি প্রধান AI tool চেনো","কোন কাজে কোন AI ব্যবহার করবে","ChatGPT vs Gemini vs Claude — পার্থক্য","Grok, Qwen, DeepSeek, Copilot — কী কাজে লাগে","তোমার জন্য সঠিক tool বেছে নেওয়া"] },
+      { title: "Lesson 2 — ChatGPT Setup — Custom Instructions দিয়ে AI কে নিজের মতো বানাও", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Gemini Setup — Custom Instructions ও Extensions চালু করো", tags: ["Gemini","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Claude Setup — Projects ও Custom Style তৈরি করো", tags: ["Claude","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — ChatGPT Projects তৈরি করো — কাজ সহজ করো বারবার", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Gemini Gems তৈরি করো — তোমার কাজের AI assistant", tags: ["Gemini","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — Claude Projects — সেরা workflow তৈরি করো", tags: ["Claude","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 8 — Prompt Engineering 101 — সঠিক প্রশ্ন করো, সেরা উত্তর পাও", tags: ["All AI","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 2. CONTENT CREATION ────────────────────────────────
+  {
+    id: "content",
+    icon: "🎬",
+    title: "Content Creation — ছবি, অডিও, ভিডিও AI দিয়ে",
+    sub: "Creator · 9 lessons",
+    sectionLocked: false,
+    accentColor: "#ff5e1a",
+    lessons: [
+      { title: "Lesson 1 — Image Generation — AI দিয়ে ছবি বানাও এক সেকেন্ডে", tags: ["Grok","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Commercial Image তৈরি করো — Brand-ready visuals", tags: ["Midjourney","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Thumbnail Generation — Click-worthy covers বানাও", tags: ["Canva AI","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Audio Generation — AI Voice ও Narration তৈরি করো", tags: ["ElevenLabs","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Video Generation — একটা prompt দাও, পুরো video পাও", tags: ["Kling AI","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Commercial Video — Ads, Reels ও Promos বানাও", tags: ["HeyGen","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — CapCut — Phone দিয়ে Pro-level Video Edit করো", tags: ["CapCut","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 8 — YouTube Video তৈরি — Script থেকে Upload পর্যন্ত", tags: ["YouTube","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 9 — NotebookLM — যেকোনো document কে podcast বানাও", tags: ["NotebookLM","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 3. SMART TOOLS ─────────────────────────────────────
+  {
+    id: "smarttools",
+    icon: "🛠️",
+    title: "Smart Tools — Google Workspace দিয়ে Productivity বাড়াও",
+    sub: "Productivity · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#378ADD",
+    lessons: [
+      { title: "Lesson 1 — Google Docs — AI দিয়ে লেখো, Edit করো, Share করো", tags: ["Google Docs","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Google Sheets — Data ও Calculation সহজ করো", tags: ["Google Sheets","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Google Forms — Survey ও Registration তৈরি করো", tags: ["Google Forms","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Google Slides — AI দিয়ে Presentation বানাও", tags: ["Google Slides","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Google Drive — Cloud-এ Files Organize করো", tags: ["Google Drive","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — AI দিয়ে Digital Notes তৈরি করো — Students ও Professionals-এর জন্য", tags: ["NotebookLM","All levels"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 4. AI FOR STUDENTS ────────────────────────────────
+  {
+    id: "students",
+    icon: "🎓",
+    title: "AI for Students — পড়াশোনা ১০x সহজ করো",
+    sub: "Students · 7 lessons",
+    sectionLocked: false,
+    accentColor: "#7F77DD",
+    lessons: [
+      { title: "Lesson 1 — AI দিয়ে Study Plan বানাও — তোমার Personal Coach", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 2 — যেকোনো বই বা PDF AI দিয়ে Summarize করো", tags: ["Claude","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — AI দিয়ে নিজেকে Quiz করো — Exam-ready হও", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Assignment ও Essay লেখো AI দিয়ে — সঠিকভাবে", tags: ["Claude","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Research করো AI দিয়ে — Perplexity ব্যবহার শেখো", tags: ["Perplexity","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Mind Map ও Visual Notes তৈরি করো", tags: ["AI Tools","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — AI Talking Assistant — Voice Mode দিয়ে Practice করো", tags: ["ChatGPT Voice","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 5. JOB SKILLS ─────────────────────────────────────
+  {
+    id: "jobskills",
+    icon: "💼",
+    title: "Job Skills — Career-ready হও AI দিয়ে",
+    sub: "Career · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#D85A30",
+    lessons: [
+      { title: "Lesson 1 — CV বানাও AI দিয়ে — ৫ মিনিটে চাকরি-ready Resume", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Cover Letter লেখো AI দিয়ে — Recruiter-এর মন জয় করো", tags: ["Claude","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Interview Preparation — AI দিয়ে Practice করো", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Google Sheets Bookkeeping — Expense Tracker ও Pivot Table", tags: ["Google Sheets","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Email Writing ও Office Communication AI দিয়ে", tags: ["ChatGPT","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — AI দিয়ে Salary Negotiation ও Job Application Strategy", tags: ["Claude","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 6. PERSONAL BRANDING ───────────────────────────────
+  {
+    id: "branding",
+    icon: "🌟",
+    title: "Personal Branding — নিজেকে World-এ Present করো",
+    sub: "Branding · 5 lessons",
+    sectionLocked: false,
+    accentColor: "#D4537E",
+    lessons: [
+      { title: "Lesson 1 — LinkedIn Profile Setup — সঠিকভাবে নিজেকে তুলে ধরো", tags: ["LinkedIn","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 2 — LinkedIn Content Strategy — Regular Post দিয়ে Network বড় করো", tags: ["LinkedIn","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Personal Brand Identity তৈরি করো — Logo, Colors, Voice", tags: ["Canva AI","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Commercial Image দিয়ে Brand-ready Look তৈরি করো", tags: ["AI Image","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Commercial Video বানাও — Ads, Promos ও Reels Strategy", tags: ["HeyGen","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+  // ── 7. ADVANCED — SECTION LOCKED ──────────────────────
+  {
+    id: "advanced",
+    icon: "🏆",
+    title: "Advanced — Income Generation & Online Business",
+    sub: "🔒 Locked · Complete Free Tracks First",
+    sectionLocked: true,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Websites ও Landing Pages বানাও — Coding ছাড়া, Free দিয়ে", tags: ["No-code","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "E-commerce শুরু করো Shopify দিয়ে — Zero to First Sale", tags: ["Shopify","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Freelancing with AI — Client খোঁজো, কাজ দ্রুত করো", tags: ["Freelancing","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Social Media Influencer Playbook — Grow ও Monetize করো", tags: ["Social Media","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+];
+
+// ══════════════ QURAN & ISLAMIC LEARNING SECTIONS ══════════════
+const quranSections = [
+  {
+    id: "quran-juzz30",
+    icon: "📖",
+    title: "Juzz 30 — সূরার অর্থ ও সহজ তাফসির",
+    sub: "English & বাংলা · 10 lessons",
+    sectionLocked: false,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Lesson 1 — Surah An-Nas — মানুষের রব-এর কাছে আশ্রয়", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Surah Al-Falaq — ভোরের রব-এর কাছে আশ্রয়", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Surah Al-Ikhlas — আল্লাহর একত্ব", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Surah Al-Masad — আবু লাহাবের পরিণতি", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Surah An-Nasr — আল্লাহর সাহায্য ও বিজয়", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Surah Al-Kafirun — অবিশ্বাসীদের প্রতি বার্তা", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — Surah Al-Kawthar — অফুরন্ত কল্যাণ", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 8 — Surah Al-Maun — ছোট ছোট ভালো কাজের গুরুত্ব", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 9 — Surah Quraysh — কুরাইশদের নেয়ামত", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 10 — Surah Al-Fil — হাতির বাহিনীর ধ্বংস", tags: ["Juzz 30","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "arabic-reading",
+    icon: "ا",
+    title: "Arabic Reading 101 — শূন্য থেকে Quran পড়া শেখো",
+    sub: "Arabic · Beginner · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "Lesson 1 — Arabic Alphabet — ২৮টি হরফ চেনো ও উচ্চারণ শেখো", tags: ["Arabic","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Harakat — Fatha, Kasra, Damma — Short Vowels", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Joining Letters — শব্দ গঠন করতে শেখো", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Tanwin, Sukun ও Shadda — Basic Rules", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Tajweed Basics — সুন্দরভাবে তেলাওয়াত করো", tags: ["Tajweed","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Practice — Juzz 30 সূরা দিয়ে পড়া অভ্যাস করো", tags: ["Practice","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "prophet-stories",
+    icon: "🕌",
+    title: "Prophet Stories — নবীদের জীবন থেকে শিক্ষা",
+    sub: "English & বাংলা · 8 lessons",
+    sectionLocked: false,
+    accentColor: "#D85A30",
+    lessons: [
+      { title: "Lesson 1 — Prophet Adam (AS) — মানবজাতির শুরু", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Prophet Ibrahim (AS) — বিশ্বাসের পরীক্ষা", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Prophet Musa (AS) — ফেরাউনের বিরুদ্ধে সত্যের লড়াই", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Prophet Isa (AS) — অলৌকিক জীবনের গল্প", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Prophet Yusuf (AS) — ধৈর্য ও বিজয়ের গল্প", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Prophet Yunus (AS) — তিমির পেটে আল্লাহর স্মরণ", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — Prophet Dawud (AS) — জ্ঞান ও শক্তির নবী", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 8 — Prophet Muhammad (SAW) — সর্বশেষ ও সর্বশ্রেষ্ঠ নবী", tags: ["Prophet","All levels","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+];
+
+// ══════════════ LANGUAGE LEARNING SECTIONS ══════════════
+const langSections = [
+  {
+    id: "lang-masterplan",
+    icon: "🗺️",
+    title: "৩ মাসে যেকোনো ভাষা শেখো — AI Masterplan",
+    sub: "Flagship · 5 lessons",
+    sectionLocked: false,
+    accentColor: "#378ADD",
+    lessons: [
+      { title: "Lesson 1 — ChatGPT Project Setup — তোমার Personal Language Tutor তৈরি করো", tags: ["ChatGPT","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Gemini Gem Setup — Language Gem দিয়ে Daily Practice করো", tags: ["Gemini","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Claude Project Setup — তোমার ৩ মাসের Masterplan তৈরি করাও", tags: ["Claude","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Voice Mode Practice — AI-এর সাথে কথা বলো, ভুল শোধরাও", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Progress Tracking — AI দিয়ে Weak Areas ধরো, Plan Update করো", tags: ["All AI","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "lang-english",
+    icon: "🇬🇧",
+    title: "English Learning with AI — বাংলাদেশিদের জন্য",
+    sub: "English · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "Lesson 1 — Spoken English শুরু করো AI দিয়ে — লাজ ভাঙো, মুখ খোলো", tags: ["English","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Grammar Fix করো AI দিয়ে — নিজের ভুল নিজে ধরো", tags: ["English","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Vocabulary Building — প্রতিদিন ১০টি নতুন শব্দ মুখস্থ করো AI দিয়ে", tags: ["English","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Email ও Formal Writing Practice — Professional English শেখো", tags: ["English","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — IELTS / Job Interview English — AI দিয়ে Practice করো", tags: ["English","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Daily Conversation Practice — ChatGPT Voice দিয়ে ঘরেই কথা বলো", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "lang-arabic",
+    icon: "🇸🇦",
+    title: "Arabic Learning with AI — Quranic থেকে Conversational",
+    sub: "Arabic · 5 lessons",
+    sectionLocked: false,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Lesson 1 — Quranic Arabic Vocabulary — AI দিয়ে শিখো সহজে", tags: ["Arabic","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Basic Arabic Sentences — AI দিয়ে Daily Conversation শুরু করো", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Arabic Grammar Basics — AI দিয়ে Structure বোঝো", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Listening Practice — Arabic Podcast ও Video AI দিয়ে বোঝো", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Voice Mode Arabic Practice — AI-এর সাথে Arabic-এ কথা বলো", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+];
+
+// ══════════════ ACTIVE TAB STATE ══════════════
+let activeTab = 'ai';
+
+// ══════════════ SWITCH LESSON TAB ══════════════
+function switchLessonTab(tab) {
+  activeTab = tab;
+
+  // update tab button styles
+  document.getElementById('tab-ai').className = 'lesson-tab' + (tab === 'ai' ? ' active-ai' : '');
+  document.getElementById('tab-quran').className = 'lesson-tab' + (tab === 'quran' ? ' active-quran' : '');
+  document.getElementById('tab-lang').className = 'lesson-tab' + (tab === 'lang' ? ' active-lang' : '');
+
+  // update hero text
+  const badge = document.getElementById('lessons-badge');
+  const title = document.getElementById('lessons-title');
+  const desc = document.getElementById('lessons-desc');
+  const bottomCards = document.getElementById('bottom-switch-cards');
+
+  if (tab === 'ai') {
+    badge.textContent = '📚 AI Skills';
+    title.textContent = 'AI Skills — সম্পূর্ণ Roadmap';
+    desc.textContent = '৬টি Free Track + ১টি Advanced Locked Track · AI Foundations থেকে শুরু করো!';
+    bottomCards.style.display = 'grid';
+  } else if (tab === 'quran') {
+    badge.textContent = '🌙 Quran & Islamic Learning';
+    title.textContent = 'Quran & Islamic Learning';
+    desc.textContent = 'Juzz 30 তাফসির · Arabic Reading 101 · নবীদের গল্প — বাংলায় ও English-এ';
+    bottomCards.style.display = 'none';
+  } else {
+    badge.textContent = '🗣️ Language Learning';
+    title.textContent = 'Language Learning with AI';
+    desc.textContent = 'যেকোনো ভাষা · ৩ মাসের AI Masterplan · Voice Practice দিয়ে দ্রুত শেখো';
+    bottomCards.style.display = 'none';
+  }
+
+  renderLessons();
+  window.scrollTo(0, 0);
+}
+
+// ══════════════ PAGE NAVIGATION ══════════════
+function showPage(name) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
   window.scrollTo(0,0);
+  if (name === 'lessons') renderLessons();
+  if (name === 'admin') renderLessonsAdmin();
 }
 
-function toggleMod(header){
-  const lessons=header.nextElementSibling;
-  const arrow=header.querySelector('.mod-arrow');
-  const isOpen=lessons.style.display!=='none';
-  lessons.style.display=isOpen?'none':'block';
-  arrow.textContent=isOpen?'▾':'▴';
+// ══════════════ DRAWER ══════════════
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
-function openLesson(ytId,title,section,available){
-  if(!available){alert('Complete previous lesson to 80% first!');return;}
-  document.getElementById('ytEmbed').src='https://www.youtube.com/embed/'+ytId+'?enablejsapi=1&rel=0&autoplay=1';
-  document.getElementById('vidTitle').textContent=title;
-  showPage('video');
-  simulateWatch();
+// ══════════════ RENDER LESSONS ══════════════
+function renderLessons() {
+  const container = document.getElementById('lessons-container');
+  const data = activeTab === 'quran' ? quranSections : activeTab === 'lang' ? langSections : sections;
+  const advancedDivider = '<div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px;"><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;"></div><div style="font-size:0.78rem;font-weight:700;letter-spacing:1.2px;color:var(--gold);padding:4px 14px;border-radius:20px;border:1px solid rgba(245,166,35,0.35);background:rgba(245,166,35,0.07);">🏆 ADVANCED TRACK</div><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;"></div></div>';
+  container.innerHTML = data.map((sec, si) => {
+    const accent = sec.accentColor || '#4ade3a';
+    const isLocked = sec.sectionLocked;
+    const headerGrad = isLocked ? 'linear-gradient(135deg,rgba(245,166,35,0.1),rgba(255,94,26,0.07))' : 'linear-gradient(135deg,rgba(74,222,58,0.05),rgba(255,94,26,0.03))';
+    const borderColor = isLocked ? 'rgba(245,166,35,0.45)' : 'var(--border)';
+    const lockBadge = isLocked ? '<span style="font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:10px;background:rgba(245,166,35,0.15);color:var(--gold);border:1px solid rgba(245,166,35,0.35);margin-right:6px;">🔒 Locked</span>' : '';
+    const divider = (sec.id === 'advanced') ? advancedDivider : '';
+    const lockedBanner = isLocked ? '<div style="padding:14px 20px;border-bottom:1px solid var(--border);background:rgba(245,166,35,0.04);display:flex;align-items:center;gap:10px;"><span style="font-size:1.3rem;">🔒</span><div><div style="font-family:\'Baloo Da 2\',cursive;font-size:0.9rem;font-weight:700;color:var(--gold);">Free Tracks সম্পূর্ণ করো — তারপর Unlock হবে</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">AI Foundations → Content Creation → Smart Tools → AI for Students → Job Skills → Personal Branding</div></div></div>' : '';
+    const lockedFooter = isLocked ? '<div style="padding:14px 20px;background:rgba(245,166,35,0.06);border-top:1px solid var(--border);text-align:center;"><button class="step-btn step-btn-ghost" onclick="showPage(\'private\')" style="font-size:0.82rem;">🔐 Private Track সম্পর্কে জানো →</button></div>' : '';
+    return divider + '<div class="lesson-section-card" id="lsc-' + si + '" style="border-color:' + borderColor + ';"><div class="ls-header" id="lsh-' + si + '" onclick="toggleSection(' + si + ')" style="background:' + headerGrad + ';"><div style="width:4px;height:40px;border-radius:2px;background:' + accent + ';flex-shrink:0;box-shadow:0 0 8px ' + accent + '55;"></div><span class="ls-icon">' + sec.icon + '</span><div class="ls-meta"><div class="ls-title">' + sec.title + '</div><div class="ls-sub">' + sec.sub + '</div></div>' + lockBadge + '<span class="ls-toggle">▾</span></div><div class="ls-body" id="lsb-' + si + '">' + lockedBanner + sec.lessons.map((les, li) => renderLessonItem(si, li, les, isLocked)).join('') + lockedFooter + '</div></div>';
+  }).join('');
+  // auto-open first section
+  const firstBody = document.getElementById('lsb-0');
+  const firstHeader = document.getElementById('lsh-0');
+  if (firstBody) { firstBody.classList.add('open'); firstHeader.classList.add('open'); }
 }
 
-let watchInterval=null;
-let watchPct=40;
-function simulateWatch(){
-  clearInterval(watchInterval);
-  const bar=document.getElementById('watchBar');
-  const pctEl=document.getElementById('watchPct');
-  const btn=document.getElementById('nextBtn');
-  const gate=document.getElementById('formGate');
-  watchInterval=setInterval(()=>{
-    if(watchPct<100){
-      watchPct=Math.min(watchPct+1,100);
-      bar.style.width=watchPct+'%';
-      if(watchPct<80){
-        pctEl.textContent=watchPct+'% watched — need 80% to unlock next';
-        btn.disabled=true;
-        btn.querySelector('span').textContent='🔒 Watch '+watchPct+'% — need 80% to unlock next';
-      } else {
-        pctEl.textContent=watchPct+'% watched — next lesson unlocked! ✅';
-        btn.disabled=false;
-        btn.querySelector('span').textContent='✅ Next Lesson Unlocked — Go to Lesson 2 →';
-        gate.style.display='block';
-      }
-    } else {
-      clearInterval(watchInterval);
-    }
-  },200);
+function renderLessonItem(si, li, les, sectionLocked) {
+  const isLocked = les.locked || sectionLocked;
+  const numHtml = isLocked
+    ? `<div class="li-num locked-icon">🔒</div>`
+    : `<div class="li-num unlocked">${li + 1}</div>`;
+  const statusHtml = les.status === 'in-progress'
+    ? `<span class="li-status in-progress">In Progress</span>`
+    : isLocked ? `<span class="li-status locked-lbl">🔒 Soon</span>` : '';
+  const tagsHtml = les.tags.map(t => `<span class="li-tag">${t}</span>`).join('');
+  const clickAction = isLocked ? '' : `onclick="openLesson(${si},${li})"`;
+  return `
+    <div class="lesson-item ${isLocked ? 'locked' : ''} ${les.status === 'in-progress' ? 'active' : ''}" ${clickAction}>
+      ${numHtml}
+      <div class="li-meta">
+        <div class="li-title">${les.title}${isLocked && !les.status === 'in-progress' ? '' : ''}</div>
+        <div class="li-tags">${tagsHtml}</div>
+      </div>
+      ${statusHtml}
+    </div>
+  `;
 }
 
-function switchAdminTab(el,tabId){
-  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('#tab-students,#tab-certs,#tab-private').forEach(t=>t.style.display='none');
-  document.getElementById(tabId).style.display='block';
+function toggleSection(si) {
+  const body = document.getElementById('lsb-' + si);
+  const header = document.getElementById('lsh-' + si);
+  body.classList.toggle('open');
+  header.classList.toggle('open');
 }
 
-function showCert(hasPrivate){
-  document.getElementById('certOverlay').style.display='block';
-  document.getElementById('privateNote').style.display=hasPrivate?'block':'none';
+// ══════════════ OPEN LESSON / PLAYER ══════════════
+function openLesson(si, li) {
+  const les = sections[si].lessons[li];
+  if (les.locked) return;
+  if (!les.ytId) { showToast('Video coming soon!'); return; }
+
+  document.getElementById('player-iframe').src = `https://www.youtube.com/embed/${les.ytId}?enablejsapi=1&rel=0`;
+  document.getElementById('player-title').textContent = les.title;
+  document.getElementById('player-tags').innerHTML = les.tags.map(t => `<span class="lesson-tag">${t}</span>`).join('');
+  document.getElementById('player-objectives').innerHTML = les.objectives.map(o =>
+    `<div class="lesson-obj-item"><span class="check">✅</span><span>${o}</span></div>`
+  ).join('');
+  showPage('player');
 }
-function hideCert(){
-  document.getElementById('certOverlay').style.display='none';
+
+// ══════════════ ADMIN TABS ══════════════
+function switchAdminTab(name, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('admin-tab-' + name).classList.add('active');
+  if (name === 'lessons-admin') renderLessonsAdmin();
 }
+
+// ══════════════ CERTIFICATE MODAL ══════════════
+function showCert(name, lessons, time) {
+  document.getElementById('cert-name').textContent = name;
+  document.getElementById('cert-lessons').textContent = lessons;
+  document.getElementById('cert-time').textContent = time;
+  document.getElementById('cert-preview').style.display = 'block';
+  document.getElementById('cert-preview').scrollIntoView({behavior:'smooth'});
+}
+
+// ══════════════ CONTENT SAVE ══════════════
+function saveContent() {
+  siteData.heroTitle = document.getElementById('edit-hero-title').value;
+  siteData.heroSubtitle = document.getElementById('edit-hero-subtitle').value;
+  document.getElementById('hero-title').innerHTML = siteData.heroTitle.replace(/\n/g,'<br>');
+  document.getElementById('hero-subtitle').textContent = siteData.heroSubtitle;
+  const saved = document.getElementById('content-saved');
+  saved.classList.add('show');
+  setTimeout(() => saved.classList.remove('show'), 2500);
+  showToast('✓ Hero content updated!');
+}
+function saveLinks() {
+  const saved = document.getElementById('links-saved');
+  saved.classList.add('show');
+  setTimeout(() => saved.classList.remove('show'), 2500);
+  showToast('✓ Links saved!');
+}
+
+// ══════════════ LESSONS ADMIN ══════════════
+function renderLessonsAdmin() {
+  const container = document.getElementById('lessons-admin-list');
+  container.innerHTML = sections.map((sec, si) => `
+    <div class="skill-admin-card" id="sac-${si}">
+      <div class="skill-admin-header" onclick="toggleSectionAdmin(${si})" id="sah-${si}">
+        <span class="sah-icon">${sec.icon}</span>
+        <span class="sah-title">${sec.title}</span>
+        <span class="sah-toggle">▼</span>
+      </div>
+      <div class="skill-admin-body" id="sab-${si}">
+        <div class="skill-admin-meta">
+          <div style="flex:1;min-width:60px;">
+            <div class="ce-label">Icon</div>
+            <input type="text" class="ce-input" value="${sec.icon}" onchange="sections[${si}].icon=this.value;document.getElementById('sah-${si}').querySelector('.sah-icon').textContent=this.value">
+          </div>
+          <div style="flex:3;min-width:180px;">
+            <div class="ce-label">Section Title</div>
+            <input type="text" class="ce-input" value="${sec.title}" onchange="sections[${si}].title=this.value;document.getElementById('sah-${si}').querySelector('.sah-title').textContent=this.value">
+          </div>
+          <div style="flex:2;min-width:160px;">
+            <div class="ce-label">Sub / Tag</div>
+            <input type="text" class="ce-input" value="${sec.sub}" onchange="sections[${si}].sub=this.value">
+          </div>
+        </div>
+        <div style="font-weight:700;font-size:0.88rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">📚 Lessons <span style="color:var(--primary);font-family:'Baloo Da 2',cursive;">(${sec.lessons.length})</span></div>
+        <div class="video-admin-list" id="val-${si}">
+          ${sec.lessons.map((les, li) => renderLessonAdminItem(si, li, les)).join('')}
+        </div>
+        <button class="add-video-btn" onclick="addLesson(${si})">+ নতুন Lesson যোগ করো</button>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;">
+          <button class="ce-save" onclick="saveAllLessons()">💾 Save</button>
+          <button class="vai-del" onclick="deleteSection(${si})" style="padding:8px 16px;">🗑 Delete Section</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLessonAdminItem(si, li, les) {
+  const thumbUrl = les.ytId ? `https://img.youtube.com/vi/${les.ytId}/mqdefault.jpg` : '';
+  return `
+    <div class="video-admin-item" id="lai-${si}-${li}">
+      <div class="vai-row">
+        <input type="text" class="ce-input" placeholder="Lesson Title" value="${les.title}"
+          onchange="sections[${si}].lessons[${li}].title=this.value">
+        <input type="text" class="ce-input" placeholder="Tags (comma separated)" value="${les.tags.join(', ')}"
+          onchange="sections[${si}].lessons[${li}].tags=this.value.split(',').map(t=>t.trim())">
+      </div>
+      <div class="vai-row">
+        <input type="text" class="ce-input" placeholder="YouTube Video ID" value="${les.ytId}"
+          oninput="updateLessonYt(${si},${li},this.value)" style="font-family:monospace;font-size:0.85rem;">
+        <select class="ce-input" style="flex:0;min-width:120px;" onchange="sections[${si}].lessons[${li}].locked=this.value==='true'">
+          <option value="false" ${!les.locked?'selected':''}>🔓 Unlocked</option>
+          <option value="true" ${les.locked?'selected':''}>🔒 Locked</option>
+        </select>
+      </div>
+      ${thumbUrl ? `<img src="${thumbUrl}" class="thumb-preview show" id="lthumb-${si}-${li}" alt="thumb">` : `<img class="thumb-preview" id="lthumb-${si}-${li}" alt="thumb">`}
+      <div class="vai-actions" style="margin-top:8px;">
+        ${li > 0 ? `<button class="vai-move" onclick="moveLes(${si},${li},-1)">↑ Up</button>` : ''}
+        ${li < sections[si].lessons.length-1 ? `<button class="vai-move" onclick="moveLes(${si},${li},1)">↓ Down</button>` : ''}
+        <button class="vai-del" onclick="deleteLes(${si},${li})">🗑 Delete</button>
+      </div>
+    </div>
+  `;
+}
+
+function updateLessonYt(si, li, val) {
+  sections[si].lessons[li].ytId = val.trim();
+  const thumb = document.getElementById(`lthumb-${si}-${li}`);
+  if (val.trim()) { thumb.src = `https://img.youtube.com/vi/${val.trim()}/mqdefault.jpg`; thumb.classList.add('show'); }
+  else { thumb.classList.remove('show'); }
+}
+function toggleSectionAdmin(si) {
+  document.getElementById('sab-' + si).classList.toggle('open');
+  document.getElementById('sah-' + si).classList.toggle('open');
+}
+function addLesson(si) {
+  sections[si].lessons.push({ title: "New Lesson", tags: ["Beginner"], ytId: "", locked: true, status: "locked", objectives: [] });
+  const li = sections[si].lessons.length - 1;
+  const container = document.getElementById('val-' + si);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderLessonAdminItem(si, li, sections[si].lessons[li]);
+  container.appendChild(tmp.firstChild);
+  showToast('Lesson added!');
+}
+function deleteLes(si, li) {
+  if (!confirm('Delete this lesson?')) return;
+  sections[si].lessons.splice(li, 1);
+  renderLessonsAdmin();
+  setTimeout(() => toggleSectionAdmin(si), 50);
+  showToast('Lesson deleted');
+}
+function moveLes(si, li, dir) {
+  const arr = sections[si].lessons;
+  const ni = li + dir;
+  if (ni < 0 || ni >= arr.length) return;
+  [arr[li], arr[ni]] = [arr[ni], arr[li]];
+  document.getElementById('val-' + si).innerHTML = arr.map((v, i) => renderLessonAdminItem(si, i, v)).join('');
+}
+function addSection() {
+  sections.push({ id: 'sec-' + Date.now(), icon: '📌', title: 'New Section', sub: 'Category · 0 lessons', lessons: [] });
+  renderLessonsAdmin();
+  const ni = sections.length - 1;
+  setTimeout(() => { document.getElementById('sac-' + ni).scrollIntoView({behavior:'smooth'}); toggleSectionAdmin(ni); }, 100);
+  showToast('New section added!');
+}
+function deleteSection(si) {
+  if (!confirm(`Delete "${sections[si].title}"?`)) return;
+  sections.splice(si, 1);
+  renderLessonsAdmin();
+  showToast('Section deleted');
+}
+function saveAllLessons() {
+  renderLessons();
+  showToast('✓ All lessons saved & updated!');
+}
+
+// ══════════════ TOAST ══════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ══════════════ INIT ══════════════
+renderLessons();
 </script>
 </body>
 </html>

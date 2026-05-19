@@ -1,0 +1,2712 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বুঝলে Easy — Free Learning Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4ade3a;
+    --primary-glow: rgba(74,222,58,0.35);
+    --orange: #ff5e1a;
+    --orange-glow: rgba(255,94,26,0.35);
+    --gold: #f5a623;
+    --green-dark: #22c55e;
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --bg4: #1f1f1f;
+    --white: #f0f0f0;
+    --text: #e8e8e8;
+    --text-muted: #888;
+    --card-bg: #161616;
+    --border: #2a2a2a;
+    --border-bright: #3a3a3a;
+    --font-heading: 'Nunito', sans-serif;
+    --font-body: 'Hind Siliguri', sans-serif;
+    --radius: 14px;
+    --shadow-green: 0 0 20px rgba(74,222,58,0.2);
+    --shadow-orange: 0 0 20px rgba(255,94,26,0.2);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.5);
+    --wa: #25D366;
+    --fb: #0084FF;
+    --grad-logo: linear-gradient(135deg, #4ade3a 0%, #f5a623 50%, #ff5e1a 100%);
+    --nav-h: 60px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #4ade3a44; }
+
+  /* ══════════════ LOGO PILL ══════════════ */
+  .nav-logo-pill, .drawer-logo-pill, .admin-logo-pill {
+    display: inline-flex; align-items: baseline; gap: 3px;
+    background: #0a0a0a;
+    border-radius: 10px;
+    padding: 5px 12px;
+    border: 1.5px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    box-shadow: 0 0 14px rgba(74,222,58,0.25), 0 0 28px rgba(255,94,26,0.12);
+  }
+  .nav-logo-pill::before, .drawer-logo-pill::before, .admin-logo-pill::before {
+    content: ''; position: absolute; inset: -1.5px; border-radius: 11px;
+    background: linear-gradient(135deg, #4ade3a 0%, #f5a623 50%, #ff5e1a 100%);
+    z-index: -1;
+  }
+  .nav-logo-bujhle {
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+    color: var(--primary); text-shadow: 0 0 10px rgba(74,222,58,0.7); letter-spacing: -0.3px;
+  }
+  .nav-logo-easy {
+    font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700;
+    color: #d0d0d0; letter-spacing: 0.5px;
+  }
+  .drawer-logo-pill { padding: 6px 14px; }
+  .drawer-logo-pill .nav-logo-bujhle { font-size: 1.1rem; }
+  .admin-logo-pill { padding: 8px 18px; display: flex; }
+  .admin-logo-pill .nav-logo-bujhle { font-size: 1.25rem; }
+  .admin-logo-pill .nav-logo-easy { font-size: 1.1rem; }
+  .nav-logo { text-decoration: none; }
+  .nav-logo:hover .nav-logo-pill { box-shadow: 0 0 22px rgba(74,222,58,0.45), 0 0 40px rgba(255,94,26,0.2); }
+
+  /* ══════════════ NAVBAR ══════════════ */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--nav-h); background: rgba(10,10,10,0.95);
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 16px; backdrop-filter: blur(16px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+  }
+  .nav-left { display: flex; align-items: center; }
+  .menu-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 8px; border-radius: 10px;
+    display: flex; flex-direction: column; gap: 5px; transition: background .2s;
+  }
+  .menu-btn:hover { background: var(--bg3); }
+  .menu-btn span {
+    display: block; width: 24px; height: 2px;
+    background: var(--primary); border-radius: 2px;
+    transition: all .3s; box-shadow: 0 0 6px var(--primary-glow);
+  }
+  .nav-logo { display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-right { display: flex; justify-content: flex-end; gap: 8px; align-items: center; }
+  .nav-icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 12px; border: 1.5px solid;
+    cursor: pointer; font-size: 1.15rem; transition: all .2s; flex-shrink: 0;
+    background: transparent;
+  }
+  .lessons-btn {
+    border-color: var(--primary); color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow), inset 0 0 10px rgba(74,222,58,0.05);
+  }
+  .lessons-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary-glow); }
+  .private-btn {
+    background: linear-gradient(135deg,rgba(245,166,35,0.12),rgba(255,94,26,0.08));
+    border-color: var(--gold); color: var(--gold);
+    box-shadow: 0 0 10px rgba(245,166,35,0.2);
+  }
+  .private-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(245,166,35,0.4); }
+
+  /* ══════════════ SIDE MENU DRAWER ══════════════ */
+  .drawer-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+  }
+  .drawer-overlay.open { display: block; }
+  .drawer {
+    position: fixed; top: 0; left: -300px; bottom: 0;
+    width: 280px; background: var(--bg2); z-index: 1200;
+    transition: left .3s ease;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.8), 1px 0 0 var(--border);
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { left: 0; }
+  .drawer-header {
+    padding: 20px 20px 16px; border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .drawer-logo-sub { font-size: 0.65rem; color: var(--orange); letter-spacing: 1.5px; margin-top: 2px; }
+  .drawer-close {
+    background: var(--bg4); border: 1px solid var(--border);
+    font-size: 1rem; cursor: pointer; color: var(--text-muted);
+    padding: 6px 9px; border-radius: 8px; transition: all .2s;
+  }
+  .drawer-close:hover { background: #2a0a0a; color: var(--orange); border-color: var(--orange); }
+  .drawer nav { padding: 10px 0; flex: 1; overflow-y: auto; }
+  .drawer nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 20px; text-decoration: none;
+    color: var(--text-muted); font-size: 0.95rem; font-weight: 500;
+    transition: all .15s; border-left: 3px solid transparent;
+  }
+  .drawer nav a:hover { background: var(--bg3); border-left-color: var(--primary); color: var(--primary); }
+  .drawer nav a .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+  .drawer nav .nav-divider { height: 1px; background: var(--border); margin: 6px 20px; }
+  .drawer-footer {
+    padding: 14px 20px; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--text-muted); text-align: center;
+  }
+  .drawer-footer span { color: var(--primary); }
+
+  /* ══════════════ MAIN CONTENT ══════════════ */
+  .main { margin-top: var(--nav-h); }
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
+  /* ══════════════ HERO ══════════════ */
+  .hero {
+    background: var(--bg2); color: var(--text); text-align: center;
+    padding: 60px 20px 50px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 50%, rgba(74,222,58,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,94,26,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: var(--grad-logo); box-shadow: 0 0 20px rgba(74,222,58,0.4);
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(74,222,58,0.1);
+    border: 1px solid rgba(74,222,58,0.4); padding: 5px 16px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; margin-bottom: 20px;
+    color: var(--primary); box-shadow: 0 0 12px rgba(74,222,58,0.15);
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800; line-height: 1.3; margin-bottom: 14px; color: var(--white);
+  }
+  .hero p { font-size: 1rem; color: var(--text-muted); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: #000;
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 0.95rem;
+    padding: 12px 24px; border-radius: 25px; border: none;
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 0 20px var(--primary-glow); transition: all .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px var(--primary-glow); filter: brightness(1.1); }
+  .btn-ghost {
+    background: transparent; color: var(--text); border: 1.5px solid var(--border-bright);
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: 0.95rem;
+    padding: 10px 22px; border-radius: 25px; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 12px var(--primary-glow); }
+
+  /* ══════════════ SECTIONS ══════════════ */
+  .section { padding: 40px 16px; max-width: 860px; margin: 0 auto; }
+  .section-title { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+  .section-sub { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 24px; }
+
+  /* ══════════════ STEPS / HOW IT WORKS ══════════════ */
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 24px;
+  }
+  .step-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px 18px; position: relative; overflow: hidden; transition: all .25s;
+  }
+  .step-card:hover { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
+  .step-card.done { border-color: rgba(74,222,58,0.4); background: rgba(74,222,58,0.04); }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--primary); color: #000;
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 14px var(--primary-glow); margin-bottom: 12px;
+  }
+  .step-card.done .step-num { background: var(--primary); }
+  .step-card-done .step-num { background: var(--primary); font-size: 1.2rem; }
+  .step-title { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .step-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .step-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .step-btn {
+    padding: 7px 14px; border-radius: 16px; border: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.8rem; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all .2s;
+  }
+  .step-btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary-glow); }
+  .step-btn-primary:hover { filter: brightness(1.1); }
+  .step-btn-ghost { background: transparent; border: 1px solid var(--border-bright); color: var(--text-muted); }
+  .step-btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* ══════════════ LESSONS / SECTIONS LIST ══════════════ */
+  .lessons-sections { display: flex; flex-direction: column; gap: 16px; }
+  .lesson-section-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    overflow: hidden; transition: border-color .2s;
+  }
+  .lesson-section-card:hover { border-color: var(--border-bright); }
+  .ls-header {
+    padding: 16px 20px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 14px;
+    background: linear-gradient(135deg, rgba(74,222,58,0.05), rgba(255,94,26,0.03));
+    transition: background .2s;
+  }
+  .ls-header:hover { background: linear-gradient(135deg, rgba(74,222,58,0.09), rgba(255,94,26,0.06)); }
+  .ls-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .ls-meta { flex: 1; }
+  .ls-title { font-family: 'Nunito', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--white); }
+  .ls-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+  .ls-toggle { color: var(--text-muted); font-size: 0.9rem; transition: transform .3s; flex-shrink: 0; }
+  .ls-header.open .ls-toggle { transform: rotate(180deg); color: var(--primary); }
+  .ls-body { display: none; border-top: 1px solid var(--border); }
+  .ls-body.open { display: block; }
+  .lesson-item {
+    display: flex; align-items: center; gap: 14px; padding: 14px 20px;
+    border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s;
+  }
+  .lesson-item:last-child { border-bottom: none; }
+  .lesson-item:hover { background: var(--bg3); }
+  .lesson-item.active { background: rgba(74,222,58,0.05); border-left: 3px solid var(--primary); }
+  .lesson-item.locked { opacity: 0.6; cursor: default; }
+  .lesson-item.locked:hover { background: transparent; }
+  .li-num {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 800;
+  }
+  .li-num.unlocked { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary-glow); }
+  .li-num.locked-icon { background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border); font-size: 0.9rem; }
+  .li-meta { flex: 1; min-width: 0; }
+  .li-title { font-size: 0.9rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+  .lesson-item.locked .li-title { color: var(--text-muted); }
+  .li-tags { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
+  .li-tag {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 8px;
+    background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border);
+  }
+  .li-status { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; flex-shrink: 0; }
+  .li-status.in-progress { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.3); }
+  .li-status.locked-lbl { background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* ══════════════ LESSON PLAYER PAGE ══════════════ */
+  .lesson-player-wrap {
+    background: var(--bg2); border-bottom: 1px solid var(--border); position: relative;
+  }
+  .lesson-player-inner { max-width: 860px; margin: 0 auto; padding: 24px 16px 0; }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-muted); font-size: 0.88rem; cursor: pointer;
+    background: none; border: none; padding: 0; margin-bottom: 16px; transition: color .2s;
+  }
+  .back-btn:hover { color: var(--primary); }
+  .player-iframe-wrap { aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #000; }
+  .player-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
+  .progress-bar-wrap { margin: 14px 0 0; }
+  .progress-bar-bg { height: 5px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--grad-logo); border-radius: 3px; transition: width .5s; box-shadow: 0 0 8px var(--primary-glow); }
+  .progress-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; display: flex; justify-content: space-between; }
+  .unlock-banner {
+    margin: 14px 0; padding: 12px 16px; border-radius: 10px;
+    background: rgba(255,94,26,0.1); border: 1px solid rgba(255,94,26,0.35);
+    color: var(--orange); font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .unlock-banner.unlocked { background: rgba(74,222,58,0.08); border-color: rgba(74,222,58,0.3); color: var(--primary); }
+  .lesson-detail-section { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+  .lesson-detail-title { font-family: 'Nunito', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+  .lesson-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .lesson-tag {
+    font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 12px;
+    background: rgba(74,222,58,0.1); color: var(--primary); border: 1px solid rgba(74,222,58,0.25);
+  }
+  .lesson-objectives { margin-top: 20px; }
+  .lesson-obj-title { font-size: 0.88rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .lesson-obj-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text); }
+  .lesson-obj-item:last-child { border-bottom: none; }
+  .lesson-obj-item .check { color: var(--primary); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .unlock-form-card {
+    background: linear-gradient(135deg, rgba(74,222,58,0.08), rgba(255,94,26,0.05));
+    border: 1px solid rgba(74,222,58,0.3); border-radius: var(--radius);
+    padding: 24px; text-align: center; margin-top: 24px;
+  }
+  .unlock-form-card .uf-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .unlock-form-card .uf-title { font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+  .unlock-form-card .uf-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; }
+
+  /* ══════════════ PLATFORM LINKS ══════════════ */
+  .platform-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ══════════════ PRIVATE TRACK PAGE ══════════════ */
+  .private-hero {
+    background: linear-gradient(135deg, #0d0d0d, #111);
+    border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    text-align: center; padding: 60px 20px 50px;
+  }
+  .private-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(245,166,35,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .private-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.4);
+    padding: 6px 18px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;
+    color: var(--gold); margin-bottom: 20px; box-shadow: 0 0 14px rgba(245,166,35,0.15);
+  }
+  .private-hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(1.5rem,5vw,2.2rem); font-weight: 800; color: var(--white); margin-bottom: 14px; line-height: 1.3; }
+  .private-hero p { font-size: 1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 28px; }
+  .pass-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(74,222,58,0.1); border: 1px solid rgba(74,222,58,0.3);
+    padding: 8px 20px; border-radius: 20px; color: var(--primary); font-size: 0.88rem; font-weight: 700; margin-bottom: 28px;
+  }
+  .private-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; margin-bottom: 28px; }
+  .private-step-card {
+    background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 20px; text-align: center; transition: border-color .2s;
+  }
+  .private-step-card:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(245,166,35,0.15); }
+  .ps-num {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #000; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+    box-shadow: 0 0 14px rgba(245,166,35,0.35);
+  }
+  .ps-title { font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--white); }
+  .private-benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+  .pb-item {
+    background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border);
+    padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px;
+    transition: border-color .2s;
+  }
+  .pb-item:hover { border-color: rgba(245,166,35,0.35); }
+  .pb-check { color: var(--primary); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .pb-text { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+
+  /* ══════════════ FLOATING BUTTONS ══════════════ */
+  .float-wrap {
+    position: fixed; bottom: 20px; left: 0; right: 0;
+    display: flex; justify-content: space-between;
+    padding: 0 16px; z-index: 900; pointer-events: none;
+  }
+  .float-btn {
+    pointer-events: all; display: flex; align-items: center; gap: 8px;
+    padding: 12px 18px; border-radius: 30px; border: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.88rem; font-weight: 700; color: white;
+    text-decoration: none; transition: all .2s;
+  }
+  .float-btn:hover { transform: translateY(-3px) scale(1.04); }
+  .float-wa { background: var(--wa); box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+  .float-wa:hover { box-shadow: 0 6px 28px rgba(37,211,102,0.7); }
+  .float-fb { background: var(--fb); box-shadow: 0 4px 20px rgba(0,132,255,0.5); }
+  .float-fb:hover { box-shadow: 0 6px 28px rgba(0,132,255,0.7); }
+  .float-btn svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+  .float-btn .btn-text { display: none; }
+  @media (min-width: 420px) { .float-btn .btn-text { display: inline; } }
+
+  /* ══════════════ ADMIN PANEL ══════════════ */
+  .admin-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 0;
+  }
+  .admin-tab {
+    padding: 10px 16px; border-radius: 10px 10px 0 0;
+    border: 1px solid transparent; border-bottom: none;
+    background: none; cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-muted);
+    transition: all .2s; position: relative; top: 1px;
+  }
+  .admin-tab.active { background: var(--bg3); border-color: var(--border); border-bottom-color: var(--bg3); color: var(--primary); }
+  .admin-tab-panel { display: none; }
+  .admin-tab-panel.active { display: block; }
+
+  .content-editor-card {
+    background: var(--card-bg); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 24px; margin-bottom: 20px;
+  }
+  .ce-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .ce-input {
+    width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.95rem;
+    color: var(--text); background: var(--bg3);
+    transition: border-color .2s, box-shadow .2s; margin-bottom: 14px;
+  }
+  .ce-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 8px var(--primary-glow); }
+  textarea.ce-input { min-height: 80px; resize: vertical; }
+  .ce-save {
+    background: var(--primary); color: #000; border: none; padding: 10px 22px; border-radius: 10px;
+    font-family: 'Hind Siliguri', sans-serif; font-size: 0.92rem; font-weight: 800; cursor: pointer;
+    transition: all .2s; box-shadow: 0 0 14px var(--primary-glow);
+  }
+  .ce-save:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 0 22px var(--primary-glow); }
+  .ce-saved {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(74,222,58,0.15); color: var(--primary); border: 1px solid rgba(74,222,58,0.3);
+    padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; margin-left: 10px;
+    opacity: 0; transition: opacity .3s;
+  }
+  .ce-saved.show { opacity: 1; }
+
+  /* Admin table */
+  .admin-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .admin-table th { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); color: var(--text-muted); font-weight: 700; background: var(--bg3); }
+  .admin-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .admin-table tr:last-child td { border-bottom: none; }
+  .admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .tbl-action {
+    padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg4); color: var(--text-muted); font-size: 0.78rem;
+    font-weight: 600; cursor: pointer; transition: all .2s;
+  }
+  .tbl-action:hover { border-color: var(--primary); color: var(--primary); }
+  .tbl-action.danger:hover { border-color: #f87171; color: #f87171; }
+
+  /* Certificate */
+  .cert-card {
+    background: linear-gradient(135deg, rgba(74,222,58,0.06), rgba(245,166,35,0.04));
+    border: 2px solid rgba(74,222,58,0.4); border-radius: 20px;
+    padding: 40px 24px; text-align: center; position: relative; overflow: hidden;
+    max-width: 500px; margin: 0 auto;
+    box-shadow: 0 0 40px rgba(74,222,58,0.1);
+  }
+  .cert-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,222,58,0.06), transparent);
+    pointer-events: none;
+  }
+  .cert-trophy { font-size: 3.5rem; margin-bottom: 16px; display: block; }
+  .cert-label { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .cert-name { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 20px var(--primary-glow); }
+  .cert-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+  .cert-stats { display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; }
+  .cert-stat-num { font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+  .cert-stat-label { font-size: 0.72rem; color: var(--text-muted); }
+  .cert-unlock { background: rgba(74,222,58,0.1); border: 1px solid rgba(74,222,58,0.3); border-radius: 10px; padding: 12px; margin-bottom: 20px; color: var(--primary); font-size: 0.88rem; font-weight: 600; }
+  .cert-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+  /* Skills Admin */
+  .skill-admin-card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden; }
+  .skill-admin-header {
+    padding: 16px 20px; background: linear-gradient(135deg, rgba(74,222,58,0.06), rgba(255,94,26,0.04));
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    user-select: none; border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  .skill-admin-header.open { border-bottom-color: var(--border); }
+  .skill-admin-header .sah-icon { font-size: 1.5rem; }
+  .skill-admin-header .sah-title { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; flex: 1; color: var(--white); }
+  .skill-admin-header .sah-toggle { color: var(--text-muted); font-size: 1rem; transition: transform .3s; }
+  .skill-admin-header.open .sah-toggle { transform: rotate(180deg); color: var(--primary); }
+  .skill-admin-body { padding: 20px; display: none; }
+  .skill-admin-body.open { display: block; }
+  .skill-admin-meta { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .skill-admin-meta .ce-input { margin-bottom: 0; flex: 1; min-width: 140px; }
+  .video-admin-list { margin-bottom: 16px; }
+  .video-admin-item { border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; background: var(--bg3); }
+  .video-admin-item .vai-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .video-admin-item .vai-row .ce-input { margin-bottom: 0; flex: 1; min-width: 140px; }
+  .vai-actions { display: flex; gap: 8px; }
+  .vai-del { background: rgba(255,60,60,0.1); color: #f87171; border: 1px solid rgba(255,60,60,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .vai-del:hover { background: #dc2626; color: white; border-color: #dc2626; }
+  .vai-move { background: var(--bg4); border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; transition: all .2s; }
+  .vai-move:hover { background: var(--border); color: var(--primary); border-color: var(--primary); }
+  .add-video-btn {
+    display: flex; align-items: center; gap: 8px; background: none;
+    border: 1.5px dashed rgba(74,222,58,0.4); color: var(--primary);
+    padding: 10px 18px; border-radius: 10px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; width: 100%;
+    justify-content: center; transition: all .2s;
+  }
+  .add-video-btn:hover { background: rgba(74,222,58,0.07); border-color: var(--primary); }
+  .add-skill-btn {
+    display: flex; align-items: center; gap: 8px; background: var(--primary); color: #000;
+    border: none; padding: 12px 22px; border-radius: 10px; font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: all .2s; margin-top: 8px;
+    box-shadow: 0 0 16px var(--primary-glow);
+  }
+  .add-skill-btn:hover { filter: brightness(1.1); box-shadow: 0 0 24px var(--primary-glow); }
+  .thumb-preview { width: 80px; height: 50px; object-fit: cover; border-radius: 6px; display: none; margin-top: 4px; border: 1px solid var(--border); }
+  .thumb-preview.show { display: block; }
+
+  /* ══════════════ SUB-GROUPS (e.g. Smart AI Tools) ══════════════ */
+  .subgroup-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    transition: background .15s;
+  }
+  .subgroup-header:hover { background: rgba(74,222,58,0.04); }
+  .subgroup-header.open { background: rgba(74,222,58,0.05); }
+  .subgroup-label {
+    flex: 1;
+    font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700;
+    color: var(--white);
+  }
+  .subgroup-count {
+    font-size: 0.75rem; padding: 2px 9px; border-radius: 10px;
+    background: var(--bg4); color: var(--text-muted); border: 1px solid var(--border);
+  }
+  .subgroup-toggle { font-size: 0.85rem; color: var(--text-muted); transition: transform .3s; flex-shrink: 0; }
+  .subgroup-header.open .subgroup-toggle { transform: rotate(180deg); color: var(--primary); }
+  .subgroup-body { display: none; }
+  .subgroup-body.open { display: block; }
+  .subgroup-coming-soon {
+    padding: 14px 20px; color: var(--text-muted); font-size: 0.85rem;
+    display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border);
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: var(--bg3); color: var(--primary); border: 1px solid rgba(74,222,58,0.4);
+    padding: 10px 22px; border-radius: 20px; font-size: 0.9rem; font-weight: 700;
+    z-index: 9999; opacity: 0; transition: opacity .3s;
+    pointer-events: none; white-space: nowrap; box-shadow: 0 0 20px var(--primary-glow);
+  }
+  .toast.show { opacity: 1; }
+
+  /* Stats row */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 16px; text-align: center; transition: border-color .2s; }
+  .stat-card:hover { border-color: var(--primary); box-shadow: 0 0 16px var(--primary-glow); }
+  .stat-num { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+
+  /* Misc */
+  .divider { height: 1px; margin: 32px 0; border-radius: 2px; background: var(--grad-logo); box-shadow: 0 0 8px rgba(74,222,58,0.3); }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; background: rgba(74,222,58,0.12); color: var(--primary); border: 1px solid rgba(74,222,58,0.2); margin: 2px; }
+
+  /* ══════════════ LANGUAGE TOGGLE ══════════════ */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1.5px solid var(--border-bright);
+    border-radius: 20px; padding: 3px; gap: 2px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .lang-toggle-btn {
+    padding: 5px 11px; border-radius: 16px; border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800;
+    transition: all .22s cubic-bezier(.4,0,.2,1);
+    background: transparent; color: var(--text-muted); letter-spacing: 0.3px;
+  }
+  .lang-toggle-btn.active {
+    background: var(--primary); color: #000;
+    box-shadow: 0 1px 8px rgba(74,222,58,0.5);
+  }
+
+
+  .video-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.92); backdrop-filter: blur(10px);
+    align-items: center; justify-content: center; padding: 16px;
+  }
+  .video-modal-overlay.open { display: flex; }
+  .video-modal-box {
+    width: 100%; max-width: 800px; background: var(--bg2);
+    border-radius: 16px; border: 1px solid var(--border);
+    overflow: hidden; box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    animation: modalIn .25s ease;
+  }
+  @keyframes modalIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .video-modal-header {
+    padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border); background: var(--bg3);
+  }
+  .video-modal-title { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); }
+  .video-modal-close {
+    background: var(--bg4); border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; padding: 6px 10px;
+    border-radius: 8px; font-size: 1rem; transition: all .2s;
+  }
+  .video-modal-close:hover { background: #2a0a0a; color: var(--orange); border-color: var(--orange); }
+  .video-modal-player { aspect-ratio: 16/9; background: #000; }
+  .video-modal-player iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  /* Registration form highlight */
+  label.checked-label { border-color: var(--primary) !important; background: rgba(74,222,58,0.07) !important; }
+
+  /* ══════════════ APPLE USER TYPE TOGGLE ══════════════ */
+  .user-type-toggle {
+    display: flex; align-items: center;
+    background: var(--bg3);
+    border: 1.5px solid var(--border-bright);
+    border-radius: 20px; padding: 5px; gap: 4px;
+    max-width: 340px; margin: 0 auto 0;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+  }
+  .utt-btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+    padding: 10px 18px; border-radius: 14px; border: none;
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
+    cursor: pointer; transition: all .28s cubic-bezier(.4,0,.2,1);
+    background: transparent; color: var(--text-muted);
+    letter-spacing: 0.2px; white-space: nowrap;
+  }
+  .utt-btn .utt-icon { font-size: 1rem; }
+  .utt-btn.active {
+    background: var(--primary); color: #000;
+    box-shadow: 0 2px 14px rgba(74,222,58,0.55), 0 1px 3px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .utt-btn:not(.active):hover { color: var(--primary); background: rgba(74,222,58,0.07); }
+
+  /* ══════════════ USER PANELS ══════════════ */
+  .user-panel {
+    animation: panelFadeIn .3s ease;
+  }
+  @keyframes panelFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* ══════════════ REGISTERED SUB-TABS ══════════════ */
+  .reg-tabs-wrap {
+    margin: 20px 0 24px; overflow-x: auto; scrollbar-width: none;
+  }
+  .reg-tabs-wrap::-webkit-scrollbar { display: none; }
+  .reg-tabs {
+    display: inline-flex; gap: 0;
+    background: var(--bg3); border: 1.5px solid var(--border-bright);
+    border-radius: 16px; padding: 4px; min-width: 100%;
+  }
+  .reg-tab {
+    flex: 1; padding: 10px 14px; border-radius: 12px; border: none;
+    font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+    cursor: pointer; background: transparent; color: var(--text-muted);
+    transition: all .22s cubic-bezier(.4,0,.2,1); white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .reg-tab.active {
+    background: var(--bg); color: var(--primary);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    border: 1px solid rgba(74,222,58,0.3);
+  }
+  .reg-tab:not(.active):hover { color: var(--white); }
+  .reg-tab-icon {
+    flex: 0 0 auto;
+    width: 40px; height: 40px;
+    border-radius: 12px !important;
+    font-size: 1.1rem;
+    padding: 0 !important;
+    border: 1.5px solid var(--primary) !important;
+    color: var(--primary) !important;
+    box-shadow: 0 0 10px var(--primary-glow), inset 0 0 8px rgba(74,222,58,0.05) !important;
+    background: transparent !important;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .reg-tab-icon:hover { background: var(--primary) !important; color: #000 !important; box-shadow: 0 0 20px var(--primary-glow) !important; }
+
+  /* ══════════════ REG PANEL CONTENT ══════════════ */
+  .reg-panel { display: none; }
+  .reg-panel.active { display: block; animation: panelFadeIn .25s ease; }
+  .reg-panel-header { margin-bottom: 18px; }
+  .rph-title { font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+  .rph-sub { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* ══════════════ VIDEO GRID (Registered) ══════════════ */
+  .reg-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .reg-video-card {
+    background: var(--card-bg); border-radius: var(--radius);
+    border: 1px solid var(--border); overflow: hidden;
+    cursor: pointer; transition: all .2s;
+  }
+  .reg-video-card:hover { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
+  .rvc-thumb {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
+    background: var(--bg3);
+  }
+  .rvc-body { padding: 12px 14px 14px; }
+  .rvc-badge {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 8px; margin-bottom: 7px;
+  }
+  .rvc-badge.new { background: rgba(74,222,58,0.15); color: var(--primary); border: 1px solid rgba(74,222,58,0.3); }
+  .rvc-badge.hot { background: rgba(255,94,26,0.15); color: var(--orange); border: 1px solid rgba(255,94,26,0.3); }
+  .rvc-title { font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--white); line-height: 1.35; margin-bottom: 6px; }
+  .rvc-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 10px; align-items: center; }
+  .rvc-views { display: flex; align-items: center; gap: 4px; }
+
+  .social-icons-row {
+    display: flex; gap: 14px; align-items: center; justify-content: center;
+    flex-wrap: nowrap; padding: 8px 0;
+  }
+  .social-icon-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all .2s; text-decoration: none;
+  }
+  .social-icon-btn:hover { transform: translateY(-3px) scale(1.1); filter: brightness(1.15); }
+
+  @media (max-width: 500px) {
+    .hero { padding: 40px 16px 36px; }
+    .private-hero { padding: 40px 16px 36px; }
+    .user-type-toggle { max-width: 100%; }
+    .reg-tabs { min-width: unset; }
+    .reg-video-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ══════════════ LESSON TABS ══════════════ */
+  .lesson-tabs {
+    display: flex; gap: 8px; padding: 20px 16px 0;
+    max-width: 860px; margin: 0 auto; overflow-x: auto; scrollbar-width: none;
+  }
+  .lesson-tabs::-webkit-scrollbar { display: none; }
+  .lesson-tab {
+    flex-shrink: 0; display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 24px; font-size: 0.88rem; font-weight: 700;
+    cursor: pointer; border: 1.5px solid var(--border-bright); color: var(--text-muted);
+    background: transparent; font-family: 'Hind Siliguri', sans-serif;
+    transition: all .2s; white-space: nowrap;
+  }
+  .lesson-tab:hover { border-color: var(--primary); color: var(--primary); }
+  .lesson-tab.active-ai { background: rgba(74,222,58,0.12); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 14px var(--primary-glow); }
+  .lesson-tab.active-quran { background: rgba(245,166,35,0.12); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(245,166,35,0.3); }
+  .lesson-tab.active-lang { background: rgba(56,140,221,0.12); border-color: #378ADD; color: #6db3f2; box-shadow: 0 0 14px rgba(56,140,221,0.25); }
+  .lesson-tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ══════════════ BOTTOM SECTION CARDS ══════════════ */
+  .section-switch-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .switch-card {
+    border-radius: var(--radius); border: 1.5px solid var(--border-bright);
+    padding: 18px 16px; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; gap: 12px; background: var(--card-bg);
+  }
+  .switch-card:hover { transform: translateY(-2px); }
+  .switch-card.quran-card:hover { border-color: var(--gold); box-shadow: 0 0 18px rgba(245,166,35,0.25); }
+  .switch-card.lang-card:hover { border-color: #378ADD; box-shadow: 0 0 18px rgba(56,140,221,0.2); }
+  .switch-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .switch-card-title { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--white); }
+  .switch-card-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  .switch-card-arrow { margin-left: auto; font-size: 1rem; color: var(--text-muted); }
+
+  /* ══════════════ JUZZ 30 DAY ACCORDION ══════════════ */
+  .juzz30-day-card {
+    background: var(--card-bg); border-radius: var(--radius);
+    border: 1px solid var(--border); overflow: hidden;
+    transition: border-color .2s; margin-bottom: 10px;
+  }
+  .juzz30-day-header {
+    padding: 14px 18px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(255,94,26,0.04));
+    transition: background .2s;
+  }
+  .juzz30-day-header:hover { background: linear-gradient(135deg, rgba(245,166,35,0.14), rgba(255,94,26,0.08)); }
+  .juzz30-day-pill {
+    background: rgba(245,166,35,0.18); color: var(--gold);
+    border: 1px solid rgba(245,166,35,0.5); border-radius: 20px;
+    font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+    padding: 4px 12px; flex-shrink: 0;
+  }
+  .juzz30-day-surahs { flex: 1; font-size: 0.82rem; color: var(--text-muted); line-height: 1.35; }
+  .juzz30-day-count { font-size: 0.72rem; color: var(--text-muted); flex-shrink: 0; white-space: nowrap; margin-right: 8px; }
+  .juzz30-day-toggle { color: var(--text-muted); font-size: 0.9rem; transition: transform .3s; flex-shrink: 0; }
+  .juzz30-day-header.open .juzz30-day-toggle { transform: rotate(180deg); color: var(--gold); }
+  .juzz30-day-body { display: none; border-top: 1px solid var(--border); }
+  .juzz30-day-body.open { display: block; }
+  .juzz30-play-row {
+    padding: 10px 18px 12px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(245,166,35,0.04);
+  }
+  .juzz30-play-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--gold); color: #000;
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 0.82rem;
+    padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer;
+    box-shadow: 0 0 12px rgba(245,166,35,0.3); transition: all .2s; flex-shrink: 0;
+  }
+  .juzz30-play-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .juzz30-surah-row {
+    display: flex; align-items: center; gap: 0;
+    padding: 11px 18px; border-bottom: 1px solid var(--border);
+    transition: background .15s; cursor: default;
+  }
+  .juzz30-surah-row:last-child { border-bottom: none; }
+  .juzz30-surah-row:hover { background: var(--bg3); }
+  .juzz30-timestamp {
+    font-family: 'Nunito', monospace; font-size: 0.75rem; font-weight: 700;
+    color: var(--gold); background: rgba(245,166,35,0.12);
+    border: 1px solid rgba(245,166,35,0.25); border-radius: 6px;
+    padding: 2px 7px; min-width: 42px; text-align: center; flex-shrink: 0; margin-right: 12px;
+  }
+  .juzz30-surah-num {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(245,166,35,0.15); color: var(--gold);
+    border: 1px solid rgba(245,166,35,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 800; margin-right: 10px;
+  }
+  .juzz30-surah-name { flex: 1; min-width: 0; }
+  .juzz30-surah-name-en { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+  .juzz30-surah-arabic { font-size: 1rem; color: var(--gold); font-weight: 500; margin-left: 10px; direction: rtl; flex-shrink: 0; }
+
+  .btn-start-exam {
+    background: linear-gradient(135deg, #f5a623 0%, #c8762a 50%, #a85c18 100%);
+    color: #fff;
+    font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 0.95rem;
+    padding: 12px 24px; border-radius: 25px; border: none;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 0 20px rgba(200,118,42,0.45), 0 0 6px rgba(245,166,35,0.3);
+    transition: all .2s; text-decoration: none; margin-top: 10px;
+  }
+  .btn-start-exam:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(200,118,42,0.65); filter: brightness(1.1); }
+
+  /* ══════════════ FOLLOW US SECTION ══════════════ */
+  .follow-us-section {
+    padding: 28px 16px 32px; max-width: 860px; margin: 0 auto;
+    border-top: 1px solid var(--border);
+  }
+  .follow-us-title {
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+    color: var(--text-muted); text-align: center; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+
+  /* ══════════════ LESSONS SPLIT-SCREEN LAYOUT ══════════════ */
+  #page-lessons {
+    flex-direction: column;
+    height: calc(100vh - var(--nav-h));
+    overflow: hidden;
+  }
+  #page-lessons.active {
+    display: flex !important;
+  }
+
+  /* ── TOP PANEL (sticky) ── */
+  .lessons-top-panel {
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(90deg, #4ade3a 0%, #f5a623 60%, #ff5e1a 100%) 1;
+    box-shadow: 0 4px 18px rgba(74,222,58,0.18), 0 4px 18px rgba(255,94,26,0.10);
+    z-index: 10;
+  }
+
+  /* Tab bar inside top panel */
+  .lessons-top-panel .lesson-tabs {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* Hero info row */
+  .lessons-hero-row {
+    padding: 10px 20px 8px;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .lessons-hero-row #lessons-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .lessons-hero-row #lessons-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Inline video player (hidden until triggered) */
+  .lessons-inline-player {
+    display: none;
+    padding: 0 16px 10px;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  /* On desktop, limit video width so bottom panel stays usable */
+  @media (min-width: 640px) {
+    .lessons-inline-player-wrap {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .lessons-now-playing-bar {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+  }
+  .lessons-inline-player.active {
+    display: block;
+  }
+  .lessons-inline-player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  }
+  .lessons-inline-player-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  /* Now-playing label bar */
+  .lessons-now-playing-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 2px 0;
+  }
+  .lessons-now-playing-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 6px var(--primary-glow);
+    flex-shrink: 0;
+    animation: npulse 1.4s ease-in-out infinite;
+  }
+  @keyframes npulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.5; transform:scale(0.75); }
+  }
+  .lessons-now-playing-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── BOTTOM PANEL (scrollable) ── */
+  .lessons-bottom-panel {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--bg);
+  }
+  .lessons-bottom-panel .section {
+    padding-top: 14px;
+  }
+  /* Custom scrollbar for bottom panel */
+  .lessons-bottom-panel::-webkit-scrollbar { width: 5px; }
+  .lessons-bottom-panel::-webkit-scrollbar-track { background: var(--bg2); }
+  .lessons-bottom-panel::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  .lessons-bottom-panel::-webkit-scrollbar-thumb:hover { background: rgba(74,222,58,0.3); }
+
+  /* Override old main padding-bottom for lessons page */
+  #page-lessons ~ * { }
+
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<header class="navbar">
+  <div class="nav-left">
+    <button class="menu-btn" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <a href="#" class="nav-logo" onclick="showPage('home')" aria-label="Bujhle Easy Home">
+    <div class="nav-logo-pill">
+      <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">Easy</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <div class="lang-toggle" id="lang-toggle">
+      <button class="lang-toggle-btn active" id="btn-bn" onclick="setLang('bn')">বাং</button>
+      <button class="lang-toggle-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="nav-icon-btn lessons-btn" onclick="showPage('lessons')" title="Lessons">📚</button>
+    <button class="nav-icon-btn private-btn" onclick="showPage('private')" title="Private Track">🔐</button>
+  </div>
+</header>
+
+<!-- ══════════════ SIDE DRAWER ══════════════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="drawer-logo-pill">
+        <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">Easy</span>
+      </div>
+      <div>
+        <div class="drawer-logo-sub">CHILL & LEARN</div>
+      </div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <nav>
+    <a href="#" onclick="showPage('home');closeDrawer()"><span class="icon">🏠</span> <span data-bn="Home" data-en="Home">Home</span></a>
+    <a href="#" onclick="showPage('lessons');closeDrawer()"><span class="icon">📚</span> <span data-bn="Lessons" data-en="Lessons">Lessons</span></a>
+    <a href="#" onclick="showPage('lessons');closeDrawer()"><span class="icon">▶</span> <span data-bn="Watch Videos" data-en="Watch Videos">Watch Videos</span></a>
+    <div class="nav-divider"></div>
+    <a href="https://www.youtube.com/@BujhleEasy" target="_blank"><span class="icon">📺</span> <span data-bn="YouTube Channel" data-en="YouTube Channel">YouTube Channel</span></a>
+    <a href="https://whatsapp.com/channel/0029Vb84AMLGehEFygEez641" target="_blank"><span class="icon">💬</span> <span data-bn="WhatsApp Join" data-en="WhatsApp Join">WhatsApp Join</span></a>
+    <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank"><span class="icon">📝</span> <span data-bn="Register Free" data-en="Register Free">Register Free</span></a>
+    <div class="nav-divider"></div>
+    <a href="#" onclick="showPage('private');closeDrawer()" style="color:var(--gold)"><span class="icon">🔐</span> <span data-bn="Private Track" data-en="Private Track">Private Track</span></a>
+    <a href="#" onclick="showPage('admin');closeDrawer()"><span class="icon">🛠</span> <span data-bn="Admin Panel" data-en="Admin Panel">Admin Panel</span></a>
+  </nav>
+  <div class="drawer-footer"><span data-bn="✨ সম্পূর্ণ বিনামূল্যে" data-en="✨ Completely Free">✨ সম্পূর্ণ বিনামূল্যে</span> · <span data-bn="Free for everyone" data-en="Free for everyone">Free for everyone</span></div>
+</div>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main">
+
+  <!-- ══════════ HOME PAGE ══════════ -->
+  <div id="page-home" class="page-section active">
+    <div class="hero">
+      <h1 id="hero-title" data-bn="AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ" data-en="Transform Your Learning & Future with AI">AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ</h1>
+      <p id="hero-subtitle" data-bn="✨ সম্পূর্ণ বিনামূল্যে · No fees · No tricks." data-en="✨ Completely Free · No fees · No tricks.">✨ সম্পূর্ণ বিনামূল্যে · No fees · No tricks.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" id="hero-play-btn" onclick="openHeroPlayer('K0ydw8WgBxg')" data-bn="▶ Intro Video দেখো" data-en="▶ Watch Intro Video">▶ Intro Video দেখো</button>
+      </div>
+
+      <!-- Hero inline video player -->
+      <div id="hero-inline-player" style="display:none;max-width:360px;margin:24px auto 0;width:100%;">
+        <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 6px 32px rgba(0,0,0,0.7),0 0 0 3px rgba(74,222,58,0.18);">
+          <iframe id="hero-inline-iframe" src="" allowfullscreen allow="autoplay; encrypted-media" style="width:100%;height:100%;border:none;display:block;"></iframe>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- User Type Toggle + Expandable Sections -->
+    <div class="section" style="padding-bottom:0;">
+      <!-- Apple-style segmented control -->
+      <div class="user-type-toggle" id="user-type-toggle">
+        <button class="utt-btn active" id="utt-new" onclick="switchUserTab('new')">
+          <span class="utt-icon">🆕</span>
+          <span class="utt-label" data-bn="New User" data-en="New User">New User</span>
+        </button>
+        <button class="utt-btn" id="utt-reg" onclick="switchUserTab('registered')">
+          <span class="utt-icon">✅</span>
+          <span class="utt-label" data-bn="Registered" data-en="Registered">Registered</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NEW USER PANEL: How To Start Steps -->
+    <div class="user-panel" id="panel-new">
+    <div class="section">
+      <div class="section-title" data-bn="কীভাবে শুরু করবে?" data-en="How To Get Started?">কীভাবে শুরু করবে?</div>
+      <div class="section-sub" data-bn="মাত্র ৩টি ধাপ — তারপর সব lessons free!" data-en="Just 3 steps — then all lessons are free!">মাত্র ৩টি ধাপ — তারপর সব lessons free!</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title" data-bn="YouTube Subscribe করো" data-en="Subscribe on YouTube">YouTube Subscribe করো</div>
+          <div class="step-desc" data-bn="আমাদের YouTube channel subscribe করো এবং notification bell চালু রাখো। নতুন lessons সবার আগে পাবে।" data-en="Subscribe to our YouTube channel and turn on the notification bell. Be the first to get new lessons.">আমাদের YouTube channel subscribe করো এবং notification bell চালু রাখো। নতুন lessons সবার আগে পাবে।</div>
+          <div class="step-btns">
+            <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="step-btn step-btn-primary" data-bn="▶ YouTube Subscribe" data-en="▶ YouTube Subscribe">▶ YouTube Subscribe</a>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title" data-bn="WhatsApp Community-তে Join করো" data-en="Join the WhatsApp Channel">WhatsApp Community-তে Join করো</div>
+          <div class="step-desc" data-bn="WhatsApp community-তে join করো। সেখানে updates, tips এবং সহপাঠীদের সাথে connect করো।" data-en="Join our WhatsApp channel for updates, tips and to connect with fellow learners.">WhatsApp community-তে join করো। সেখানে updates, tips এবং সহপাঠীদের সাথে connect করো।</div>
+          <div class="step-btns">
+            <a href="https://whatsapp.com/channel/0029Vb84AMLGehEFygEez641" target="_blank" class="step-btn step-btn-primary" data-bn="💬 WhatsApp Join" data-en="💬 WhatsApp Join">💬 WhatsApp Join</a>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title" data-bn="Form Fill করো" data-en="Fill the Registration Form">Form Fill করো</div>
+          <div class="step-desc" data-bn="নিচের form-এ তোমার নাম, email, ভাষা পছন্দ এবং কনফার্ম করো — তারপরেই সব lessons unlock!" data-en="Fill in your name, email, language preference below and confirm — then all lessons unlock!">নিচের form-এ তোমার নাম, email, ভাষা পছন্দ এবং কনফার্ম করো — তারপরেই সব lessons unlock!</div>
+          <div class="step-btns">
+            <button class="step-btn step-btn-primary" onclick="document.getElementById('registration-form-section').scrollIntoView({behavior:'smooth'})" data-bn="📝 Form Fill করো" data-en="📝 Fill the Form">📝 Form Fill করো</button>
+          </div>
+        </div>
+        <div class="step-card done" style="border-color:rgba(74,222,58,0.4);background:rgba(74,222,58,0.04);">
+          <div class="step-num" style="background:var(--primary);font-size:1.3rem;">✓</div>
+          <div class="step-title" data-bn="সব Lessons এখন Free — নিজের গতিতে শেখো!" data-en="All Lessons Now Free — Learn at Your Own Pace!">সব Lessons এখন Free — নিজের গতিতে শেখো!</div>
+          <div class="step-desc" data-bn="Form fill করার পর সব lessons unlock হয়ে যাবে। কোনো password নেই, কোনো deadline নেই।" data-en="After filling the form, all lessons will be unlocked. No password, no deadline.">Form fill করার পর সব lessons unlock হয়ে যাবে। কোনো password নেই, কোনো deadline নেই।</div>
+          <div class="step-btns">
+            <button class="step-btn step-btn-primary" onclick="showPage('lessons')" data-bn="📚 Lessons দেখো →" data-en="📚 Browse Lessons →">📚 Lessons দেখো →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="section" id="registration-form-section" style="padding-top:0;">
+      <div class="section-title" data-bn="📝 Free Registration" data-en="📝 Free Registration">📝 Free Registration</div>
+      <div class="section-sub" data-bn="একবার fill করো — সব lessons free!" data-en="Fill once — all lessons free!">একবার fill করো — সব lessons free!</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:500px;">
+        <div style="margin-bottom:16px;">
+          <div class="ce-label" data-bn="তোমার নাম" data-en="Your Name">তোমার নাম</div>
+          <input type="text" id="reg-name" class="ce-input" data-bn-placeholder="Full Name লেখো" data-en-placeholder="Enter your full name" placeholder="Full Name লেখো" style="margin-bottom:0;">
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="ce-label" data-bn="Email Address" data-en="Email Address">Email Address</div>
+          <input type="email" id="reg-email" class="ce-input" placeholder="your@email.com" style="margin-bottom:0;">
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="ce-label" data-bn="ভাষা পছন্দ" data-en="Language Preference">ভাষা পছন্দ</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:10px 16px;flex:1;min-width:130px;transition:all .2s;" id="lang-bn-lbl">
+              <input type="radio" name="reg-lang" value="bangla" id="reg-lang-bn" style="accent-color:var(--primary);" onchange="highlightLangLabel()">
+              <span data-bn="🇧🇩 বাংলায় শিখবো" data-en="🇧🇩 Learn in Bangla">🇧🇩 বাংলায় শিখবো</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:10px 16px;flex:1;min-width:130px;transition:all .2s;" id="lang-en-lbl">
+              <input type="radio" name="reg-lang" value="english" id="reg-lang-en" style="accent-color:var(--primary);" onchange="highlightLangLabel()">
+              <span data-bn="🇬🇧 English-এ শিখবো" data-en="🇬🇧 Learn in English">🇬🇧 English-এ শিখবো</span>
+            </label>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;transition:all .2s;" id="yt-sub-lbl">
+            <input type="checkbox" id="reg-yt" style="accent-color:var(--primary);width:18px;height:18px;" onchange="highlightCheckLabel('yt-sub-lbl','reg-yt')">
+            <span style="font-size:0.92rem;" data-bn="✅ হ্যাঁ, আমি YouTube Subscribe করেছি" data-en="✅ Yes, I have subscribed on YouTube">✅ হ্যাঁ, আমি YouTube Subscribe করেছি</span>
+          </label>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;transition:all .2s;" id="wa-join-lbl">
+            <input type="checkbox" id="reg-wa" style="accent-color:var(--primary);width:18px;height:18px;" onchange="highlightCheckLabel('wa-join-lbl','reg-wa')">
+            <span style="font-size:0.92rem;" data-bn="💬 হ্যাঁ, আমি WhatsApp-এ Join করেছি" data-en="💬 Yes, I have joined on WhatsApp">💬 হ্যাঁ, আমি WhatsApp-এ Join করেছি</span>
+          </label>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;padding:14px;" onclick="submitRegistration()" data-bn="🚀 Submit — সব Lessons Unlock করো!" data-en="🚀 Submit — Unlock All Lessons!">🚀 Submit — সব Lessons Unlock করো!</button>
+        <div id="reg-success" style="display:none;margin-top:16px;padding:14px;border-radius:10px;background:rgba(74,222,58,0.1);border:1px solid rgba(74,222,58,0.3);color:var(--primary);font-weight:700;text-align:center;" data-bn="🎉 দারুণ! Registration সম্পন্ন! এখন সব Lessons Free — চলো শুরু করি!" data-en="🎉 Awesome! Registration complete! All Lessons are now Free — let's go!">
+          🎉 দারুণ! Registration সম্পন্ন! এখন সব Lessons Free — চলো শুরু করি!
+        </div>
+      </div>
+    </div>
+    </div><!-- /panel-new -->
+
+    <!-- REGISTERED USER PANEL -->
+    <div class="user-panel" id="panel-registered" style="display:none;">
+      <div class="section" style="padding-top:24px;">
+        <div class="section-title" data-bn="স্বাগতম, Registered Member! 🎉" data-en="Welcome back, Registered Member! 🎉">স্বাগতম, Registered Member! 🎉</div>
+        <div class="section-sub" data-bn="তোমার জন্য সব skills ও videos এখানে আছে।" data-en="All your skills and videos are right here.">তোমার জন্য সব skills ও videos এখানে আছে।</div>
+
+        <!-- Registered Sub-Tabs (Apple pill style) -->
+        <div class="reg-tabs-wrap">
+          <div class="reg-tabs" id="reg-tabs">
+            <button class="reg-tab active" id="rtab-new" onclick="switchRegTab('new-skills')">
+              🆕 New Skills
+            </button>
+            <button class="reg-tab" id="rtab-popular" onclick="switchRegTab('popular')">
+              🔥 Most Watched
+            </button>
+            <button class="nav-icon-btn lessons-btn reg-tab-icon" id="rtab-all" onclick="showPage('lessons')" title="All Skills">📚</button>
+          </div>
+        </div>
+
+        <!-- New Skills Tab -->
+        <div class="reg-panel active" id="rpanel-new-skills">
+          <div class="reg-panel-header">
+            <div class="rph-title">🆕 New Skill Videos</div>
+            <div class="rph-sub">Last 2 weeks · YouTube থেকে নতুন আপলোড</div>
+          </div>
+          <div class="reg-video-grid" id="new-skills-grid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Popular Tab -->
+        <div class="reg-panel" id="rpanel-popular">
+          <div class="reg-panel-header">
+            <div class="rph-title">🔥 Most Watched Videos</div>
+            <div class="rph-sub">সবচেয়ে বেশি দেখা popular lessons</div>
+          </div>
+          <div class="reg-video-grid" id="popular-grid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        </div>
+
+      </div>
+    </div><!-- /panel-registered -->
+
+    <!-- Follow Us — bottom of Home page -->
+    <div class="section" style="padding-top:16px;">
+      <div class="section-title" data-bn="Join Us" data-en="Join Us" style="margin-bottom:16px;">Join Us</div>
+      <div class="social-icons-row">
+        <a href="#" target="_blank" class="social-icon-btn" aria-label="Instagram" style="background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7);box-shadow:0 0 18px rgba(238,42,123,0.4);">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" target="_blank" class="social-icon-btn" aria-label="Facebook" style="background:#1877f2;box-shadow:0 0 18px rgba(24,119,242,0.4);">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@BujhleEasy" target="_blank" class="social-icon-btn" aria-label="YouTube" style="background:#ff0000;box-shadow:0 0 18px rgba(255,0,0,0.4);">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb84AMLGehEFygEez641" target="_blank" class="social-icon-btn" aria-label="WhatsApp" style="background:#25D366;box-shadow:0 0 18px rgba(37,211,102,0.4);">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="#" target="_blank" class="social-icon-btn" aria-label="TikTok" style="background:#010101;box-shadow:0 0 18px rgba(105,201,208,0.35);">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ LESSONS PAGE — SPLIT SCREEN ══════════ -->
+  <div id="page-lessons" class="page-section">
+
+    <!-- ── TOP PANEL (sticky) ── -->
+    <div class="lessons-top-panel">
+
+      <!-- Tab bar -->
+      <div class="lesson-tabs">
+        <button class="lesson-tab active-ai" id="tab-ai" onclick="switchLessonTab('ai')">AI Skills</button>
+        <button class="lesson-tab" id="tab-quran" onclick="switchLessonTab('quran')">Quran</button>
+        <button class="lesson-tab" id="tab-lang" onclick="switchLessonTab('lang')">Language</button>
+      </div>
+
+      <!-- Hero info row -->
+      <div class="lessons-hero-row">
+        <div id="lessons-title">AI Skills — সম্পূর্ণ Roadmap</div>
+        <div id="lessons-desc">৬টি Free Track + ১টি Advanced Locked Track · AI Foundations থেকে শুরু করো!</div>
+      </div>
+
+      <!-- Inline video player -->
+      <div class="lessons-inline-player" id="lessons-inline-player">
+        <div class="lessons-inline-player-wrap">
+          <iframe id="lessons-inline-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="lessons-now-playing-bar">
+          <div class="lessons-now-playing-dot"></div>
+          <div class="lessons-now-playing-title" id="lessons-now-playing-title">Now Playing</div>
+        </div>
+      </div>
+
+    </div><!-- /lessons-top-panel -->
+
+    <!-- ── BOTTOM PANEL (scrollable) ── -->
+    <div class="lessons-bottom-panel" id="lessons-bottom-panel">
+      <div class="section" style="padding-top:14px;">
+        <div class="lessons-sections" id="lessons-container">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div><!-- /lessons-bottom-panel -->
+
+  </div>
+
+  <!-- ══════════ LESSON PLAYER PAGE ══════════ -->
+  <div id="page-player" class="page-section">
+    <div class="lesson-player-wrap">
+      <div class="lesson-player-inner">
+        <button class="back-btn" onclick="showPage('lessons')">← সব Lessons-এ ফিরে যাও</button>
+        <div class="player-iframe-wrap">
+          <iframe id="player-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:40%"></div></div>
+          <div class="progress-label">
+            <span id="progress-text">Watch Progress: 40% watched — need 80% to unlock next</span>
+            <span id="progress-lock" style="color:var(--orange);">🔒 Watch 80% to unlock next lesson →</span>
+          </div>
+        </div>
+        <div id="unlock-banner" class="unlock-banner">🔒 Watch 80% to unlock next lesson →</div>
+      </div>
+    </div>
+    <div class="lesson-detail-section">
+      <div class="lesson-detail-title" id="player-title">Lesson Title</div>
+      <div class="lesson-tags" id="player-tags"></div>
+      <div class="lesson-objectives">
+        <div class="lesson-obj-title">এই Lesson-এ কী শিখবে:</div>
+        <div id="player-objectives"></div>
+      </div>
+      <div class="unlock-form-card" id="unlock-form-card">
+        <div class="uf-icon">🎉</div>
+        <div class="uf-title">দারুণ! পরের Lesson unlock করতে Form fill করো</div>
+        <div class="uf-desc">শুধু একবার। তারপর সব lessons free।</div>
+        <a href="https://forms.gle/hzFmhfPfX4hP57Q29" target="_blank" class="btn-primary">📝 Google Form Fill করো</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PRIVATE TRACK PAGE ══════════ -->
+  <div id="page-private" class="page-section">
+    <div class="private-hero">
+      <div class="private-badge">🔐 Exclusive · Private Track</div>
+      <h1>Passive Income — Private 1-on-1 Tutorial</h1>
+      <p>এটা সবার জন্য না। যারা free course শেষ করে exam-এ ৮০% বা তার বেশি পাবে — শুধু তারাই এই exclusive training পাবে।</p>
+      <div class="pass-badge">✅ Pass mark: 80% বা তার বেশি</div>
+    </div>
+    <div class="section">
+      <div class="section-title">কীভাবে Private Access পাবে</div>
+      <div class="section-sub">মাত্র ৩টি ধাপে — কোনো fee নেই</div>
+      <div class="private-steps">
+        <div class="private-step-card">
+          <div class="ps-num">1</div>
+          <div class="ps-title">সব Free lessons শেষ করো</div>
+        </div>
+        <div class="private-step-card">
+          <div class="ps-num">2</div>
+          <div class="ps-title">Online Exam দাও (80% target)</div>
+        </div>
+        <div class="private-step-card">
+          <div class="ps-num">3</div>
+          <div class="ps-title">Selected হলে Private access পাবে</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title" style="margin-bottom:16px;">Private track-এ কী পাবে</div>
+      <div class="private-benefits-grid">
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">YouTube channel grow করার exact strategy — step by step</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">AI দিয়ে content তৈরি করে income করার proven method</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">Bujhle Easy-এর সাথে direct collaboration সুযোগ</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">1-on-1 Private video tutorial — limited seats only</span></div>
+        <div class="pb-item"><span class="pb-check">✓</span><span class="pb-text">WhatsApp Private group-এ access</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="text-align:center;padding:10px 0 20px;">
+        <div class="section-title" style="margin-bottom:10px;">এখনই শুরু করো</div>
+        <div class="section-sub" style="margin-bottom:20px;">Free lessons শেষ করলেই exam দেওয়ার সুযোগ পাবে। কোনো fee নেই।</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <button class="btn-primary" onclick="showPage('lessons')" style="min-width:220px;justify-content:center;">📚 Free Lessons শুরু করো →</button>
+        <button class="btn-start-exam" onclick="showToast('Exam coming soon — complete the free track first!')" style="min-width:220px;justify-content:center;">📝 Start Exam</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ ADMIN PAGE ══════════ -->
+  <div id="page-admin" class="page-section">
+    <div style="background:linear-gradient(135deg,#0d0d0d,#111);color:white;padding:32px 20px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(74,222,58,0.08),transparent);pointer-events:none;"></div>
+      <div class="admin-logo-pill" style="margin:0 auto 12px;">
+        <span class="nav-logo-bujhle">Bujhle</span><span class="nav-logo-easy">Easy</span>
+      </div>
+      <div style="font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:800;color:var(--primary);">🛠 Admin Panel</div>
+      <div style="color:var(--text-muted);font-size:0.9rem;margin-top:4px;">বুঝলে Easy — Real-time student activity & progress · <span style="color:var(--orange);font-size:0.8rem;">Admin Only</span></div>
+    </div>
+    <div class="section">
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num">148</div><div class="stat-label">Total Students</div></div>
+        <div class="stat-card"><div class="stat-num">94</div><div class="stat-label">Active this week</div></div>
+        <div class="stat-card"><div class="stat-num">23</div><div class="stat-label">Certificates issued</div></div>
+        <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Private access (80%+)</div></div>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab('students',this)">👥 Students</button>
+        <button class="admin-tab" onclick="switchAdminTab('certs',this)">🏆 Certificates</button>
+        <button class="admin-tab" onclick="switchAdminTab('exam',this)">🔐 Private Exam</button>
+        <button class="admin-tab" onclick="switchAdminTab('content',this)">📝 Page Content</button>
+        <button class="admin-tab" onclick="switchAdminTab('lessons-admin',this)">🎓 Lessons</button>
+        <button class="admin-tab" onclick="switchAdminTab('links',this)">🔗 Links</button>
+      </div>
+
+      <!-- TAB: STUDENTS -->
+      <div id="admin-tab-students" class="admin-tab-panel active">
+        <div class="content-editor-card" style="overflow-x:auto;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;color:var(--primary);">👥 Students</div>
+            <div style="display:flex;gap:8px;">
+              <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;" onclick="showToast('Exported!')">📤 Export CSV</button>
+              <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;background:var(--bg4);color:var(--primary);box-shadow:none;" onclick="showToast('Add student modal coming!')">+ Add Student</button>
+            </div>
+          </div>
+          <table class="admin-table">
+            <thead><tr>
+              <th>Student</th><th>Progress</th><th>Watch Time</th><th>Status</th><th>Exam Score</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>Rahim Uddin<br><small style="color:var(--text-muted)">rahim@gmail.com</small></td>
+                <td>3 / 31 lessons</td><td>47 min</td>
+                <td><span class="tag">Active</span></td><td>—</td>
+                <td><button class="tbl-action">View</button></td>
+              </tr>
+              <tr>
+                <td>Fatema Khatun<br><small style="color:var(--text-muted)">fatema@gmail.com</small></td>
+                <td>31 / 31 lessons</td><td>6h 14m</td>
+                <td><span class="tag" style="background:rgba(74,222,58,0.15);color:var(--primary);border-color:rgba(74,222,58,0.3);">Certified</span></td>
+                <td>92%</td><td><button class="tbl-action">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Karim Hossain<br><small style="color:var(--text-muted)">karim@yahoo.com</small></td>
+                <td>15 / 31 lessons</td><td>2h 33m</td>
+                <td><span class="tag">Active</span></td><td>—</td>
+                <td><button class="tbl-action">View</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter<br><small style="color:var(--text-muted)">nasrin@gmail.com</small></td>
+                <td>31 / 31 lessons</td><td>5h 48m</td>
+                <td><span class="tag" style="background:rgba(74,222,58,0.15);color:var(--primary);border-color:rgba(74,222,58,0.3);">Certified</span></td>
+                <td>64% ✗</td><td><button class="tbl-action">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed<br><small style="color:var(--text-muted)">shakil@hotmail.com</small></td>
+                <td>31 / 31 lessons</td><td>7h 02m</td>
+                <td><span class="tag" style="background:rgba(245,166,35,0.15);color:var(--gold);border-color:rgba(245,166,35,0.3);">Private Access</span></td>
+                <td>88% ✓</td><td><button class="tbl-action">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: CERTIFICATES -->
+      <div id="admin-tab-certs" class="admin-tab-panel">
+        <div class="content-editor-card" style="overflow-x:auto;margin-bottom:24px;">
+          <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:16px;">🏆 Certificates</div>
+          <table class="admin-table">
+            <thead><tr><th>Student</th><th>Completed</th><th>Watch Time</th><th>Certificate</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Fatema Khatun<br><small style="color:var(--text-muted)">fatema@gmail.com</small></td>
+                <td>31/31 (100%)</td><td>6h 14m</td><td>Issued Jan 12</td>
+                <td><button class="tbl-action" onclick="showCert('Fatema Khatun','31','6h 14m','Jan 12')">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter<br><small style="color:var(--text-muted)">nasrin@gmail.com</small></td>
+                <td>31/31 (100%)</td><td>5h 48m</td><td>Issued Jan 14</td>
+                <td><button class="tbl-action" onclick="showCert('Nasrin Akter','31','5h 48m','Jan 14')">View Cert</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed<br><small style="color:var(--text-muted)">shakil@hotmail.com</small></td>
+                <td>31/31 (100%)</td><td>7h 02m</td><td>Issued Jan 10</td>
+                <td><button class="tbl-action" onclick="showCert('Shakil Ahmed','31','7h 02m','Jan 10')">View Cert</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Certificate Preview -->
+        <div id="cert-preview" style="display:none;">
+          <div class="cert-card">
+            <span class="cert-trophy">🏆</span>
+            <div class="cert-label">Certificate of Completion</div>
+            <div class="cert-name" id="cert-name">Fatema Khatun</div>
+            <div class="cert-desc">সফলভাবে সম্পন্ন করেছে<br><strong style="color:var(--white);">বুঝলে Easy — AI Learning Program</strong></div>
+            <div class="cert-stats">
+              <div><div class="cert-stat-num" id="cert-lessons">31</div><div class="cert-stat-label">Lessons</div></div>
+              <div><div class="cert-stat-num" id="cert-time">6h 14m</div><div class="cert-stat-label">Watch Time</div></div>
+              <div><div class="cert-stat-num">100%</div><div class="cert-stat-label">Completed</div></div>
+            </div>
+            <div class="cert-unlock">🎉 Private Passive Income Track — Unlocked!</div>
+            <div class="cert-actions">
+              <button class="btn-primary" onclick="showToast('PDF download coming!')">⬇ Download PDF</button>
+              <button class="btn-ghost" onclick="showToast('Shared to Facebook!')">f Share on Facebook</button>
+              <button class="btn-ghost" onclick="document.getElementById('cert-preview').style.display='none'">✕ Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PRIVATE EXAM -->
+      <div id="admin-tab-exam" class="admin-tab-panel">
+        <div class="content-editor-card" style="overflow-x:auto;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;color:var(--primary);">🔐 Private Exam Results</div>
+            <button class="ce-save" style="font-size:0.82rem;padding:7px 14px;" onclick="showToast('Exported!')">📤 Export Exam Results</button>
+          </div>
+          <table class="admin-table">
+            <thead><tr><th>Student</th><th>Exam Score</th><th>Pass (80%+)</th><th>Private Access</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Fatema Khatun</td><td>92%</td>
+                <td style="color:var(--primary);">✓ Passed</td>
+                <td><span class="tag">Granted</span></td>
+                <td><button class="tbl-action danger">Revoke</button></td>
+              </tr>
+              <tr>
+                <td>Shakil Ahmed</td><td>88%</td>
+                <td style="color:var(--primary);">✓ Passed</td>
+                <td><span class="tag">Granted</span></td>
+                <td><button class="tbl-action danger">Revoke</button></td>
+              </tr>
+              <tr>
+                <td>Nasrin Akter</td><td>64%</td>
+                <td style="color:#f87171;">✗ Failed</td>
+                <td><span class="tag" style="background:rgba(255,60,60,0.1);color:#f87171;border-color:rgba(255,60,60,0.3);">Not granted</span></td>
+                <td><button class="tbl-action">Override</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: PAGE CONTENT -->
+      <div id="admin-tab-content" class="admin-tab-panel">
+        <div class="content-editor-card">
+          <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">🏠 Hero Section</div>
+          <div class="ce-label">Main Title (Hero)</div>
+          <input type="text" class="ce-input" id="edit-hero-title" value="AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ">
+          <div class="ce-label">Subtitle / Description</div>
+          <textarea class="ce-input" id="edit-hero-subtitle">Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.</textarea>
+          <div class="ce-label">Hero Badge Text</div>
+          <input type="text" class="ce-input" id="edit-hero-badge" value="✨ সম্পূর্ণ বিনামূল্যে · 100% Free">
+          <div class="ce-label">Intro Video URL (YouTube)</div>
+          <input type="text" class="ce-input" id="edit-intro-url" value="https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY">
+          <button class="ce-save" onclick="saveContent()">💾 Save Changes</button>
+          <span class="ce-saved" id="content-saved">✓ Saved!</span>
+        </div>
+        <div class="content-editor-card">
+          <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">💬 Contact / Social Links</div>
+          <div class="ce-label">WhatsApp Number (with country code)</div>
+          <input type="text" class="ce-input" id="edit-wa" value="97455879325">
+          <div class="ce-label">Facebook Messenger Link</div>
+          <input type="text" class="ce-input" id="edit-fb" value="https://m.me/BujhleEasy">
+          <div class="ce-label">YouTube Channel URL</div>
+          <input type="text" class="ce-input" id="edit-yt" value="https://www.youtube.com/@BujhleEasy">
+          <div class="ce-label">Google Form (Registration) URL</div>
+          <input type="text" class="ce-input" id="edit-form" value="https://forms.gle/hzFmhfPfX4hP57Q29">
+          <button class="ce-save" onclick="saveLinks()">💾 Save Links</button>
+          <span class="ce-saved" id="links-saved">✓ Saved!</span>
+        </div>
+      </div>
+
+      <!-- TAB: LESSONS ADMIN -->
+      <div id="admin-tab-lessons-admin" class="admin-tab-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;">🎓 Lessons Manager</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">Section ও lesson যোগ করো, edit করো, order পরিবর্তন করো</div>
+          </div>
+          <button class="ce-save" onclick="saveAllLessons()">💾 Save All</button>
+        </div>
+        <div id="lessons-admin-list"><!-- Populated by JS --></div>
+        <button class="add-skill-btn" onclick="addSection()">+ নতুন Section যোগ করো</button>
+      </div>
+
+      <!-- TAB: LINKS -->
+      <div id="admin-tab-links" class="admin-tab-panel">
+        <div class="content-editor-card">
+          <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary);">🔗 Navigation & Button Links</div>
+          <div class="ce-label">Navbar Brand Name</div>
+          <input type="text" class="ce-input" value="বুঝলে Easy">
+          <div class="ce-label">Lessons Button Text (Navbar)</div>
+          <input type="text" class="ce-input" value="📚 Lessons">
+          <div class="ce-label">WhatsApp Float Button Text</div>
+          <input type="text" class="ce-input" value="WhatsApp">
+          <div class="ce-label">Messenger Float Button Text</div>
+          <input type="text" class="ce-input" value="Messenger">
+          <button class="ce-save" onclick="showToast('Navigation settings saved!')">💾 Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══════════ VIDEO MODAL ══════════ -->
+  <div id="video-modal" class="video-modal-overlay" onclick="closeVideoModal(event)">
+    <div class="video-modal-box">
+      <div class="video-modal-header">
+        <div class="video-modal-title" id="video-modal-title">Video</div>
+        <button class="video-modal-close" onclick="closeVideoModalDirect()">✕ বন্ধ করো</button>
+      </div>
+      <div class="video-modal-player">
+        <iframe id="video-modal-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════ DATA ══════════════
+let siteData = {
+  heroTitle: "AI দিয়ে বদলে দাও তোমার পড়াশোনা ও ভবিষ্যৎ",
+  heroSubtitle: "Students, freshers, office workers — সবার জন্য। বাংলায় ও English-এ। No fees. No tricks.",
+  heroBadge: "✨ সম্পূর্ণ বিনামূল্যে · 100% Free",
+  introUrl: "https://youtu.be/K0ydw8WgBxg?si=8I7vNCzY0LBPJ8BY",
+  waNumber: "https://whatsapp.com/channel/0029Vb84AMLGehEFygEez641",
+  fbLink: "https://m.me/BujhleEasy",
+  ytUrl: "https://www.youtube.com/@BujhleEasy",
+  formUrl: "https://forms.gle/hzFmhfPfX4hP57Q29",
+};
+
+let sections = [
+
+  // ══════════════════════════════════════════════════════
+  // 1. AI FOUNDATION
+  // ══════════════════════════════════════════════════════
+  {
+    id: "ai-foundation",
+    icon: "🤖",
+    title: "1. AI Foundation",
+    titleEn: "1. AI Foundation",
+    sub: "Beginner · 3 lessons",
+    subEn: "Beginner · 3 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "The AI Survival Guide", titleEn: "The AI Survival Guide", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [] },
+      { title: "Zero Skills to Earnings — 4 Week AI Roadmap", titleEn: "Zero Skills to Earnings — 4 Week AI Roadmap", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [] },
+      { title: "AI Job Cuts: The Alarming Truth", titleEn: "AI Job Cuts: The Alarming Truth", tags: ["AI","Jobs"], ytId: "K0ydw8WgBxg", locked: false, status: "available", objectives: [] },
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // 2. SMART AI TOOLS
+  // ══════════════════════════════════════════════════════
+  {
+    id: "smart-ai-tools",
+    icon: "⚡",
+    title: "2. Smart AI Tools",
+    titleEn: "2. Smart AI Tools",
+    sub: "NotebookLM · LLMs · Image · Video · Audio · 15 lessons",
+    subEn: "NotebookLM · LLMs · Image · Video · Audio · 15 lessons",
+    sectionLocked: false,
+    accentColor: "#4285F4",
+    subGroups: [
+      { label: "📒 Research & Reports (NotebookLM)" },
+      { label: "📒 Research & Reports (NotebookLM)" },
+      { label: "📒 Research & Reports (NotebookLM)" },
+      { label: "📒 Research & Reports (NotebookLM)" },
+      { label: "🧠 Large Language Models (LLMs)" },
+      { label: "🎨 AI Image Generation" },
+      { label: "🎨 AI Image Generation" },
+      { label: "🎨 AI Image Generation" },
+      { label: "🎬 AI Video Creation" },
+      { label: "🎬 AI Video Creation" },
+      { label: "🎬 AI Video Creation" },
+      { label: "🎵 AI Voiceovers & Music" },
+      { label: "🎵 AI Voiceovers & Music" },
+      { label: "🛠️ Others" },
+    ],
+    lessons: [
+      // 2.1 Research & Reports (NotebookLM)
+      { title: "Learn Anything 10x Faster", titleEn: "Learn Anything 10x Faster", tags: ["NotebookLM"], ytId: "TThi7rCba_c", locked: false, status: "available", objectives: [], subGroup: "📒 Research & Reports (NotebookLM)" },
+      { title: "Turn Any Document into Video Presentation", titleEn: "Turn Any Document into Video Presentation", tags: ["NotebookLM"], ytId: "bMdHWjSLkeM", locked: false, status: "available", objectives: [], subGroup: "📒 Research & Reports (NotebookLM)" },
+      { title: "The Magic of Converting Text to Podcasts", titleEn: "The Magic of Converting Text to Podcasts", tags: ["NotebookLM","Shorts"], ytId: "FkBWh3drYKI", locked: false, status: "available", objectives: [], subGroup: "📒 Research & Reports (NotebookLM)" },
+      { title: "Generate Instant Study Guides, Slides & Mind Maps", titleEn: "Generate Instant Study Guides, Slides & Mind Maps", tags: ["NotebookLM"], ytId: "G-hM-OkmY10", locked: false, status: "available", objectives: [], subGroup: "📒 Research & Reports (NotebookLM)" },
+      // 2.2 Large Language Models (LLMs)
+      { title: "Large Language Models (LLMs)", titleEn: "Large Language Models (LLMs)", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [], subGroup: "🧠 Large Language Models (LLMs)" },
+      // 2.3 AI Image Generation
+      { title: "Google Gemini Nano vs. Pro Explained", titleEn: "Google Gemini Nano vs. Pro Explained", tags: ["Gemini","Image"], ytId: "JmWFQAiHeTw", locked: false, status: "available", objectives: [], subGroup: "🎨 AI Image Generation" },
+      { title: "Mastering Character Consistency in AI Images", titleEn: "Mastering Character Consistency in AI Images", tags: ["AI Image"], ytId: "d3MNeDYqAnA", locked: false, status: "available", objectives: [], subGroup: "🎨 AI Image Generation" },
+      { title: "The Ultimate SSS Prompt Formula Revealed", titleEn: "The Ultimate SSS Prompt Formula Revealed", tags: ["Prompt","SSS"], ytId: "uJ73lsA0MVY", locked: false, status: "available", objectives: [], subGroup: "🎨 AI Image Generation" },
+      // 2.4 AI Video Creation
+      { title: "Create 3D Cartoon Videos", titleEn: "Create 3D Cartoon Videos", tags: ["Video","3D"], ytId: "B8bd9zapHDI", locked: false, status: "available", objectives: [], subGroup: "🎬 AI Video Creation" },
+      { title: "Long 3D Animation Cartoons Full Tutorial", titleEn: "Long 3D Animation Cartoons Full Tutorial", tags: ["Video","Animation"], ytId: "_nRRTDTnsL8", locked: false, status: "available", objectives: [], subGroup: "🎬 AI Video Creation" },
+      { title: "Viral Trend Pop Art Effect — Tutorial", titleEn: "Viral Trend Pop Art Effect — Tutorial", tags: ["Video","Viral"], ytId: "4Oj6960a7cs", locked: false, status: "available", objectives: [], subGroup: "🎬 AI Video Creation" },
+      // 2.5 AI Voiceovers & Music
+      { title: "Free Professional Voiceovers in Google AI Studio", titleEn: "Free Professional Voiceovers in Google AI Studio", tags: ["Voiceover","Gemini"], ytId: "vaCbMzmAy3Y", locked: false, status: "available", objectives: [], subGroup: "🎵 AI Voiceovers & Music" },
+      { title: "Google Gemini Music Creation", titleEn: "Google Gemini Music Creation", tags: ["Music","Gemini","Shorts"], ytId: "U2Gdy__2d10", locked: false, status: "available", objectives: [], subGroup: "🎵 AI Voiceovers & Music" },
+      // 2.6 Others
+      { title: "Others — More Smart AI Tools Coming Soon", titleEn: "Others — More Smart AI Tools Coming Soon", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [], subGroup: "🛠️ Others" },
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // 3. JOB PREPARATION SKILLS
+  // ══════════════════════════════════════════════════════
+  {
+    id: "job-prep",
+    icon: "💼",
+    title: "3. Job Preparation Skills",
+    titleEn: "3. Job Preparation Skills",
+    sub: "Career · Coming Soon",
+    subEn: "Career · Coming Soon",
+    sectionLocked: false,
+    accentColor: "#22c55e",
+    lessons: [
+      { title: "3. Job Preparation Skills", titleEn: "3. Job Preparation Skills", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [] },
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // 4. AI FOR STUDENTS
+  // ══════════════════════════════════════════════════════
+  {
+    id: "students-gemini",
+    icon: "🎓",
+    title: "4. AI for Students",
+    titleEn: "4. AI for Students",
+    sub: "Students · 6 lessons",
+    subEn: "Students · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#7F77DD",
+    lessons: [
+      { title: "Top Gemini Hacks for Academic Success", titleEn: "Top Gemini Hacks for Academic Success", tags: ["Gemini","Students"], ytId: "TidchEwa-pE", locked: false, status: "available", objectives: [] },
+      { title: "Learn Anything 10x Faster with NotebookLM", titleEn: "Learn Anything 10x Faster with NotebookLM", tags: ["NotebookLM","Students"], ytId: "TThi7rCba_c", locked: false, status: "available", objectives: [] },
+      { title: "Turn Any Document into a Video with One Click", titleEn: "Turn Any Document into a Video with One Click", tags: ["NotebookLM","Students"], ytId: "bMdHWjSLkeM", locked: false, status: "available", objectives: [] },
+      { title: "The Magic of Converting Text to Podcasts", titleEn: "The Magic of Converting Text to Podcasts", tags: ["NotebookLM","Shorts"], ytId: "FkBWh3drYKI", locked: false, status: "available", objectives: [] },
+      { title: "Customise Handwritten Notes", titleEn: "Customise Handwritten Notes", tags: ["NotebookLM","Notes"], ytId: "G-hM-OkmY10", locked: false, status: "available", objectives: [] },
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // 5. AI FOR PROFESSIONALS
+  // ══════════════════════════════════════════════════════
+  {
+    id: "professionals",
+    icon: "🏢",
+    title: "5. AI for Professionals",
+    titleEn: "5. AI for Professionals",
+    sub: "Career · 1 lesson",
+    subEn: "Career · 1 lesson",
+    sectionLocked: false,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Creating AI Models for Brand Promotions", titleEn: "Creating AI Models for Brand Promotions", tags: ["Branding","AI Model"], ytId: "MNQU_7IkhuU", locked: false, status: "available", objectives: [] },
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // 6. PERSONAL BRANDING
+  // ══════════════════════════════════════════════════════
+  {
+    id: "personal-branding",
+    icon: "✨",
+    title: "6. Personal Branding",
+    titleEn: "6. Personal Branding",
+    sub: "Branding · Coming Soon",
+    subEn: "Branding · Coming Soon",
+    sectionLocked: false,
+    accentColor: "#f472b6",
+    lessons: [
+      { title: "6. Personal Branding", titleEn: "6. Personal Branding", tags: ["Coming Soon"], ytId: "", locked: false, status: "coming-soon", objectives: [] },
+    ]
+  },
+
+  // ── 7. ADVANCED — SECTION LOCKED ──────────────────────
+  {
+    id: "advanced",
+    icon: "🏆",
+    title: "Advanced — Income Generation & Online Business",
+    titleEn: "Advanced — Income Generation & Online Business",
+    sub: "🔒 Locked · Complete Free Tracks First",
+    subEn: "🔒 Locked · Complete Free Tracks First",
+    sectionLocked: true,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Websites ও Landing Pages বানাও — Coding ছাড়া, Free দিয়ে", titleEn: "Build Websites & Landing Pages — No Coding, Free Tools", tags: ["No-code","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "E-commerce শুরু করো Shopify দিয়ে — Zero to First Sale", titleEn: "Start E-commerce with Shopify — Zero to First Sale", tags: ["Shopify","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Freelancing with AI — Client খোঁজো, কাজ দ্রুত করো", titleEn: "Freelancing with AI — Find Clients, Work Faster", tags: ["Freelancing","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Social Media Influencer Playbook — Grow ও Monetize করো", titleEn: "Social Media Influencer Playbook — Grow & Monetize", tags: ["Social Media","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+
+];
+
+// ══════════════ QURAN & ISLAMIC LEARNING SECTIONS ══════════════
+const quranSections = [
+  {
+    id: "quran-juzz30",
+    icon: "📖",
+    title: "Understand the Quran — Juzz 30",
+    titleEn: "Understand the Quran — Juzz 30",
+    sub: "4 Days · 19 Surahs · বাংলা",
+    subEn: "4 Days · 19 Surahs · Bangla",
+    sectionLocked: false,
+    accentColor: "#f5a623",
+    isJuzz30: true,
+    days: [
+      {
+        dayNum: 1,
+        label: "Day 1",
+        surahs: "Fatiha · Nas · Ikhlas · Falaq · Kafirun · Nasr",
+        surahsBn: "ফাতিহা · নাস · ইখলাস · ফালাক · কাফিরুন · নাসর",
+        count: "6 Surahs",
+        ytId: "8KMRZG8JFP0",
+        timestamps: [
+          { time: "0:00", surahNum: 1,   nameEn: "Al-Fatiha",  nameBn: "আল-ফাতিহা",   arabic: "الفاتحة" },
+          { time: "0:39", surahNum: 114, nameEn: "An-Nas",     nameBn: "আন-নাস",       arabic: "الناس" },
+          { time: "1:06", surahNum: 113, nameEn: "Al-Falaq",   nameBn: "আল-ফালাক",    arabic: "الفلق" },
+          { time: "1:24", surahNum: 112, nameEn: "Al-Ikhlas",  nameBn: "আল-ইখলাস",    arabic: "الإخلاص" },
+          { time: "1:44", surahNum: 109, nameEn: "Al-Kafirun", nameBn: "আল-কাফিরুন",  arabic: "الكافرون" },
+          { time: "2:07", surahNum: 110, nameEn: "An-Nasr",    nameBn: "আন-নাসর",      arabic: "النصر" }
+        ]
+      },
+      {
+        dayNum: 2,
+        label: "Day 2",
+        surahs: "Masad · Kawthar · Ma'un · Quraysh · Fil · Humazah · Asr",
+        surahsBn: "মাসাদ · কাউসার · মাউন · কুরাইশ · ফিল · হুমাযাহ · আসর",
+        count: "7 Surahs",
+        ytId: "jVu-bkOle-A",
+        timestamps: [
+          { time: "0:00", surahNum: 111, nameEn: "Al-Masad",   nameBn: "আল-মাসাদ",    arabic: "المسد" },
+          { time: "1:06", surahNum: 108, nameEn: "Al-Kawthar", nameBn: "আল-কাউসার",   arabic: "الكوثر" },
+          { time: "1:55", surahNum: 107, nameEn: "Al-Ma'un",   nameBn: "আল-মাউন",     arabic: "الماعون" },
+          { time: "3:00", surahNum: 106, nameEn: "Quraysh",    nameBn: "কুরাইশ",       arabic: "قريش" },
+          { time: "3:49", surahNum: 105, nameEn: "Al-Fil",     nameBn: "আল-ফিল",      arabic: "الفيل" },
+          { time: "4:47", surahNum: 104, nameEn: "Al-Humazah", nameBn: "আল-হুমাযাহ",  arabic: "الهمزة" },
+          { time: "5:57", surahNum: 103, nameEn: "Al-Asr",     nameBn: "আল-আসর",      arabic: "العصر" }
+        ]
+      },
+      {
+        dayNum: 3,
+        label: "Day 3",
+        surahs: "Takathur · Adiyat · Zalzalah · Bayyinah",
+        surahsBn: "তাকাসুর · আদিয়াত · যালযালাহ · বাইয়্যিনাহ",
+        count: "4 Surahs",
+        ytId: "cYNXaIRXyXM",
+        timestamps: [
+          { time: "0:08", surahNum: 102, nameEn: "At-Takathur",  nameBn: "আত-তাকাসুর",    arabic: "التكاثر" },
+          { time: "1:33", surahNum: 100, nameEn: "Al-Adiyat",    nameBn: "আল-আদিয়াত",    arabic: "العاديات" },
+          { time: "3:21", surahNum: 99,  nameEn: "Az-Zalzalah",  nameBn: "আয-যালযালাহ",  arabic: "الزلزلة" },
+          { time: "5:00", surahNum: 98,  nameEn: "Al-Bayyinah",  nameBn: "আল-বাইয়্যিনাহ", arabic: "البينة" }
+        ]
+      },
+      {
+        dayNum: 4,
+        label: "Day 4",
+        surahs: "Qadr · Alaq",
+        surahsBn: "কদর · আলাক",
+        count: "2 Surahs",
+        ytId: "k0eK5kDpeTw",
+        timestamps: [
+          { time: "0:08", surahNum: 97, nameEn: "Al-Qadr", nameBn: "আল-কদর", arabic: "القدر" },
+          { time: "1:22", surahNum: 96, nameEn: "Al-Alaq", nameBn: "আল-আলাক", arabic: "العلق" }
+        ]
+      }
+    ],
+    lessons: []
+  },
+  {
+    id: "arabic-reading",
+    icon: "ا",
+    title: "Arabic Reading 101 — শূন্য থেকে Quran পড়া শেখো",
+    titleEn: "Arabic Reading 101 — Learn to Read the Quran from Scratch",
+    sub: "Arabic 6 lessons",
+    subEn: "Arabic 6 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "Lesson 1 — Arabic Alphabet — ২৮টি হরফ চেনো ও উচ্চারণ শেখো", titleEn: "Lesson 1 — Arabic Alphabet — Learn the 28 Letters & Pronunciation", tags: ["Arabic","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Harakat — Fatha, Kasra, Damma — Short Vowels", titleEn: "Lesson 2 — Harakat — Fatha, Kasra, Damma — Short Vowels", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Joining Letters — শব্দ গঠন করতে শেখো", titleEn: "Lesson 3 — Joining Letters — Learn to Form Words", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Tanwin, Sukun ও Shadda — Basic Rules", titleEn: "Lesson 4 — Tanwin, Sukun & Shadda — Basic Rules", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Tajweed Basics — সুন্দরভাবে তেলাওয়াত করো", titleEn: "Lesson 5 — Tajweed Basics — Recite Beautifully", tags: ["Tajweed","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Practice — Juzz 30 সূরা দিয়ে পড়া অভ্যাস করো", titleEn: "Lesson 6 — Practice — Read Aloud Using Juzz 30 Surahs", tags: ["Practice","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "prophet-stories",
+    icon: "🕌",
+    title: "Prophet Stories — নবীদের জীবন থেকে শিক্ষা",
+    titleEn: "Prophet Stories — Lessons from the Lives of the Prophets",
+    sub: "বাংলা · 8 lessons",
+    subEn: "Bangla · 8 lessons",
+    sectionLocked: false,
+    accentColor: "#D85A30",
+    lessons: [
+      { title: "Lesson 1 — Prophet Ismail (AS) — ইসমাইল (আ:) নবীর Sacrifice", titleEn: "Lesson 1 — Prophet Ismail (AS) — The Sacrifice of Prophet Ismail", tags: ["Prophet","Beginner","BN"], ytId: "gwltlK6Qmeg", locked: false, status: "in-progress",
+        objectives: ["ইসমাইল (আ:)-এর জীবনের পরীক্ষা","আল্লাহর আদেশে কুরবানির অসাধারণ ঘটনা","আব্রাহাম ও ইসমাইল (আ:)-এর মধ্যে বিশ্বাস","কুরবানির পেছনের গভীর শিক্ষা"] },
+      { title: "Lesson 2 — Prophet Adam (AS) — মানবজাতির শুরু", titleEn: "Lesson 2 — Prophet Adam (AS) — The Beginning of Humanity", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Prophet Musa (AS) — ফেরাউনের বিরুদ্ধে সত্যের লড়াই", titleEn: "Lesson 3 — Prophet Musa (AS) — The Battle of Truth Against Pharaoh", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Prophet Isa (AS) — অলৌকিক জীবনের গল্প", titleEn: "Lesson 4 — Prophet Isa (AS) — The Story of a Miraculous Life", tags: ["Prophet","Beginner","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Prophet Yusuf (AS) — ধৈর্য ও বিজয়ের গল্প", titleEn: "Lesson 5 — Prophet Yusuf (AS) — A Story of Patience & Triumph", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Prophet Yunus (AS) — তিমির পেটে আল্লাহর স্মরণ", titleEn: "Lesson 6 — Prophet Yunus (AS) — Remembering Allah in the Belly of the Whale", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 7 — Prophet Dawud (AS) — জ্ঞান ও শক্তির নবী", titleEn: "Lesson 7 — Prophet Dawud (AS) — The Prophet of Wisdom & Strength", tags: ["Prophet","Intermediate","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 8 — Prophet Muhammad (SAW) — সর্বশেষ ও সর্বশ্রেষ্ঠ নবী", titleEn: "Lesson 8 — Prophet Muhammad (SAW) — The Last & Greatest Prophet", tags: ["Prophet","All levels","EN","BN"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+];
+
+// ══════════════ LANGUAGE LEARNING SECTIONS ══════════════
+const langSections = [
+  {
+    id: "lang-masterplan",
+    icon: "🗺️",
+    title: "৩ মাসে যেকোনো ভাষা শেখো — AI Masterplan",
+    titleEn: "Learn Any Language in 3 Months — AI Masterplan",
+    sub: "Flagship · 5 lessons",
+    subEn: "Flagship · 5 lessons",
+    sectionLocked: false,
+    accentColor: "#378ADD",
+    lessons: [
+      { title: "Lesson 1 — ChatGPT Project Setup — তোমার Personal Language Tutor তৈরি করো", titleEn: "Lesson 1 — ChatGPT Project Setup — Create Your Personal Language Tutor", tags: ["ChatGPT","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Gemini Gem Setup — Language Gem দিয়ে Daily Practice করো", titleEn: "Lesson 2 — Gemini Gem Setup — Daily Practice with a Language Gem", tags: ["Gemini","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Claude Project Setup — তোমার ৩ মাসের Masterplan তৈরি করাও", titleEn: "Lesson 3 — Claude Project Setup — Generate Your 3-Month Masterplan", tags: ["Claude","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Voice Mode Practice — AI-এর সাথে কথা বলো, ভুল শোধরাও", titleEn: "Lesson 4 — Voice Mode Practice — Speak with AI & Fix Your Mistakes", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Progress Tracking — AI দিয়ে Weak Areas ধরো, Plan Update করো", titleEn: "Lesson 5 — Progress Tracking — Identify Weak Areas & Update Your Plan with AI", tags: ["All AI","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "lang-english",
+    icon: "🇬🇧",
+    title: "English Learning with AI — বাংলাদেশিদের জন্য",
+    titleEn: "English Learning with AI — For Bangladeshis",
+    sub: "English · 6 lessons",
+    subEn: "English · 6 lessons",
+    sectionLocked: false,
+    accentColor: "#4ade3a",
+    lessons: [
+      { title: "Lesson 1 — Spoken English শুরু করো AI দিয়ে — লাজ ভাঙো, মুখ খোলো", titleEn: "Lesson 1 — Start Spoken English with AI — Break the Shyness, Open Your Mouth", tags: ["English","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Grammar Fix করো AI দিয়ে — নিজের ভুল নিজে ধরো", titleEn: "Lesson 2 — Fix Grammar with AI — Catch Your Own Mistakes", tags: ["English","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Vocabulary Building — প্রতিদিন ১০টি নতুন শব্দ মুখস্থ করো AI দিয়ে", titleEn: "Lesson 3 — Vocabulary Building — Memorise 10 New Words a Day with AI", tags: ["English","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Email ও Formal Writing Practice — Professional English শেখো", titleEn: "Lesson 4 — Email & Formal Writing Practice — Learn Professional English", tags: ["English","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — IELTS / Job Interview English — AI দিয়ে Practice করো", titleEn: "Lesson 5 — IELTS / Job Interview English — Practice with AI", tags: ["English","Advanced"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 6 — Daily Conversation Practice — ChatGPT Voice দিয়ে ঘরেই কথা বলো", titleEn: "Lesson 6 — Daily Conversation Practice — Talk at Home with ChatGPT Voice", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+  {
+    id: "lang-arabic",
+    icon: "🇸🇦",
+    title: "Arabic Learning with AI — Quranic থেকে Conversational",
+    titleEn: "Arabic Learning with AI — Quranic to Conversational",
+    sub: "Arabic · 5 lessons",
+    subEn: "Arabic · 5 lessons",
+    sectionLocked: false,
+    accentColor: "#f5a623",
+    lessons: [
+      { title: "Lesson 1 — Quranic Arabic Vocabulary — AI দিয়ে শিখো সহজে", titleEn: "Lesson 1 — Quranic Arabic Vocabulary — Learn Easily with AI", tags: ["Arabic","Beginner"], ytId: "", locked: false, status: "locked", objectives: [] },
+      { title: "Lesson 2 — Basic Arabic Sentences — AI দিয়ে Daily Conversation শুরু করো", titleEn: "Lesson 2 — Basic Arabic Sentences — Start Daily Conversation with AI", tags: ["Arabic","Beginner"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 3 — Arabic Grammar Basics — AI দিয়ে Structure বোঝো", titleEn: "Lesson 3 — Arabic Grammar Basics — Understand Structure with AI", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 4 — Listening Practice — Arabic Podcast ও Video AI দিয়ে বোঝো", titleEn: "Lesson 4 — Listening Practice — Understand Arabic Podcasts & Videos with AI", tags: ["Arabic","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+      { title: "Lesson 5 — Voice Mode Arabic Practice — AI-এর সাথে Arabic-এ কথা বলো", titleEn: "Lesson 5 — Voice Mode Arabic Practice — Speak Arabic with AI", tags: ["Voice Mode","Intermediate"], ytId: "", locked: true, status: "locked", objectives: [] },
+    ]
+  },
+];
+
+// ══════════════ HERO INLINE PLAYER ══════════════
+function openHeroPlayer(ytId) {
+  const player = document.getElementById('hero-inline-player');
+  const iframe  = document.getElementById('hero-inline-iframe');
+  const btn     = document.getElementById('hero-play-btn');
+
+  if (player.style.display === 'none' || player.style.display === '') {
+    // Show and play
+    iframe.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
+    player.style.display = 'block';
+    // Animate in
+    player.style.opacity = '0';
+    player.style.transform = 'translateY(-8px)';
+    player.style.transition = 'opacity .3s ease, transform .3s ease';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        player.style.opacity = '1';
+        player.style.transform = 'translateY(0)';
+      });
+    });
+    // Scroll the player into view smoothly
+    setTimeout(() => player.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    if (btn) btn.textContent = '■ Close Video';
+  } else {
+    // Toggle off
+    iframe.src = '';
+    player.style.display = 'none';
+    if (btn) {
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'bn';
+      btn.textContent = lang === 'en' ? '▶ Watch Intro Video' : '▶ Intro Video দেখো';
+    }
+  }
+}
+
+// ══════════════ INLINE LESSON PLAYER ══════════════
+function openInlinePlayer(ytId, title, startSeconds) {
+  const panel = document.getElementById('lessons-inline-player');
+  const iframe = document.getElementById('lessons-inline-iframe');
+  const label = document.getElementById('lessons-now-playing-title');
+  const startParam = startSeconds ? '&start=' + startSeconds : '';
+  iframe.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0' + startParam;
+  label.textContent = title || 'Now Playing';
+  panel.classList.add('active');
+  // Scroll bottom panel to top when a new video starts
+  const bottomPanel = document.getElementById('lessons-bottom-panel');
+  if (bottomPanel) bottomPanel.scrollTop = 0;
+}
+function closeInlinePlayer() {
+  const panel = document.getElementById('lessons-inline-player');
+  const iframe = document.getElementById('lessons-inline-iframe');
+  if (panel) panel.classList.remove('active');
+  if (iframe) iframe.src = '';
+}
+
+// ══════════════ VIDEO MODAL ══════════════
+function timeToSeconds(t) {
+  const parts = t.split(':').map(Number);
+  return parts.length === 2 ? parts[0] * 60 + parts[1] : parts[0] * 3600 + parts[1] * 60 + parts[2];
+}
+function openVideoModal(ytId, title, startSeconds) {
+  document.getElementById('video-modal-title').textContent = title || 'Video';
+  const startParam = startSeconds ? `&start=${startSeconds}` : '';
+  document.getElementById('video-modal-iframe').src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0${startParam}`;
+  document.getElementById('video-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoModal(e) {
+  if (e.target === document.getElementById('video-modal')) closeVideoModalDirect();
+}
+function closeVideoModalDirect() {
+  document.getElementById('video-modal').classList.remove('open');
+  document.getElementById('video-modal-iframe').src = '';
+  document.body.style.overflow = '';
+}
+
+// ══════════════ REGISTRATION FORM ══════════════
+function highlightLangLabel() {
+  document.getElementById('lang-bn-lbl').classList.toggle('checked-label', document.getElementById('reg-lang-bn').checked);
+  document.getElementById('lang-en-lbl').classList.toggle('checked-label', document.getElementById('reg-lang-en').checked);
+}
+function highlightCheckLabel(lblId, inputId) {
+  document.getElementById(lblId).classList.toggle('checked-label', document.getElementById(inputId).checked);
+}
+
+// ── IMPORTANT: paste your deployed Apps Script Web App URL here ──
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbycUuLM55YLOPE9-vSayw_Oa3COMg-G1DiNYbH-SumoC2pmr8GraZ9nwjJztLJZRijkEA/exec';
+
+async function submitRegistration() {
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const lang  = document.querySelector('input[name="reg-lang"]:checked');
+  const ytSub = document.getElementById('reg-yt').checked;
+  const waSub = document.getElementById('reg-wa').checked;
+
+  // ── Validation: all fields required ──
+  if (!name) {
+    showToast(currentLang === 'en' ? '⚠️ Please enter your name' : '⚠️ নাম লেখো');
+    document.getElementById('reg-name').focus(); return;
+  }
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    showToast(currentLang === 'en' ? '⚠️ Enter a valid email' : '⚠️ Valid email দাও');
+    document.getElementById('reg-email').focus(); return;
+  }
+  if (!lang) {
+    showToast(currentLang === 'en' ? '⚠️ Select your language preference' : '⚠️ ভাষা পছন্দ করো'); return;
+  }
+  if (!ytSub) {
+    showToast(currentLang === 'en' ? '⚠️ Please subscribe on YouTube first' : '⚠️ আগে YouTube Subscribe করো');
+    document.getElementById('yt-sub-lbl').scrollIntoView({behavior:'smooth',block:'center'}); return;
+  }
+  if (!waSub) {
+    showToast(currentLang === 'en' ? '⚠️ Please join the WhatsApp channel first' : '⚠️ আগে WhatsApp-এ Join করো');
+    document.getElementById('wa-join-lbl').scrollIntoView({behavior:'smooth',block:'center'}); return;
+  }
+
+  // ── Disable button, show loading ──
+  const btn = document.querySelector('#registration-form-section .btn-primary');
+  const origText = btn.textContent;
+  btn.textContent = currentLang === 'en' ? '⏳ Submitting…' : '⏳ জমা হচ্ছে…';
+  btn.disabled = true;
+
+  const payload = {
+    timestamp: new Date().toLocaleString('en-GB', {timeZone:'Asia/Dhaka'}),
+    name,
+    email,
+    language: lang.value,
+    youtube:  'Subscribed ✓',
+    whatsapp: 'Joined ✓'
+  };
+
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // no-cors means we can't read the response, but the request goes through
+    onSuccess();
+  } catch (err) {
+    // Even if fetch throws (network error), show error
+    btn.textContent = origText;
+    btn.disabled = false;
+    showToast(currentLang === 'en' ? '❌ Network error — try again' : '❌ Network error — আবার চেষ্টা করো');
+  }
+}
+
+function onSuccess() {
+  const successEl = document.getElementById('reg-success');
+  successEl.style.display = 'block';
+  successEl.textContent = currentLang === 'en'
+    ? "🎉 Awesome! Registration complete! All Lessons are now Free — let's go!"
+    : '🎉 দারুণ! Registration সম্পন্ন! এখন সব Lessons Free — চলো শুরু করি!';
+  const btn = document.querySelector('#registration-form-section .btn-primary');
+  btn.style.display = 'none';
+  showToast(currentLang === 'en' ? '🎉 Registration complete!' : '🎉 Registration সম্পন্ন!');
+  setTimeout(() => showPage('lessons'), 2500);
+}
+
+// ══════════════ LANGUAGE TOGGLE ══════════════
+let currentLang = 'bn';
+
+// Returns the display title for a lesson in the current language
+function lesTitle(les) {
+  return (currentLang === 'en' && les.titleEn) ? les.titleEn : les.title;
+}
+// Returns the display title / sub for a section in the current language
+function secTitle(sec) {
+  return (currentLang === 'en' && sec.titleEn) ? sec.titleEn : sec.title;
+}
+function secSub(sec) {
+  return (currentLang === 'en' && sec.subEn) ? sec.subEn : sec.sub;
+}
+
+function setLang(lang) {
+  currentLang = lang;
+
+  // Toggle button styles
+  document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // Translate all elements with data-bn / data-en
+  document.querySelectorAll('[data-bn]').forEach(el => {
+    const text = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-bn');
+    if (text !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        // handled by placeholder below
+      } else if (el.innerHTML !== undefined && (el.getAttribute('data-bn') || '').includes('<')) {
+        el.innerHTML = text;
+      } else {
+        el.textContent = text;
+      }
+    }
+  });
+
+  // Handle placeholders
+  document.querySelectorAll('[data-bn-placeholder]').forEach(el => {
+    el.placeholder = lang === 'en' ? el.getAttribute('data-en-placeholder') : el.getAttribute('data-bn-placeholder');
+  });
+
+  // Re-render lessons so lesson titles / section titles reflect lang
+  renderLessons();
+
+  // Update dynamic lesson page hero text based on active tab
+  const tab = activeTab;
+  const badge = document.getElementById('lessons-badge');
+  const title = document.getElementById('lessons-title');
+  const desc = document.getElementById('lessons-desc');
+  if (badge && title && desc) {
+  if (tab === 'ai') {
+    badge.textContent = '📚 AI Skills';
+    title.textContent = lang === 'en' ? 'AI Skills — Complete Roadmap' : 'AI Skills — সম্পূর্ণ Roadmap';
+    desc.textContent = lang === 'en' ? '6 Free Tracks + 1 Advanced Locked Track · Start from AI Foundation!' : '৬টি Free Track + ১টি Advanced Locked Track · AI Foundations থেকে শুরু করো!';
+  } else if (tab === 'quran') {
+    badge.textContent = '🌙 Quran';
+    title.textContent = lang === 'en' ? 'Quran & Islamic Learning' : 'Quran & Islamic Learning';
+    desc.textContent = lang === 'en' ? 'Juzz 30 · Arabic Reading 101 · Prophet Stories — in Bangla & English' : 'Juzz 30 তাফসির · Arabic Reading 101 · নবীদের গল্প — বাংলায় ও English-এ';
+  } else {
+    badge.textContent = '🗣️ Language';
+    title.textContent = lang === 'en' ? 'Language Learning with AI' : 'Language Learning with AI';
+    desc.textContent = lang === 'en' ? 'Any language · 3-month AI Masterplan · Voice Practice' : 'যেকোনো ভাষা · ৩ মাসের AI Masterplan · Voice Practice দিয়ে দ্রুত শেখো';
+  }
+  }
+}
+
+// ══════════════ ACTIVE TAB STATE ══════════════
+let activeTab = 'ai';
+
+// ══════════════ SWITCH LESSON TAB ══════════════
+function switchLessonTab(tab) {
+  activeTab = tab;
+
+  // update tab button styles
+  document.getElementById('tab-ai').className = 'lesson-tab' + (tab === 'ai' ? ' active-ai' : '');
+  document.getElementById('tab-quran').className = 'lesson-tab' + (tab === 'quran' ? ' active-quran' : '');
+  document.getElementById('tab-lang').className = 'lesson-tab' + (tab === 'lang' ? ' active-lang' : '');
+
+  // update hero text (elements removed; kept for potential future use)
+  const badge = document.getElementById('lessons-badge');
+  const title = document.getElementById('lessons-title');
+  const desc = document.getElementById('lessons-desc');
+  const bottomCards = document.getElementById('bottom-switch-cards');
+
+  if (title && desc) {
+  if (tab === 'ai') {
+    title.textContent = currentLang === 'en' ? 'AI Skills — Complete Roadmap' : 'AI Skills — সম্পূর্ণ Roadmap';
+    desc.textContent = currentLang === 'en' ? '6 Free Tracks + 1 Advanced Locked Track · Start from AI Foundation!' : '৬টি Free Track + ১টি Advanced Locked Track · AI Foundations থেকে শুরু করো!';
+  } else if (tab === 'quran') {
+    title.textContent = 'Quran & Islamic Learning';
+    desc.textContent = currentLang === 'en' ? 'Juzz 30 · Arabic Reading 101 · Prophet Stories — in Bangla & English' : 'Juzz 30 তাফসির · Arabic Reading 101 · নবীদের গল্প — বাংলায় ও English-এ';
+  } else {
+    title.textContent = 'Language Learning with AI';
+    desc.textContent = currentLang === 'en' ? 'Any language · 3-month AI Masterplan · Voice Practice' : 'যেকোনো ভাষা · ৩ মাসের AI Masterplan · Voice Practice দিয়ে দ্রুত শেখো';
+  }
+  }
+
+  renderLessons();
+  closeInlinePlayer();
+  // scroll bottom panel to top on tab switch
+  const bp = document.getElementById('lessons-bottom-panel');
+  if (bp) bp.scrollTop = 0;
+}
+
+// ══════════════ PAGE NAVIGATION ══════════════
+function showPage(name) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0,0);
+  if (name === 'lessons') renderLessons();
+  if (name === 'admin') renderLessonsAdmin();
+  // Close inline player when navigating away from lessons
+  if (name !== 'lessons') closeInlinePlayer();
+  // Close hero player when navigating away from home
+  if (name !== 'home') {
+    const hi = document.getElementById('hero-inline-iframe');
+    const hp = document.getElementById('hero-inline-player');
+    const hb = document.getElementById('hero-play-btn');
+    if (hi) hi.src = '';
+    if (hp) hp.style.display = 'none';
+    if (hb) hb.textContent = (typeof currentLang !== 'undefined' && currentLang === 'en') ? '▶ Watch Intro Video' : '▶ Intro Video দেখো';
+  }
+}
+
+// ══════════════ DRAWER ══════════════
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ══════════════ RENDER LESSONS ══════════════
+function renderJuzz30Section(sec, si) {
+  const accent = sec.accentColor || '#f5a623';
+  return `<div class="lesson-section-card" id="lsc-${si}" style="border-color:var(--border);">
+    <div class="ls-header" id="lsh-${si}" onclick="toggleSection(${si})" style="background:linear-gradient(135deg,rgba(245,166,35,0.08),rgba(255,94,26,0.04));">
+      <div style="width:4px;height:40px;border-radius:2px;background:${accent};flex-shrink:0;box-shadow:0 0 8px ${accent}55;"></div>
+      <span class="ls-icon">${sec.icon}</span>
+      <div class="ls-meta">
+        <div class="ls-title">${secTitle(sec)}</div>
+        <div class="ls-sub">${secSub(sec)}</div>
+      </div>
+      <span class="ls-toggle">▾</span>
+    </div>
+    <div class="ls-body" id="lsb-${si}">
+      ${sec.days.map((day, di) => `
+        <div class="juzz30-day-card" id="j30d-${si}-${di}">
+          <div class="juzz30-day-header" id="j30dh-${si}-${di}" onclick="toggleJ30Day(${si},${di})">
+            <div class="juzz30-day-pill">${day.label}</div>
+            <div class="juzz30-day-surahs">${currentLang === 'bn' ? day.surahsBn : day.surahs}</div>
+            <div class="juzz30-day-count">${day.count}</div>
+            <span class="juzz30-day-toggle">▾</span>
+          </div>
+          <div class="juzz30-day-body" id="j30db-${si}-${di}">
+            ${day.timestamps.map(ts => `
+              <div class="juzz30-surah-row" style="cursor:pointer;" onclick="openInlinePlayer('${day.ytId}','${day.label} — ${ts.nameEn}',timeToSeconds('${ts.time}'))">
+                <span class="juzz30-timestamp">${ts.time}</span>
+                <div class="juzz30-surah-num">${ts.surahNum}</div>
+                <div class="juzz30-surah-name">
+                  <div class="juzz30-surah-name-en">${currentLang === 'bn' ? ts.nameBn : ts.nameEn}</div>
+                </div>
+                <span class="juzz30-surah-arabic">${ts.arabic}</span>
+                <span style="margin-left:8px;color:var(--gold);font-size:0.75rem;opacity:0.7;">▶</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
+function renderSubGroups(si, lessons, sectionLocked) {
+  // Group lessons by subGroup key
+  const groups = [];
+  const groupMap = {};
+  lessons.forEach((les, li) => {
+    const key = les.subGroup || '__default__';
+    if (!groupMap[key]) {
+      groupMap[key] = { label: key, items: [] };
+      groups.push(groupMap[key]);
+    }
+    groupMap[key].items.push({ les, li });
+  });
+
+  return groups.map((grp, gi) => {
+    const isComingSoon = grp.items.every(({ les }) => les.status === 'coming-soon' || !les.ytId);
+    const availableCount = grp.items.filter(({ les }) => les.ytId && !les.locked).length;
+    const countLabel = isComingSoon
+      ? '<span class="subgroup-count">Coming Soon</span>'
+      : `<span class="subgroup-count">${availableCount} video${availableCount !== 1 ? 's' : ''}</span>`;
+
+    if (isComingSoon) {
+      return `
+        <div class="subgroup-header" style="cursor:default;">
+          <span class="subgroup-label">${grp.label}</span>
+          ${countLabel}
+        </div>`;
+    }
+
+    const bodyId = `sgb-${si}-${gi}`;
+    const headId = `sgh-${si}-${gi}`;
+    const lessonItems = grp.items.map(({ les, li }, groupIdx) => renderLessonItem(si, li, les, sectionLocked, groupIdx + 1)).join('');
+    return `
+      <div class="subgroup-header" id="${headId}" onclick="toggleSubGroup('${headId}','${bodyId}')">
+        <span class="subgroup-label">${grp.label}</span>
+        ${countLabel}
+        <span class="subgroup-toggle">▾</span>
+      </div>
+      <div class="subgroup-body" id="${bodyId}">
+        ${lessonItems}
+      </div>`;
+  }).join('');
+}
+
+function toggleSubGroup(headId, bodyId) {
+  const body = document.getElementById(bodyId);
+  const head = document.getElementById(headId);
+  if (!body || !head) return;
+  body.classList.toggle('open');
+  head.classList.toggle('open');
+}
+
+function renderLessons() {
+  const container = document.getElementById('lessons-container');
+  const data = activeTab === 'quran' ? quranSections : activeTab === 'lang' ? langSections : sections;
+  const advancedDivider = '<div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px;"><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;"></div><div style="font-size:0.78rem;font-weight:700;letter-spacing:1.2px;color:var(--gold);padding:4px 14px;border-radius:20px;border:1px solid rgba(245,166,35,0.35);background:rgba(245,166,35,0.07);">🏆 ADVANCED TRACK</div><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;"></div></div>';
+  container.innerHTML = data.map((sec, si) => {
+    if (sec.isJuzz30) return renderJuzz30Section(sec, si);
+    const accent = sec.accentColor || '#4ade3a';
+    const isLocked = sec.sectionLocked;
+    const headerGrad = isLocked ? 'linear-gradient(135deg,rgba(245,166,35,0.1),rgba(255,94,26,0.07))' : 'linear-gradient(135deg,rgba(74,222,58,0.05),rgba(255,94,26,0.03))';
+    const borderColor = isLocked ? 'rgba(245,166,35,0.45)' : 'var(--border)';
+    const lockBadge = isLocked ? '<span style="font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:10px;background:rgba(245,166,35,0.15);color:var(--gold);border:1px solid rgba(245,166,35,0.35);margin-right:6px;">🔒 Locked</span>' : '';
+    const advancedDividerStr = '<div style="display:flex;align-items:center;gap:12px;margin:8px 0 4px;"><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:0.4;"></div><div style="font-size:0.78rem;font-weight:700;letter-spacing:1.2px;color:var(--primary);padding:4px 14px;border-radius:20px;border:1px solid rgba(74,222,58,0.35);background:rgba(74,222,58,0.07);">🤖 2. SMART AI TOOLS</div><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:0.4;"></div></div>';
+    const divider = (sec.id === 'advanced') ? advancedDivider : (sec.id === 'smart-tools-notebooklm') ? advancedDividerStr : '';
+    const lockedBanner = isLocked ? '<div style="padding:14px 20px;border-bottom:1px solid var(--border);background:rgba(245,166,35,0.04);display:flex;align-items:center;gap:10px;"><span style="font-size:1.3rem;">🔒</span><div><div style="font-family:\'Nunito\',sans-serif;font-size:0.9rem;font-weight:700;color:var(--gold);">Free Tracks সম্পূর্ণ করো — তারপর Unlock হবে</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">AI Foundations → Content Creation → Smart Tools → AI for Students → Job Skills → Personal Branding</div></div></div>' : '';
+    const lockedFooter = isLocked ? '<div style="padding:14px 20px;background:rgba(245,166,35,0.06);border-top:1px solid var(--border);text-align:center;"><button class="step-btn step-btn-ghost" onclick="showPage(\'private\')" style="font-size:0.82rem;">🔐 Private Track সম্পর্কে জানো →</button></div>' : '';
+
+    // Check if this section uses subGroups
+    const hasSubGroups = sec.lessons.some(les => les.subGroup);
+    const bodyContent = hasSubGroups
+      ? renderSubGroups(si, sec.lessons, isLocked)
+      : sec.lessons.map((les, li) => renderLessonItem(si, li, les, isLocked)).join('');
+
+    return divider + '<div class="lesson-section-card" id="lsc-' + si + '" style="border-color:' + borderColor + ';"><div class="ls-header" id="lsh-' + si + '" onclick="toggleSection(' + si + ')" style="background:' + headerGrad + ';"><div style="width:4px;height:40px;border-radius:2px;background:' + accent + ';flex-shrink:0;box-shadow:0 0 8px ' + accent + '55;"></div><span class="ls-icon">' + sec.icon + '</span><div class="ls-meta"><div class="ls-title">' + secTitle(sec) + '</div><div class="ls-sub">' + secSub(sec) + '</div></div>' + lockBadge + '<span class="ls-toggle">▾</span></div><div class="ls-body" id="lsb-' + si + '">' + lockedBanner + bodyContent + lockedFooter + '</div></div>';
+  }).join('');
+  // all sections start collapsed
+}
+
+function renderLessonItem(si, li, les, sectionLocked, displayNum) {
+  const isLocked = les.locked || sectionLocked;
+  const num = displayNum !== undefined ? displayNum : li + 1;
+  const numHtml = isLocked
+    ? `<div class="li-num locked-icon">🔒</div>`
+    : `<div class="li-num unlocked">${num}</div>`;
+  const statusHtml = les.ytId
+    ? ''
+    : isLocked ? `<span class="li-status locked-lbl">🔒 Soon</span>` : '';
+  const tagsHtml = les.tags.filter(t => t !== 'Beginner').map(t => `<span class="li-tag">${t}</span>`).join('');
+  const clickAction = isLocked ? '' : `onclick="openLesson(${si},${li})"`;
+  return `
+    <div class="lesson-item ${isLocked ? 'locked' : ''}" ${clickAction}>
+      ${numHtml}
+      <div class="li-meta">
+        <div class="li-title">${lesTitle(les)}${isLocked && !les.status === 'in-progress' ? '' : ''}</div>
+        <div class="li-tags">${tagsHtml}</div>
+      </div>
+      ${statusHtml}
+    </div>
+  `;
+}
+
+function toggleSection(si) {
+  const body = document.getElementById('lsb-' + si);
+  const header = document.getElementById('lsh-' + si);
+  const isOpening = !body.classList.contains('open');
+
+  // Collapse ALL sections first (accordion behaviour)
+  const data = activeTab === 'quran' ? quranSections : activeTab === 'lang' ? langSections : sections;
+  data.forEach((_, i) => {
+    const b = document.getElementById('lsb-' + i);
+    const h = document.getElementById('lsh-' + i);
+    if (b) b.classList.remove('open');
+    if (h) h.classList.remove('open');
+  });
+
+  // Then open the clicked one (if it wasn't already open)
+  if (isOpening) {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+function toggleJ30Day(si, di) {
+  // Collapse all other days first (accordion behavior)
+  const sec = (activeTab === 'quran' ? quranSections : sections)[si];
+  if (sec && sec.days) {
+    sec.days.forEach((_, i) => {
+      if (i !== di) {
+        const b = document.getElementById(`j30db-${si}-${i}`);
+        const h = document.getElementById(`j30dh-${si}-${i}`);
+        if (b) b.classList.remove('open');
+        if (h) h.classList.remove('open');
+      }
+    });
+  }
+  const body = document.getElementById(`j30db-${si}-${di}`);
+  const header = document.getElementById(`j30dh-${si}-${di}`);
+  if (body) body.classList.toggle('open');
+  if (header) header.classList.toggle('open');
+}
+
+// ══════════════ OPEN LESSON / PLAYER ══════════════
+function openLesson(si, li) {
+  const data = activeTab === 'quran' ? quranSections : activeTab === 'lang' ? langSections : sections;
+  const les = data[si].lessons[li];
+  if (les.locked) return;
+  if (!les.ytId) { showToast('Video coming soon!'); return; }
+
+  // Play inline in the top panel
+  openInlinePlayer(les.ytId, lesTitle(les));
+
+  // Also update player page data for reference
+  document.getElementById('player-iframe').src = `https://www.youtube.com/embed/${les.ytId}?enablejsapi=1&rel=0`;
+  document.getElementById('player-title').textContent = lesTitle(les);
+  document.getElementById('player-tags').innerHTML = les.tags.map(t => `<span class="lesson-tag">${t}</span>`).join('');
+  document.getElementById('player-objectives').innerHTML = les.objectives.map(o =>
+    `<div class="lesson-obj-item"><span class="check">✅</span><span>${o}</span></div>`
+  ).join('');
+}
+
+// ══════════════ ADMIN TABS ══════════════
+function switchAdminTab(name, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('admin-tab-' + name).classList.add('active');
+  if (name === 'lessons-admin') renderLessonsAdmin();
+}
+
+// ══════════════ CERTIFICATE MODAL ══════════════
+function showCert(name, lessons, time) {
+  document.getElementById('cert-name').textContent = name;
+  document.getElementById('cert-lessons').textContent = lessons;
+  document.getElementById('cert-time').textContent = time;
+  document.getElementById('cert-preview').style.display = 'block';
+  document.getElementById('cert-preview').scrollIntoView({behavior:'smooth'});
+}
+
+// ══════════════ CONTENT SAVE ══════════════
+function saveContent() {
+  siteData.heroTitle = document.getElementById('edit-hero-title').value;
+  siteData.heroSubtitle = document.getElementById('edit-hero-subtitle').value;
+  document.getElementById('hero-title').innerHTML = siteData.heroTitle.replace(/\n/g,'<br>');
+  document.getElementById('hero-subtitle').textContent = siteData.heroSubtitle;
+  const saved = document.getElementById('content-saved');
+  saved.classList.add('show');
+  setTimeout(() => saved.classList.remove('show'), 2500);
+  showToast('✓ Hero content updated!');
+}
+function saveLinks() {
+  const saved = document.getElementById('links-saved');
+  saved.classList.add('show');
+  setTimeout(() => saved.classList.remove('show'), 2500);
+  showToast('✓ Links saved!');
+}
+
+// ══════════════ LESSONS ADMIN ══════════════
+function renderLessonsAdmin() {
+  const container = document.getElementById('lessons-admin-list');
+  container.innerHTML = sections.map((sec, si) => `
+    <div class="skill-admin-card" id="sac-${si}">
+      <div class="skill-admin-header" onclick="toggleSectionAdmin(${si})" id="sah-${si}">
+        <span class="sah-icon">${sec.icon}</span>
+        <span class="sah-title">${sec.title}</span>
+        <span class="sah-toggle">▼</span>
+      </div>
+      <div class="skill-admin-body" id="sab-${si}">
+        <div class="skill-admin-meta">
+          <div style="flex:1;min-width:60px;">
+            <div class="ce-label">Icon</div>
+            <input type="text" class="ce-input" value="${sec.icon}" onchange="sections[${si}].icon=this.value;document.getElementById('sah-${si}').querySelector('.sah-icon').textContent=this.value">
+          </div>
+          <div style="flex:3;min-width:180px;">
+            <div class="ce-label">Section Title</div>
+            <input type="text" class="ce-input" value="${sec.title}" onchange="sections[${si}].title=this.value;document.getElementById('sah-${si}').querySelector('.sah-title').textContent=this.value">
+          </div>
+          <div style="flex:2;min-width:160px;">
+            <div class="ce-label">Sub / Tag</div>
+            <input type="text" class="ce-input" value="${sec.sub}" onchange="sections[${si}].sub=this.value">
+          </div>
+        </div>
+        <div style="font-weight:700;font-size:0.88rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">📚 Lessons <span style="color:var(--primary);font-family:'Nunito',sans-serif;">(${sec.lessons.length})</span></div>
+        <div class="video-admin-list" id="val-${si}">
+          ${sec.lessons.map((les, li) => renderLessonAdminItem(si, li, les)).join('')}
+        </div>
+        <button class="add-video-btn" onclick="addLesson(${si})">+ নতুন Lesson যোগ করো</button>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;">
+          <button class="ce-save" onclick="saveAllLessons()">💾 Save</button>
+          <button class="vai-del" onclick="deleteSection(${si})" style="padding:8px 16px;">🗑 Delete Section</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLessonAdminItem(si, li, les) {
+  const thumbUrl = les.ytId ? `https://img.youtube.com/vi/${les.ytId}/mqdefault.jpg` : '';
+  return `
+    <div class="video-admin-item" id="lai-${si}-${li}">
+      <div class="vai-row">
+        <input type="text" class="ce-input" placeholder="Lesson Title" value="${les.title}"
+          onchange="sections[${si}].lessons[${li}].title=this.value">
+        <input type="text" class="ce-input" placeholder="Tags (comma separated)" value="${les.tags.join(', ')}"
+          onchange="sections[${si}].lessons[${li}].tags=this.value.split(',').map(t=>t.trim())">
+      </div>
+      <div class="vai-row">
+        <input type="text" class="ce-input" placeholder="YouTube Video ID" value="${les.ytId}"
+          oninput="updateLessonYt(${si},${li},this.value)" style="font-family:monospace;font-size:0.85rem;">
+        <select class="ce-input" style="flex:0;min-width:120px;" onchange="sections[${si}].lessons[${li}].locked=this.value==='true'">
+          <option value="false" ${!les.locked?'selected':''}>🔓 Unlocked</option>
+          <option value="true" ${les.locked?'selected':''}>🔒 Locked</option>
+        </select>
+      </div>
+      ${thumbUrl ? `<img src="${thumbUrl}" class="thumb-preview show" id="lthumb-${si}-${li}" alt="thumb">` : `<img class="thumb-preview" id="lthumb-${si}-${li}" alt="thumb">`}
+      <div class="vai-actions" style="margin-top:8px;">
+        ${li > 0 ? `<button class="vai-move" onclick="moveLes(${si},${li},-1)">↑ Up</button>` : ''}
+        ${li < sections[si].lessons.length-1 ? `<button class="vai-move" onclick="moveLes(${si},${li},1)">↓ Down</button>` : ''}
+        <button class="vai-del" onclick="deleteLes(${si},${li})">🗑 Delete</button>
+      </div>
+    </div>
+  `;
+}
+
+function updateLessonYt(si, li, val) {
+  sections[si].lessons[li].ytId = val.trim();
+  const thumb = document.getElementById(`lthumb-${si}-${li}`);
+  if (val.trim()) { thumb.src = `https://img.youtube.com/vi/${val.trim()}/mqdefault.jpg`; thumb.classList.add('show'); }
+  else { thumb.classList.remove('show'); }
+}
+function toggleSectionAdmin(si) {
+  document.getElementById('sab-' + si).classList.toggle('open');
+  document.getElementById('sah-' + si).classList.toggle('open');
+}
+function addLesson(si) {
+  sections[si].lessons.push({ title: "New Lesson", tags: [], ytId: "", locked: true, status: "locked", objectives: [] });
+  const li = sections[si].lessons.length - 1;
+  const container = document.getElementById('val-' + si);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderLessonAdminItem(si, li, sections[si].lessons[li]);
+  container.appendChild(tmp.firstChild);
+  showToast('Lesson added!');
+}
+function deleteLes(si, li) {
+  if (!confirm('Delete this lesson?')) return;
+  sections[si].lessons.splice(li, 1);
+  renderLessonsAdmin();
+  setTimeout(() => toggleSectionAdmin(si), 50);
+  showToast('Lesson deleted');
+}
+function moveLes(si, li, dir) {
+  const arr = sections[si].lessons;
+  const ni = li + dir;
+  if (ni < 0 || ni >= arr.length) return;
+  [arr[li], arr[ni]] = [arr[ni], arr[li]];
+  document.getElementById('val-' + si).innerHTML = arr.map((v, i) => renderLessonAdminItem(si, i, v)).join('');
+}
+function addSection() {
+  sections.push({ id: 'sec-' + Date.now(), icon: '📌', title: 'New Section', sub: 'Category · 0 lessons', lessons: [] });
+  renderLessonsAdmin();
+  const ni = sections.length - 1;
+  setTimeout(() => { document.getElementById('sac-' + ni).scrollIntoView({behavior:'smooth'}); toggleSectionAdmin(ni); }, 100);
+  showToast('New section added!');
+}
+function deleteSection(si) {
+  if (!confirm(`Delete "${sections[si].title}"?`)) return;
+  sections.splice(si, 1);
+  renderLessonsAdmin();
+  showToast('Section deleted');
+}
+function saveAllLessons() {
+  renderLessons();
+  showToast('✓ All lessons saved & updated!');
+}
+
+// ══════════════ TOAST ══════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ══════════════ INIT ══════════════
+renderLessons();
+initRegisteredPanels();
+
+// ══════════════ USER TYPE TOGGLE ══════════════
+function switchUserTab(tab) {
+  const isNew = tab === 'new';
+  document.getElementById('panel-new').style.display = isNew ? 'block' : 'none';
+  document.getElementById('panel-registered').style.display = isNew ? 'none' : 'block';
+  document.getElementById('utt-new').classList.toggle('active', isNew);
+  document.getElementById('utt-reg').classList.toggle('active', !isNew);
+}
+
+// ══════════════ REGISTERED SUB-TABS ══════════════
+function switchRegTab(tab) {
+  document.querySelectorAll('.reg-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.reg-panel').forEach(p => p.classList.remove('active'));
+  const tabMap = { 'new-skills': 'rtab-new', 'popular': 'rtab-popular' };
+  const panelMap = { 'new-skills': 'rpanel-new-skills', 'popular': 'rpanel-popular' };
+  if (tabMap[tab]) document.getElementById(tabMap[tab]).classList.add('active');
+  if (panelMap[tab]) document.getElementById(panelMap[tab]).classList.add('active');
+}
+
+// ══════════════ REGISTERED PANELS DATA ══════════════
+function initRegisteredPanels() {
+  // Derive all lessons from sections
+  const allLessons = [];
+  sections.forEach(sec => {
+    sec.lessons.forEach(les => {
+      if (les.ytId) allLessons.push({ ...les, section: sec.title, icon: sec.icon });
+    });
+  });
+
+  // "New Skills" = first ~6 lessons (simulate "last 2 weeks" — in production replace with date filter)
+  const newSkills = allLessons.slice(0, 6);
+  // "Popular" = sample by picking every 2nd lesson (simulate view counts)
+  const popular = allLessons.filter((_, i) => i % 2 === 0).slice(0, 8);
+
+  renderRegGrid('new-skills-grid', newSkills, 'new');
+  renderRegGrid('popular-grid', popular, 'hot');
+}
+
+function renderRegGrid(containerId, lessons, badge) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (!lessons.length) {
+    el.innerHTML = '<div style="color:var(--text-muted);padding:20px 0;font-size:0.9rem;">কোনো video পাওয়া যায়নি।</div>';
+    return;
+  }
+  el.innerHTML = lessons.map(les => {
+    const thumb = `https://img.youtube.com/vi/${les.ytId}/mqdefault.jpg`;
+    const badgeHtml = badge !== 'none'
+      ? `<span class="rvc-badge ${badge}">${badge === 'new' ? '🆕 New' : '🔥 Popular'}</span>`
+      : '';
+    return `
+      <div class="reg-video-card" onclick="openVideoModal('${les.ytId}','${les.title.replace(/'/g,"\\'")}')">
+        <img class="rvc-thumb" src="${thumb}" alt="${les.title}" loading="lazy">
+        <div class="rvc-body">
+          ${badgeHtml}
+          <div class="rvc-title">${les.title}</div>
+          <div class="rvc-meta">
+            <span>${les.icon} ${les.section}</span>
+            ${les.tags && les.tags.length ? `<span style="color:var(--border-bright)">·</span><span>${les.tags[0]}</span>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+</script>
+</body>
+</html>
